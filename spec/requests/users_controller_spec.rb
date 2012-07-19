@@ -245,7 +245,7 @@ describe '/users/edit' do
     end
 
     it 'updates the profile' do
-      find_field('Email').value.should == 'bob@example.com'
+      page.should_not have_content 'error'
     end
   end
 end

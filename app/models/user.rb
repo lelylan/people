@@ -13,7 +13,7 @@ class User
   validates_presence_of :email
   validates_uniqueness_of :email
   validates_presence_of :encrypted_password
-  
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -42,9 +42,37 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
+  # Profile fields
+  field :username, type: String
+  field :full_name, type: String
+  field :location, type: String
+  field :homepage, type: String
+
   def self.authenticate!(email, password)
     user = User.where(email: email).first
     return (user.valid_password?(password) ? user : nil) unless user.nil?
     nil
+  end
+
+  # Hack to let the model update also without pass
+  def update_with_password(params, *options)
+    current_password = params.delete(:current_password)
+
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+
+    result = if params[:password].blank? || valid_password?(current_password) 
+      update_attributes(params, *options)
+    else
+      self.assign_attributes(params, *options)
+      self.valid?
+      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      false
+    end
+
+    clean_up_passwords
+    result
   end
 end
