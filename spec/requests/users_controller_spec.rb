@@ -4,7 +4,11 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 describe '/users/signin' do
 
   let!(:user) { FactoryGirl.create(:user) }
-  before      { visit '/users/sign_in' }
+
+  before do
+    # TODO should click on the button in the page
+    visit '/users/sign_in'
+  end
 
   it 'shows the sign in page' do
     page.should have_content 'Sign in'
@@ -149,6 +153,7 @@ end
 describe '/users/sign_up' do
 
   before do
+    # TODO: should click to the link at home page
     visit '/users/sign_up'
   end
 
@@ -202,7 +207,66 @@ describe '/users/sign_up' do
     end
 
     it 'shows the already registerd accont message' do
-      page.should have_content 'Email is already taken'
+      page.has_content? 'Email is already taken'
     end
+  end
+end
+
+
+describe '/users/edit' do
+
+  let!(:user) { FactoryGirl.create(:user) }
+
+  before do
+    visit '/users/sign_in'
+    fill_in 'Email',    with: 'alice@example.com'
+    fill_in 'Password', with: 'alice'
+    click_button 'Sign in'
+  end
+
+  before do
+    click_link 'profile'
+  end
+
+  it 'shows the priofile page' do
+    page.has_content? 'Edit profile'
+  end
+
+  describe 'when updating the profile' do
+
+    before do
+      fill_in 'Email', with: 'bob@example.com'
+      click_button 'Update'
+    end
+
+    it 'shows the priofile page' do
+      page.has_content? 'Edit user profile'
+    end
+
+    it 'updates the profile' do
+      page.has_field? 'Email', with: 'bob@example.com'
+    end
+  end
+end
+
+
+describe '/users/cancel' do
+
+  let!(:user) { FactoryGirl.create(:user) }
+
+  before do
+    visit '/users/sign_in'
+    fill_in 'Email',    with: 'alice@example.com'
+    fill_in 'Password', with: 'alice'
+    click_button 'Sign in'
+    click_link 'profile'
+  end
+
+  before do
+    click_link 'Cancel my account'
+  end
+
+  it 'shows the priofile page' do
+    page.has_content? 'Your account was successfully cancelled.'
   end
 end
