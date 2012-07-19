@@ -2,20 +2,19 @@
 <html>
 <head>
   <title>People</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <ul>
-  <%= render 'devise/menu/login_items' %>
-  <%= render 'devise/menu/registration_items' %>
+  <%= render 'devise/shared/links' %>
 </ul>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-  
+<p class='notice'><%= notice %></p>
+<p class='alert'><%= alert %></p>
+
 <%= yield %>
 
 </body>

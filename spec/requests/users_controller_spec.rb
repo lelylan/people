@@ -85,14 +85,15 @@ describe '/users/password/new' do
   let!(:user) { FactoryGirl.create(:user) }
 
   before do
-    visit '/users/password/new'
+    visit '/'
+    click_link 'Forgot your password?'
   end
 
   it 'shows the forgot your password page' do
     page.should have_content('Forgot your password?')
   end
 
-  describe "when user exists" do
+  describe 'when user exists' do
 
     before do
       fill_in 'Email', with: 'alice@example.com'
@@ -104,7 +105,7 @@ describe '/users/password/new' do
     end
   end
 
-  describe "when user does not exists" do
+  describe 'when user does not exists' do
 
     before do
       fill_in 'Email', with: 'invalid@example.com'
