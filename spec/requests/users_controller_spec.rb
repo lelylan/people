@@ -18,7 +18,7 @@ describe '/users/signin' do
 
     before do
       fill_in 'Email',    with: 'alice@example.com'
-      fill_in 'Password', with: 'alice'
+      fill_in 'Password', with: 'password'
       click_button 'Sign in'
     end
 
@@ -31,7 +31,7 @@ describe '/users/signin' do
 
     before do
       fill_in 'Email',    with: 'invalid@example.com'
-      fill_in 'Password', with: 'alice'
+      fill_in 'Password', with: 'password'
       click_button 'Sign in'
     end
 
@@ -62,7 +62,7 @@ describe '/users/signout' do
   before do
     visit '/users/sign_in'
     fill_in 'Email',    with: 'alice@example.com'
-    fill_in 'Password', with: 'alice'
+    fill_in 'Password', with: 'password'
     click_button 'Sign in'
   end
 
@@ -138,8 +138,8 @@ describe '/users/password/edit' do
     describe 'when fills in the new password' do
 
       before do
-        fill_in 'New password',         with: 'reset_alice'
-        fill_in 'Confirm new password', with: 'reset_alice'
+        fill_in 'New password',         with: 'reset_password'
+        fill_in 'Confirm new password', with: 'reset_password'
         click_button 'Change my password'
       end
 
@@ -166,7 +166,7 @@ describe '/users/sign_up' do
 
     before do
       fill_in 'Email',    with: 'alice@example.com'
-      fill_in 'Password', with: 'alice'
+      fill_in 'Password', with: 'password'
       click_button 'Sign up'
     end
 
@@ -195,7 +195,7 @@ describe '/users/sign_up' do
 
     before do
       fill_in 'Email',    with: 'alice@example.com'
-      fill_in 'Password', with: 'alice'
+      fill_in 'Password', with: 'password'
       click_button 'Sign up'
       click_link 'Sign out'
     end
@@ -203,7 +203,7 @@ describe '/users/sign_up' do
     before do
       visit '/users/sign_up'
       fill_in 'Email',    with: 'alice@example.com'
-      fill_in 'Password', with: 'alice'
+      fill_in 'Password', with: 'password'
       click_button 'Sign up'
     end
 
@@ -221,7 +221,7 @@ describe '/users/edit' do
   before do
     visit '/users/sign_in'
     fill_in 'Email',    with: 'alice@example.com'
-    fill_in 'Password', with: 'alice'
+    fill_in 'Password', with: 'password'
     click_button 'Sign in'
   end
 
@@ -236,7 +236,9 @@ describe '/users/edit' do
   describe 'when updating the profile' do
 
     before do
-      fill_in 'Email', with: 'bob@example.com'
+      fill_in 'Email',     with: 'bob@example.com'
+      fill_in 'Full name', with: 'Bob'
+      fill_in 'Homepage',  with: 'www.example.com'
       click_button 'Update'
     end
 
@@ -246,6 +248,12 @@ describe '/users/edit' do
 
     it 'updates the profile' do
       page.should_not have_content 'error'
+    end
+
+    it 'updates the fields' do
+      find_field('Email').value.should     == 'bob@example.com'
+      find_field('Full name').value.should == 'Bob'
+      find_field('Homepage').value.should  == 'www.example.com'
     end
   end
 end
@@ -258,7 +266,7 @@ describe '/users/cancel' do
   before do
     visit '/users/sign_in'
     fill_in 'Email',    with: 'alice@example.com'
-    fill_in 'Password', with: 'alice'
+    fill_in 'Password', with: 'password'
     click_button 'Sign in'
     click_link 'Edit profile'
   end
@@ -291,7 +299,7 @@ describe '/users/edit/password' do
   before do
     visit '/users/sign_in'
     fill_in 'Email',    with: 'alice@example.com'
-    fill_in 'Password', with: 'alice'
+    fill_in 'Password', with: 'password'
     click_button 'Sign in'
     click_link 'Edit profile'
   end
@@ -307,9 +315,9 @@ describe '/users/edit/password' do
   describe 'when user set the new password' do
 
     before do
-      fill_in 'Password',              with: 'bob'
-      fill_in 'Password confirmation', with: 'bob'
-      fill_in 'Current password',      with: 'alice'
+      fill_in 'Password',              with: 'new_password'
+      fill_in 'Password confirmation', with: 'new_password'
+      fill_in 'Current password',      with: 'password'
       click_button 'Update'
     end
 
@@ -332,7 +340,7 @@ describe '/users/edit/password' do
         before do
           visit '/users/sign_in'
           fill_in 'Email',    with: 'alice@example.com'
-          fill_in 'Password', with: 'bob'
+          fill_in 'Password', with: 'new_password'
           click_button 'Sign in'
         end
 

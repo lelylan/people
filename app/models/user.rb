@@ -13,6 +13,7 @@ class User
   validates_presence_of :email
   validates_uniqueness_of :email
   validates_presence_of :encrypted_password
+  validates_length_of :password, minimum: 8, allow_nil: true
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -47,6 +48,9 @@ class User
   field :full_name, type: String
   field :location, type: String
   field :homepage, type: String
+
+  validates_uniqueness_of :username
+
 
   def self.authenticate!(email, password)
     user = User.where(email: email).first
