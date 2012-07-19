@@ -10,7 +10,7 @@ describe '/users/signin' do
     page.should have_content 'Sign in'
   end
 
-  context 'with valid email and password' do
+  describe 'with valid email and password' do
 
     before do
       fill_in 'Email',    with: 'alice@example.com'
@@ -23,7 +23,7 @@ describe '/users/signin' do
     end
   end
 
-  context 'with not valid email' do
+  describe 'with not valid email' do
 
     before do
       fill_in 'Email',    with: 'invalid@example.com'
@@ -36,7 +36,7 @@ describe '/users/signin' do
     end
   end
 
-  context 'with not valid password' do
+  describe 'with not valid password' do
 
     before do
       fill_in 'Email',    with: 'alice@example.com'
@@ -97,6 +97,112 @@ describe '/users/password/new' do
 
     it 'send the mail for password recovery' do 
       page.should have_content('You will receive an email with instructions')
+    end
+  end
+
+  describe "when user does not exists" do
+
+    before do
+      fill_in 'Email', with: 'invalid@example.com'
+      click_button 'Send me reset password instructions'
+    end
+
+    it 'send the mail for password recovery' do 
+      page.should have_content('Email not found')
+    end
+  end
+end
+
+
+describe '/users/password/edit' do
+
+  describe 'with valid remember token' do
+
+    let!(:user) { FactoryGirl.create(:user) }
+    before      { user.send_reset_password_instructions }
+    let(:token) { user.reset_password_token }
+
+    before do
+      visit '/users/password/edit?reset_password_token=' + token
+    end
+
+    it 'shows the change password page' do
+      page.should have_content('Change your password')
+    end
+
+    describe 'when fills in the new password' do
+
+      before do
+        fill_in 'New password',         with: 'reset_alice'
+        fill_in 'Confirm new password', with: 'reset_alice'
+        click_button 'Change my password'
+      end
+
+      it 'changes the password' do
+        page.should have_content('Your password was changed successfully.')
+      end
+    end
+  end
+end
+
+
+describe '/users/sign_up' do
+
+  before do
+    visit '/users/sign_up'
+  end
+
+  it 'shows the sign up page' do
+    page.should have_content('Sign up')
+  end
+
+  describe 'with all fields filled in' do
+
+    before do
+      fill_in 'Email',    with: 'alice@example.com'
+      fill_in 'Password', with: 'alice'
+      click_button 'Sign up'
+    end
+
+    it 'signs up' do
+      page.should have_content 'Welcome! You have signed up successfully.'
+    end
+
+    it 'is logged in' do
+      page.should have_content 'Sign out'
+    end
+  end
+
+  describe 'with no password' do
+
+    before do
+      fill_in 'Email', with: 'alice@example.com'
+      click_button 'Sign up'
+    end
+
+    it 'shows the missing password message' do
+      page.should have_content 'password can\'t be blank'
+    end
+  end
+
+  describe 'with existing email' do
+
+    before do
+      fill_in 'Email',    with: 'alice@example.com'
+      fill_in 'Password', with: 'alice'
+      click_button 'Sign up'
+      click_link 'Sign out'
+    end
+
+    before do
+      visit '/users/sign_up'
+      fill_in 'Email',    with: 'alice@example.com'
+      fill_in 'Password', with: 'alice'
+      click_button 'Sign up'
+    end
+
+    it 'shows the already registerd accont message' do
+      page.should have_content 'Email is already taken'
     end
   end
 end
