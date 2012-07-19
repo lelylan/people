@@ -81,6 +81,8 @@ end
 
 
 describe '/users/password/new' do
+  include EmailSpec::Helpers
+  include EmailSpec::Matchers
 
   let!(:user) { FactoryGirl.create(:user) }
 
@@ -100,8 +102,43 @@ describe '/users/password/new' do
       click_button 'Send me reset password instructions'
     end
 
-    it 'send the mail for password recovery' do 
-      page.should have_content('You will receive an email with instructions')
+    it 'sends the mail for password recovery' do 
+      page.should have_content 'You will receive an email with instructions'
+    end
+
+    describe 'when checking the mail' do
+
+      it 'sends the mail' do
+        last_email.should_not be_nil
+      end
+
+      it 'sends the mail to the filled mail address' do
+        last_email.to.should include 'alice@example.com'
+      end
+
+      describe 'when clicking to #reset_password_token' do
+
+        before do
+          visit '/users/password/edit?reset_password_token=' + reset_password_token(last_email)
+        end
+
+        it 'shows the change password page' do
+          page.should have_content('Change your password')
+        end
+
+        describe 'when fills in the new password' do
+
+          before do
+            fill_in 'New password',         with: 'reset_password'
+            fill_in 'Confirm new password', with: 'reset_password'
+            click_button 'Change my password'
+          end
+
+          it 'changes the password' do
+            page.should have_content('Your password was changed successfully.')
+          end
+        end
+      end
     end
   end
 
@@ -114,38 +151,6 @@ describe '/users/password/new' do
 
     it 'send the mail for password recovery' do 
       page.should have_content('Email not found')
-    end
-  end
-end
-
-
-describe '/users/password/edit' do
-
-  describe 'with valid remember token' do
-
-    let!(:user) { FactoryGirl.create(:user) }
-    before      { user.send_reset_password_instructions }
-    let(:token) { user.reset_password_token }
-
-    before do
-      visit '/users/password/edit?reset_password_token=' + token
-    end
-
-    it 'shows the change password page' do
-      page.should have_content('Change your password')
-    end
-
-    describe 'when fills in the new password' do
-
-      before do
-        fill_in 'New password',         with: 'reset_password'
-        fill_in 'Confirm new password', with: 'reset_password'
-        click_button 'Change my password'
-      end
-
-      it 'changes the password' do
-        page.should have_content('Your password was changed successfully.')
-      end
     end
   end
 end

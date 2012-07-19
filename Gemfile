@@ -20,6 +20,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 group :development, :test do
   gem 'foreman'
   gem 'rspec-rails', '~> 2.6'
+  gem 'email_spec'
   gem 'shoulda'
   gem 'capybara'
   gem 'factory_girl_rails'

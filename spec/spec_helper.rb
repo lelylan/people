@@ -17,6 +17,7 @@ Spork.prefork do
   require 'webmock/rspec'
   require 'draper/test/rspec_integration'
   require 'database_cleaner'
+  require 'email_spec'
 
   RSpec.configure do |config|
     config.mock_with :rspec
@@ -24,7 +25,7 @@ Spork.prefork do
     config.before(:suite) { DatabaseCleaner.strategy = :truncation }
     config.before(:each)  { DatabaseCleaner.clean }
 
-    config.alias_it_should_behave_like_to :it_validates, "it validates"
+    config.alias_it_should_behave_like_to :it_validates, 'it validates'
   end
 end
 
@@ -32,6 +33,6 @@ end
 Spork.each_run do
   FactoryGirl.reload
   I18n.backend.reload!
-  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-  Dir[Rails.root.join("spec/requests/support/**/*.rb")].each {|f| require f}
+  Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
+  Dir[Rails.root.join('spec/requests/support/**/*.rb')].each {|f| require f}
 end
