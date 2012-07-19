@@ -6,8 +6,8 @@ describe '/users/signin' do
   let!(:user) { FactoryGirl.create(:user) }
 
   before do
-    # TODO should click on the button in the page
-    visit '/users/sign_in'
+    visit '/'
+    click_link 'Sign in'
   end
 
   it 'shows the sign in page' do
@@ -153,8 +153,8 @@ end
 describe '/users/sign_up' do
 
   before do
-    # TODO: should click to the link at home page
-    visit '/users/sign_up'
+    visit '/'
+    click_link 'Sign up'
   end
 
   it 'shows the sign up page' do
@@ -207,7 +207,7 @@ describe '/users/sign_up' do
     end
 
     it 'shows the already registerd accont message' do
-      page.has_content? 'Email is already taken'
+      page.should have_content 'Email is already taken'
     end
   end
 end
@@ -229,7 +229,7 @@ describe '/users/edit' do
   end
 
   it 'shows the priofile page' do
-    page.has_content? 'Edit profile'
+    page.should have_content 'Edit profile'
   end
 
   describe 'when updating the profile' do
@@ -239,12 +239,12 @@ describe '/users/edit' do
       click_button 'Update'
     end
 
-    it 'shows the priofile page' do
-      page.has_content? 'Edit user profile'
+    it 'shows the profile page' do
+      page.should have_content 'User profile'
     end
 
     it 'updates the profile' do
-      page.has_field? 'Email', with: 'bob@example.com'
+      find_field('Email').value.should == 'bob@example.com'
     end
   end
 end
@@ -263,7 +263,7 @@ describe '/users/cancel' do
   end
 
   it 'shows the profile page' do
-    page.has_content? 'Edit profile'
+    page.should have_content 'Edit profile'
   end
 
   describe 'when clicks on the cancel link' do
@@ -273,7 +273,7 @@ describe '/users/cancel' do
     end
 
     it 'deletes the account' do
-      page.has_content? 'Your account was successfully cancelled.'
+      page.should have_content 'Your account was successfully cancelled.'
     end
 
     it 'shows the home page' do
@@ -300,7 +300,7 @@ describe '/users/edit/password' do
   end
 
   it 'shows the priofile page' do
-    page.has_content? 'Edit password'
+    page.should have_content 'Edit password'
   end
 
   describe 'when user set the new password' do
@@ -312,8 +312,12 @@ describe '/users/edit/password' do
       click_button 'Update'
     end
 
+    it 'shows the profile page' do
+      page.should have_content 'User profile'
+    end
+
     it 'changes the password' do
-      page.has_content? 'You updated your account successfully.'
+      page.should have_content 'You updated your account successfully.'
     end
 
     describe 'when sign out' do
@@ -332,7 +336,7 @@ describe '/users/edit/password' do
         end
 
         it 'signs in' do
-          page.should have_content('Signed in successfully.')
+          page.should have_content 'Signed in successfully.'
         end
       end
     end
