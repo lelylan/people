@@ -36,7 +36,7 @@ feature 'authorization code flow' do
           page.should have_content "Authorize #{application.name}"
         end
 
-        describe 'when authorize the client', js: true do
+        describe 'when authorizes the client', js: true do
 
           before { page.click_button 'Authorize' }
 
@@ -44,6 +44,11 @@ feature 'authorization code flow' do
             query  = URI.parse(page.current_url).query
             params = Rack::Utils.parse_nested_query query
             params['code']
+          end
+
+          it 'redirects to the client callback uri' do
+            redirect_uri = page.current_host + page.current_path
+            redirect_uri.should == application.redirect_uri
           end
 
           it 'returns an activation code' do
@@ -69,7 +74,7 @@ feature 'authorization code flow' do
               expect { JSON.parse(page.source) }.to_not raise_error
             end
 
-            describe 'acces token representation' do
+            describe 'when returns the acces token representation' do
 
               let(:token)     { Doorkeeper::AccessToken.last }
               subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
