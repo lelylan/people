@@ -51,7 +51,7 @@ class User
 
   validates_uniqueness_of :username
 
-
+  # Tell doorkeeper how to authenticate the resource owner with username/password
   def self.authenticate!(email, password)
     user = User.where(email: email).first
     return (user.valid_password?(password) ? user : nil) unless user.nil?

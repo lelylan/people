@@ -1,10 +1,15 @@
 Doorkeeper.configure do
-  # ORM currently supported options are :active_record and :mongoid
+  # ORM setting. Currently supported options are :active_record and :mongoid
   orm :mongoid
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do |routes|
     current_user || warden.authenticate!(:scope => :user)
+  end
+
+  # Tell doorkeeper how to authenticate the resource owner with username/password
+  resource_owner_from_credentials do |routes|
+    User.authenticate!(params[:username], params[:password])
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.

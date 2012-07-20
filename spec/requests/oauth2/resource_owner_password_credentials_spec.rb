@@ -23,14 +23,14 @@ feature 'resource owner password credentials flow' do
       expect { JSON.parse(page.source) }.to_not raise_error
     end
 
-    #describe 'when returns the acces token representation' do
+    describe 'when returns the acces token representation' do
 
-      #let(:token)     { Doorkeeper::AccessToken.last }
-      #subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
+      let(:token)     { Doorkeeper::AccessToken.last }
+      subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
 
-      #its(:access_token) { should == token.token }
-      #its(:expires_in)   { should == 7200 }
-      #its(:token_type)   { should == 'bearer' }
-    #end
+      its(:access_token) { should == token.token }
+      its(:expires_in)   { should == 7200 }
+      its(:token_type)   { should == 'bearer' }
+    end
   end
 end
