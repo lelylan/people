@@ -1,6 +1,6 @@
-class ApiController < ActionController::Base
+class Api::BaseController < ApplicationController
 
-  private
+private
 
   def current_user
     if doorkeeper_token
