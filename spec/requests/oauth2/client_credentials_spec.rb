@@ -1,15 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-feature 'resource owner password credentials flow' do
+feature 'client credentials flow' do
 
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
 
   let!(:authorization_params) {{
-    grant_type: 'password',
-    username:   'alice@example.com',
-    password:   'password',
-    scope:      'public write'
+    grant_type: 'client_credentials',
+    scope:      'public write',
   }}
 
   describe 'when sends an authorization request' do
@@ -26,7 +24,7 @@ feature 'resource owner password credentials flow' do
     describe 'when returns the acces token representation' do
 
       let(:token)     { Doorkeeper::AccessToken.last }
-      subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
+      subject(:json)  { pp token; Hashie::Mash.new JSON.parse(page.source) }
 
       its(:access_token) { should == token.token }
       its(:expires_in)   { should == 7200 }

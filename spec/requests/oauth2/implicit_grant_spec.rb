@@ -18,13 +18,13 @@ feature 'implicit grant flow' do
     let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
     before    { visit uri }
 
-    describe "when not logged in" do
+    describe 'when not logged in' do
 
       it 'shows the sign in page' do
         page.should have_content 'Sign in'
       end
 
-      describe "when signs in" do
+      describe 'when signs in' do
 
         before do
           fill_in 'Email',    with: 'alice@example.com'

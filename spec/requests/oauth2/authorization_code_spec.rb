@@ -5,20 +5,20 @@ feature 'authorization code flow' do
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
 
-  let!(:authorization_params) do
-    { response_type: 'code',
-      client_id:     application.uid,
-      redirect_uri:  application.redirect_uri,
-      scope:         'public write',
-      state:         'remember-me' }
-  end
+  let!(:authorization_params) {{
+    response_type: 'code',
+    client_id:     application.uid,
+    redirect_uri:  application.redirect_uri,
+    scope:         'public write',
+    state:         'remember-me'
+  }}
 
   describe 'when sends an authorization request' do
 
     let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
     before    { visit uri }
 
-    describe "when not logged in" do
+    describe 'when not logged in' do
 
       it 'shows the sign in page' do
         page.should have_content 'Sign in'
