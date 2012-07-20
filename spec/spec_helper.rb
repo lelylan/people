@@ -14,7 +14,7 @@ Spork.prefork do
 
   require 'rspec/rails'
   require 'capybara/rspec'
-  require 'webmock/rspec'
+  #require 'webmock/rspec'
   require 'draper/test/rspec_integration'
   require 'database_cleaner'
   require 'email_spec'

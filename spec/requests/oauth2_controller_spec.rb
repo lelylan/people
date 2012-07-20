@@ -36,12 +36,20 @@ feature 'authorization code flow' do
           page.should have_content "Authorize #{application.name}"
         end
 
-        describe 'when authorize the client' do
+        describe 'when authorize the client', js: true do
 
           before { page.click_button 'Authorize' }
 
-          it 'redirects to the callback uri' do
-            page.current_path.should == application.redirect_uri
+          describe 'when redirect to the client uri' do
+
+            let(:authorization) do
+              query = URI.parse(page.current_url).query
+              Rack::Utils.parse_nested_query query
+            end
+
+            it 'should have an activation code' do
+              authorization.code.should_not be_nil
+            end
           end
         end
       end
