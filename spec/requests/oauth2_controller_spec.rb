@@ -5,7 +5,7 @@ feature 'authorization code flow' do
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
 
-  let!(:params) do
+  let!(:authorization_params) do
     { response_type: 'code',
       client_id:     application.uid,
       redirect_uri:  application.redirect_uri,
@@ -13,9 +13,9 @@ feature 'authorization code flow' do
       state:         'remember-me' }
   end
 
-  describe 'when sends a valid request' do
+  describe 'when sends an authorization request' do
 
-    let(:uri) { "/oauth/authorize?#{params.to_param}" }
+    let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
     before    { visit uri }
 
     describe "when not logged in" do
@@ -40,15 +40,43 @@ feature 'authorization code flow' do
 
           before { page.click_button 'Authorize' }
 
-          describe 'when redirect to the client uri' do
+          let!(:authorization_code) do
+            query  = URI.parse(page.current_url).query
+            params = Rack::Utils.parse_nested_query query
+            params['code']
+          end
 
-            let(:authorization) do
-              query = URI.parse(page.current_url).query
-              Rack::Utils.parse_nested_query query
+          it 'returns an activation code' do
+            authorization_code.should_not be_nil
+          end
+
+          describe 'when sends an access token request' do
+
+            before { Capybara.use_default_driver }
+
+            let!(:access_params) do
+              { grant_type:  'authorization_code',
+                code:         authorization_code,
+                redirect_uri: application.redirect_uri }
             end
 
-            it 'should have an activation code' do
-              authorization.code.should_not be_nil
+            before do
+              page.driver.browser.authorize application.uid, application.secret
+              page.driver.post '/oauth/token', access_params
+            end
+
+            it 'returns valid json' do
+              expect { JSON.parse(page.source) }.to_not raise_error
+            end
+
+            describe 'acces token representation' do
+
+              let(:token)     { Doorkeeper::AccessToken.last }
+              subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
+
+              its(:access_token) { should == token.token }
+              its(:expires_in)   { should == 7200 }
+              its(:token_type)   { should == 'bearer' }
             end
           end
         end
