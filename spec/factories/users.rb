@@ -5,6 +5,19 @@ FactoryGirl.define do
     username 'alice'
   end
 
+  factory :bob, parent: 'user' do
+    email    'bob@example.com'
+    password 'password'
+    username 'bob'
+  end
+
+  factory :admin, parent: 'user' do
+    email    'admin@example.com'
+    password 'password'
+    username 'admin'
+    admin    true
+  end
+
   trait :with_all_attributes do
     after(:create) do |user|
       user.update_attributes(
@@ -12,12 +25,6 @@ FactoryGirl.define do
         location:  'Fantasia',
         homepage:  'http://example.com')
     end
-  end
-
-  factory :bob, parent: 'user' do
-    email    'bob@example.com'
-    password 'password'
-    username 'bob'
   end
 
   trait :as_admin do

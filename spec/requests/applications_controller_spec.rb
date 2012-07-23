@@ -4,6 +4,7 @@ feature 'applications' do
 
   let!(:user) { FactoryGirl.create :user }
   let!(:bob)  { FactoryGirl.create :bob }
+  let!(:admin)  { FactoryGirl.create :admin }
 
   let!(:application)     { FactoryGirl.create :application, resource_owner_id: user.id }
   let!(:bob_application) { FactoryGirl.create :application, resource_owner_id: bob.id }
@@ -152,6 +153,7 @@ feature 'applications' do
     end
   end
 
+
   describe 'delete' do
 
     before { click_link 'Delete' }
@@ -174,20 +176,20 @@ feature 'applications' do
     end
   end
 
+
   describe 'admin' do
 
-    let!(:user)  { FactoryGirl.create :user, :as_admin }
-    let!(:bob)   { FactoryGirl.create :bob }
-
-    let!(:application)     { FactoryGirl.create :application, resource_owner_id: user.id }
-    let!(:bob_application) { FactoryGirl.create :application, resource_owner_id: bob.id }
+    before do
+      click_link 'Sign out'
+      click_link 'Sign in'
+    end
 
     before do
       visit oauth_applications_path
     end
 
     before do
-      fill_in 'Email',    with: 'alice@example.com'
+      fill_in 'Email',    with: 'admin@example.com'
       fill_in 'Password', with: 'password'
       click_button 'Sign in'
     end
