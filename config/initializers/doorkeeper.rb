@@ -12,13 +12,12 @@ Doorkeeper.configure do
     User.authenticate!(params[:username], params[:password])
   end
 
-  # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
-  # admin_authenticator do |routes|
-  #   # Put your admin authentication logic here.
-  #   # If you want to use named routes from your app, you need to call them on routes object, e.g., routes.new_admin_session_path
-  #   # Example implementation:
-  #   Admin.find_by_id(session[:admin_id]) || redirect_to(routes.new_admin_session_url)
-  # end
+  # If you want to restrict access to the web interface for adding oauth authorized applications
+  # you need to declare the block below.
+  admin_authenticator do |routes|
+    # Admin.find_by_id(session[:admin_id]) || redirect_to(routes.new_admin_session_url)
+    current_user || warden.authenticate!(:scope => :user) || redirect_to(root_path)
+  end
 
   # Authorization Code expiration time (default 10 minutes).
   # authorization_code_expires_in 10.minutes
@@ -28,7 +27,7 @@ Doorkeeper.configure do
   # access_token_expires_in 2.hours
 
   # Issue access tokens with refresh token (disabled by default)
-  # use_refresh_token
+  use_refresh_token
 
   # Define access token scopes for your provider
   # For more information go to https://github.com/applicake/doorkeeper/wiki/Using-Scopes

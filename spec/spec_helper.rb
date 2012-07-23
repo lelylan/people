@@ -14,7 +14,7 @@ Spork.prefork do
 
   require 'rspec/rails'
   require 'capybara/rspec'
-  #require 'webmock/rspec'
+  require 'webmock/rspec'
   require 'draper/test/rspec_integration'
   require 'database_cleaner'
   require 'email_spec'
@@ -24,6 +24,9 @@ Spork.prefork do
 
     config.before(:suite) { DatabaseCleaner.strategy = :truncation }
     config.before(:each)  { DatabaseCleaner.clean }
+
+    # Let selenium work and block all requests to the net
+    WebMock.disable_net_connect! allow_localhost: true
 
     config.alias_it_should_behave_like_to :it_validates, 'it validates'
   end
