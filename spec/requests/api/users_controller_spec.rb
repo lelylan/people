@@ -48,7 +48,6 @@ describe 'GET /me' do
       its(:full_name) { should == 'Alice Bella' }
       its(:location)  { should == 'Fantasia' }
       its(:homepage)  { should == 'http://example.com' }
-
     end
   end
 end

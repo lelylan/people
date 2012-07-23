@@ -9,8 +9,7 @@ feature 'applications' do
   let!(:bob_application) { FactoryGirl.create :application, resource_owner_id: bob.id }
 
   before do
-    visit '/'
-    click_link 'Applications'
+    visit oauth_applications_path
   end
 
   before do
@@ -28,6 +27,10 @@ feature 'applications' do
 
     it 'does not contain bob application' do
       page.should_not have_content bob_application.name
+    end
+
+    it 'contains the applications link' do
+      page.should have_link 'Applications'
     end
   end
 
@@ -154,13 +157,12 @@ feature 'applications' do
       page.should_not have_content application.name
     end
 
-    
     describe 'with a not owned application' do
 
       let(:uri) { oauth_application_path bob_application }
 
       it 'does not show the resource' do
-        expect {visit "#{uri}?_method=delete"}.to raise_error Mongoid::Errors::DocumentNotFound
+        expect { page.driver.delete uri }.to raise_error Mongoid::Errors::DocumentNotFound
       end
     end
   end
