@@ -6,7 +6,9 @@ People::Application.routes.draw do
     get '/users/edit/password' => 'registrations#edit_password', as: 'edit_user_password'
   end
 
-  use_doorkeeper
+  use_doorkeeper do
+    controllers applications: 'applications'
+  end
 
   scope module: :api, defaults: {format: 'json'} do
     get :me, to: 'users#show'
