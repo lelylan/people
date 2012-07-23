@@ -8,12 +8,12 @@
     end
 
     def new
-      @application = Application.new
+      @application = Doorkeeper::Application.new
     end
 
     def create
-      @application = Application.new(params[:application])
-      @application.resource_owner_id = current_resource_owner.id.to_s
+      @application = Doorkeeper::Application.new(params[:application])
+      @application.resource_owner_id = current_resource_owner.id
       if @application.save
         flash[:notice] = "Application created"
         respond_with [:oauth, @application]

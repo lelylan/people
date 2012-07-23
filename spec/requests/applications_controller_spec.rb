@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
-feature 'GET /oauth/applications' do
+feature 'applications' do
 
   let!(:user) { FactoryGirl.create :user }
   let!(:bob)  { FactoryGirl.create :bob }
@@ -19,15 +19,149 @@ feature 'GET /oauth/applications' do
     click_button 'Sign in'
   end
 
-  it 'contains @application' do
-    page.should have_content application.name
+
+  describe 'index' do
+
+    it 'contains the application' do
+      page.should have_content application.name
+    end
+
+    it 'does not contain bob application' do
+      page.should_not have_content bob_application.name
+    end
   end
 
-  it 'should contain the menu' do
-    page.should have_link 'Sign out'
+
+  describe 'show' do
+
+    before { click_link application.name }
+
+    it 'contains name' do
+      page.should have_content application.name
+    end
+
+    it 'contains redirect uri' do
+    end
+
+    it 'contains unique id' do
+      page.should have_content application.uid
+    end
+
+    it 'contains secret' do
+      page.should have_content application.secret
+    end
+
+    describe 'with a not owned resource' do
+
+      let(:uri) { oauth_application_path bob_application }
+
+      it 'does not show the resource' do
+        expect {visit uri}.to raise_error Mongoid::Errors::DocumentNotFound
+      end
+    end
   end
 
-  it 'does not contain @bob_application' do
-    page.should_not have_content bob_application.name
+
+  describe 'new' do
+
+    before { click_link 'New Application' }
+
+    it 'contains name field' do
+      page.should have_field 'Name'
+    end
+
+    it 'contains redirect uri field' do
+      page.should have_field 'Redirect uri'
+    end
+
+    describe 'when fills the field' do
+
+      before do
+        fill_in 'Name',         with: 'Voice recognition'
+        fill_in 'Redirect uri', with: 'http://app.com/callback'
+        click_button 'Submit'
+      end
+
+      let(:new_application) { Doorkeeper::Application.last }
+
+      it 'creates a new application' do
+        page.should have_content new_application.name
+      end
+    end
+
+    describe 'when fills invalid values' do
+
+      before { click_button 'Submit' }
+
+      it 'contains validation errors' do
+        page.should have_content 'errors'
+      end
+    end
+  end
+
+
+  describe 'edit' do
+
+    before { click_link 'Edit' }
+
+    it 'contains name field' do
+      page.should have_field 'Name'
+    end
+
+    it 'contains redirect uri field' do
+      page.should have_field 'Redirect uri'
+    end
+
+    describe 'when updates the application' do
+
+      before do
+        fill_in 'Redirect uri', with: 'http://app.com/updated'
+        click_button 'Submit'
+      end
+
+      it 'updates the application' do
+        page.should have_content 'updated'
+      end
+    end
+
+    describe 'when fills invalid values' do
+
+      before do
+        fill_in 'Redirect uri', with: 'not-valid-uri'
+        click_button 'Submit'
+      end
+
+      it 'contains validation errors' do
+        page.should have_content 'errors'
+      end
+    end
+
+    describe 'with a not owned application' do
+
+      let(:uri) { edit_oauth_application_path bob_application }
+
+      it 'does not show the resource' do
+        expect {visit uri}.to raise_error Mongoid::Errors::DocumentNotFound
+      end
+    end
+  end
+
+  describe 'delete' do
+
+    before { click_link 'Delete' }
+
+    it 'remove the application' do
+      page.should_not have_content application.name
+    end
+
+    
+    describe 'with a not owned application' do
+
+      let(:uri) { oauth_application_path bob_application }
+
+      it 'does not show the resource' do
+        expect {visit "#{uri}?_method=delete"}.to raise_error Mongoid::Errors::DocumentNotFound
+      end
+    end
   end
 end
