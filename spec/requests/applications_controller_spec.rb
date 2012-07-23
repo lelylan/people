@@ -8,6 +8,8 @@ feature 'applications' do
   let!(:application)     { FactoryGirl.create :application, resource_owner_id: user.id }
   let!(:bob_application) { FactoryGirl.create :application, resource_owner_id: bob.id }
 
+  let!(:token) { FactoryGirl.create :access_token, application: application }
+
   before do
     visit oauth_applications_path
   end
@@ -44,6 +46,7 @@ feature 'applications' do
     end
 
     it 'contains redirect uri' do
+      page.should have_content application.redirect_uri
     end
 
     it 'contains unique id' do
@@ -153,8 +156,12 @@ feature 'applications' do
 
     before { click_link 'Delete' }
 
-    it 'remove the application' do
+    it 'removes the application' do
       page.should_not have_content application.name
+    end
+
+    it 'deletes access tokens related to the application' do
+      Doorkeeper::AccessToken.count.should == 0
     end
 
     describe 'with a not owned application' do
@@ -166,4 +173,59 @@ feature 'applications' do
       end
     end
   end
+
+  describe 'admin' do
+
+    let!(:user)  { FactoryGirl.create :user, :as_admin }
+    let!(:bob)   { FactoryGirl.create :bob }
+
+    let!(:application)     { FactoryGirl.create :application, resource_owner_id: user.id }
+    let!(:bob_application) { FactoryGirl.create :application, resource_owner_id: bob.id }
+
+    before do
+      visit oauth_applications_path
+    end
+
+    before do
+      fill_in 'Email',    with: 'alice@example.com'
+      fill_in 'Password', with: 'password'
+      click_button 'Sign in'
+    end
+
+    describe 'index' do
+
+      it 'contains not owned applications' do
+        page.should have_content bob_application.name
+      end
+    end
+
+    describe 'show' do
+
+      before { click_link bob_application.name }
+
+      it 'shows the not owned resource' do
+        page.should have_content bob_application.secret
+      end
+    end
+
+    describe 'edit' do
+
+      before { visit edit_oauth_application_path bob_application }
+
+      it 'edits the not owned application' do
+        page.should have_field 'Name'
+      end
+    end
+
+    describe 'delete' do
+
+      before do
+        page.driver.delete oauth_application_path bob_application
+      end
+
+      it 'removes the not owned application' do
+        page.should_not have_content bob_application.name
+      end
+    end
+  end  
 end

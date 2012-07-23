@@ -49,6 +49,10 @@ class User
   field :location, type: String
   field :homepage, type: String
 
+  # Admin fiels
+  field :admin, type: Boolean, default: false
+  attr_protected :admin
+
   validates_uniqueness_of :username
 
   # Tell doorkeeper how to authenticate the resource owner with username/password

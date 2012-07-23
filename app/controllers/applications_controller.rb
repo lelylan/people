@@ -49,6 +49,10 @@
     private
 
     def find_applications
-      @applications = Doorkeeper::Application.where(resource_owner_id: current_resource_owner.id)
+      @applications = if current_resource_owner.admin?
+        Doorkeeper::Application.all
+      else
+        Doorkeeper::Application.where(resource_owner_id: current_resource_owner.id)
+      end
     end
   end

@@ -19,4 +19,11 @@ FactoryGirl.define do
     password 'password'
     username 'bob'
   end
+
+  trait :as_admin do
+    after(:create) do |user|
+      user.admin = true
+      user.save
+    end
+  end
 end
