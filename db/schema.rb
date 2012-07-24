@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20120711090802) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
-    t.integer  "resource_owner_id"
+    t.string   "resource_owner_id"
     t.text     "devices"
     t.string   "type"
     t.datetime "created_at",        :null => false

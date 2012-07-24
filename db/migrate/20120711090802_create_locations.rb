@@ -6,7 +6,7 @@ class CreateLocations < ActiveRecord::Migration
       t.integer :lft
       t.integer :rgt
       t.integer :depth
-      t.integer :resource_owner_id
+      t.string  :resource_owner_id
       t.text    :devices
       t.string  :type
 

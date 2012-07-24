@@ -24,7 +24,7 @@
         #page.should have_content 'Sign in'
       #end
 
-      #describe "when signs in" do
+      #describe 'when signs in' do
 
         #before do
           #fill_in 'Email',    with: 'alice@example.com'

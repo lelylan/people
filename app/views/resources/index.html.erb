@@ -19,8 +19,8 @@
       <% @devices.each do |device| %>
         <tr id="device_<%= device.id %>">
           <td><%= device.name %></td>
-          <td><%= link_to 'Add', device, @params.merge(method: 'update', resource: 'devices') %></td>
-          <td><%= link_to 'Remove', device, @params.merge(method: 'delete', resource: 'devices') %></td>
+          <td><%= link_to 'Add', resource_path(device, authorization_params.merge(method: 'update', resource: 'devices')) %></td>
+          <td><%= link_to 'Remove', resource_path(device, authorization_params.merge(method: 'delete', resource: 'devices')) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -42,8 +42,8 @@
       <% @locations.each do |location| %>
         <tr id="location_<%= location.id %>">
           <td><%= location.name %></td>
-          <td><%= link_to 'Add', location, @params.merge(method: 'update', resource: 'locations') %></td>
-          <td><%= link_to 'Remove', location, @params.merge(method: 'delete', resource: 'locations') %></td>
+          <td><%= link_to 'Add', resource_path(location, authorization_params.merge(method: 'update', resource: 'locations')) %></td>
+          <td><%= link_to 'Remove', resource_path(location, authorization_params.merge(method: 'delete', resource: 'locations')) %></td>
         </tr>
       <% end %>
     </tbody>

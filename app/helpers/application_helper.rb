@@ -11,4 +11,14 @@ module ApplicationHelper
   def resource_class
     devise_mapping.to
   end
+
+  def authorization_params
+    {
+      response_type: params[:response_type],
+      client_id:     params[:client_id],
+      redirect_uri:  params[:redirect_uri],
+      scope:         params[:scope],
+      state:         params[:state]
+    }
+  end
 end
