@@ -1,0 +1,51 @@
+<header class="page-header">
+  <h2>Select your resource</h2>
+</header>
+
+<p><%= link_to 'Back to authorization', oauth_authorization_path, @params %></p>
+
+<div class="span16 devices">
+  <h3>Select your devices</h3>
+
+  <table class="zebra-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr id="device_<%= device.id %>">
+          <td><%= device.name %></td>
+          <td><%= link_to 'Add', device, @params.merge(method: 'update', resource: 'devices') %></td>
+          <td><%= link_to 'Remove', device, @params.merge(method: 'delete', resource: 'devices') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="span16 locations">
+  <h3>Select your locations</h3>
+
+  <table class="zebra-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr id="location_<%= location.id %>">
+          <td><%= location.name %></td>
+          <td><%= link_to 'Add', location, @params.merge(method: 'update', resource: 'locations') %></td>
+          <td><%= link_to 'Remove', location, @params.merge(method: 'delete', resource: 'locations') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

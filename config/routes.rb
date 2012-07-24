@@ -6,6 +6,10 @@ People::Application.routes.draw do
     get '/users/edit/password' => 'registrations#edit_password', as: 'edit_user_password'
   end
 
+  scope 'oauth/authorize' do
+    resources :resources, only: %w(index update destroy)
+  end
+
   use_doorkeeper do
     controllers applications: 'applications'
   end
