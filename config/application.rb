@@ -63,5 +63,10 @@ module People
 
     # Force your application to not access the DB or load models when precompiling your assets
     config.assets.initialize_on_precompile = false
+
+    # Base layout for Doorkeeper.
+    config.to_prepare do
+      Doorkeeper::ApplicationController.layout "application"
+    end
   end
 end
