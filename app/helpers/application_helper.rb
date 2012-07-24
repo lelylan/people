@@ -21,4 +21,12 @@ module ApplicationHelper
       state:         params[:state]
     }
   end
+
+  def device_params
+    authorization_params.merge(type: 'devices')
+  end
+
+  def location_params
+    authorization_params.merge(type: 'locations')
+  end
 end

@@ -5,7 +5,7 @@ class ResourcesController < Doorkeeper::ApplicationController
   before_filter :find_session
   before_filter :find_type, only: %w(update destroy)
   before_filter :find_resources
-  before_filter :find_resource, only: %(update destroy)
+  before_filter :find_resource, only: %w(update destroy)
 
   def index
   end
@@ -13,19 +13,19 @@ class ResourcesController < Doorkeeper::ApplicationController
   def update
     session[:resources][@type].push(@resource.id).uniq!
     flash[:notice] = "#{@type.humanize} added"
-    redirect_to resources_uri(authorization_params)
+    redirect_to resources_path(authorization_params)
   end
 
   def destroy
     session[:resources][type].delete(@resource.id)
     flash[:notice] = "#{type.humanize} added"
-    redirect_to resources_uri(authorization_params)
+    redirect_to resources_path(authorization_params)
   end
 
   private
 
   def find_session
-    session[:resources] ||= { devices: [], locations: [] }
+    session[:resources] ||= HashWithIndifferentAccess.new({ devices: [], locations: [] })
   end
 
   def find_type
@@ -40,7 +40,7 @@ class ResourcesController < Doorkeeper::ApplicationController
   def find_resource
     @resource = (@type == 'devices') ? @devices.find(params[:id]) : @locations.find(params[:id])
   end
-  
+
   def authorization_params
     { 
       response_type: params[:response_type],

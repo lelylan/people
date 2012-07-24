@@ -19,8 +19,13 @@
       <% @devices.each do |device| %>
         <tr id="device_<%= device.id %>">
           <td><%= device.name %></td>
-          <td><%= link_to 'Add', resource_path(device, authorization_params.merge(method: 'update', resource: 'devices')) %></td>
-          <td><%= link_to 'Remove', resource_path(device, authorization_params.merge(method: 'delete', resource: 'devices')) %></td>
+          <% if not session[:resources][:devices].include? device.id %>
+            <td><%= link_to 'Add', resource_path(device, device_params), method: :put %></td>
+            <td></td>
+          <% else %>
+            <td>Added</td>
+            <td><%= link_to 'Remove', resource_path(device, device_params), method: :delete %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -42,8 +47,13 @@
       <% @locations.each do |location| %>
         <tr id="location_<%= location.id %>">
           <td><%= location.name %></td>
-          <td><%= link_to 'Add', resource_path(location, authorization_params.merge(method: 'update', resource: 'locations')) %></td>
-          <td><%= link_to 'Remove', resource_path(location, authorization_params.merge(method: 'delete', resource: 'locations')) %></td>
+          <% if not session[:resources][:locations].include? location.id %>
+            <td><%= link_to 'Add', resource_path(location, location_params), method: :put %></td>
+            <td></td>
+          <% else %>
+            <td>Added</td>
+            <td><%= link_to 'Remove', resource_path(location, location_params), method: :delete %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
