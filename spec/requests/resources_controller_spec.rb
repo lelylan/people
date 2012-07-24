@@ -40,6 +40,7 @@ feature 'resources' do
           before { click_link 'Filter resources' }
 
           it 'shows the devices' do
+            save_and_open_page
             page.should have_content device.name
           end
 
