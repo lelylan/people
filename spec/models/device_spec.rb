@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Device do
 
-  let(:device) { Device.create(name: 'device') }
+  let(:device) { FactoryGirl.create :device }
 
   it 'should connect to the device database' do
     Device.db.name.should match 'devices'
   end
 
   it 'creates simple devices' do
-    device.name.should == 'device'
+    device.name.should == 'light'
   end
 end
