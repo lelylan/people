@@ -1,7 +1,7 @@
 class Doorkeeper::AccessGrant
   field :devices, type: Array, default: []
 
-  attr_protected :devices
+  attr_accessible :devices
 
   def save_resources(resources)
     if filtered_resources? resources

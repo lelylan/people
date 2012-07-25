@@ -36,7 +36,7 @@ feature 'authorization code flow' do
 
           before { click_link 'Filter resources' }
 
-          describe 'when adds resources' do
+          describe 'when adds devices and locations' do
 
             before { within('.devices')   { click_link 'Add' } }
             before { within('.locations') { click_link 'Add' } }
@@ -50,12 +50,29 @@ feature 'authorization code flow' do
               before { click_link 'Back to authorization' }
               before { begin page.click_button 'Authorize' rescue ActionController::RoutingError end }
 
-              describe 'when checking the grant access' do
+              let(:grant) { Doorkeeper::AccessGrant.last }
 
-                let(:grant) { Doorkeeper::AccessGrant.last }
+              it 'creates an access grant with all desired devices' do
+                grant.devices.should == resources
+              end
 
-                it 'contains all devices' do
-                  grant.devices.should == resources
+              describe 'when authorize the access token request' do
+
+                let!(:access_params) do
+                  { grant_type:  'authorization_code',
+                    code:         grant.token,
+                    redirect_uri: application.redirect_uri }
+                end
+
+                before do
+                  page.driver.browser.authorize application.uid, application.secret
+                  page.driver.post '/oauth/token', access_params
+                end
+
+                let(:token) { Doorkeeper::AccessToken.last }
+
+                it 'creates an access token with all desired devices' do
+                  token.devices.should == resources
                 end
               end
             end

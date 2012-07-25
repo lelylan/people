@@ -1,35 +1,37 @@
-#require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-#feature 'client credentials flow' do
+feature 'client credentials flow' do
 
-  #let!(:application) { FactoryGirl.create :application }
-  #let!(:user)        { FactoryGirl.create :user }
+  before { cleanup }
 
-  #let!(:authorization_params) {{
-    #grant_type: 'client_credentials',
-    #scope:      'public write',
-  #}}
+  let!(:application) { FactoryGirl.create :application }
+  let!(:user)        { FactoryGirl.create :user }
 
-  #describe 'when sends an authorization request' do
+  let!(:authorization_params) {{
+    grant_type: 'client_credentials',
+    scope:      'public write',
+  }}
 
-    #before do
-      #page.driver.browser.authorize application.uid, application.secret
-      #page.driver.post '/oauth/token', authorization_params
-    #end
+  describe 'when sends an authorization request' do
 
-    #it 'returns valid json' do
-      #expect { JSON.parse(page.source) }.to_not raise_error
-    #end
+    before do
+      page.driver.browser.authorize application.uid, application.secret
+      page.driver.post '/oauth/token', authorization_params
+    end
 
-    #describe 'when returns the acces token representation' do
+    it 'returns valid json' do
+      expect { JSON.parse(page.source) }.to_not raise_error
+    end
 
-      #let(:token)     { Doorkeeper::AccessToken.last }
-      #subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
+    describe 'when returns the acces token representation' do
 
-      #its(:access_token)  { should == token.token }
-      #its(:expires_in)    { should == 7200 }
-      #its(:token_type)    { should == 'bearer' }
-      #its(:refresh_token) { should == token.refresh_token }
-    #end
-  #end
-#end
+      let(:token)     { Doorkeeper::AccessToken.last }
+      subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
+
+      its(:access_token)  { should == token.token }
+      its(:expires_in)    { should == 7200 }
+      its(:token_type)    { should == 'bearer' }
+      its(:refresh_token) { should == token.refresh_token }
+    end
+  end
+end

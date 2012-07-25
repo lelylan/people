@@ -15,8 +15,27 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
   private
 
   def save_resources(authorization, resources)
-    authorization = authorization.instance_variable_get '@authorization'
-    authorization.grant.save_resources resources
+    for_grant? ? find_grant.save_resources(resources) : find_token.save_resources(resources)
+  end
+
+  def find_token
+    for_token?
+  end
+
+  def find_grant
+    for_grant?
+  end
+
+  # Authorization code flow (creates an access grant)
+  def for_token?
+    app = authorization.instance_variable_get '@authorization'
+    app.instance_variable_get '@access_token'
+  end
+
+  # Implicit authorization flow (creates an access token)
+  def for_grant?
+    app = authorization.instance_variable_get '@authorization'
+    app.respond_to?('grant') ? app.grant : nil
   end
 end
 
