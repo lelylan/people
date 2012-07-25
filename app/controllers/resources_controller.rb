@@ -12,13 +12,13 @@ class ResourcesController < Doorkeeper::ApplicationController
 
   def update
     session[:resources][@type].push(@resource.id).uniq!
-    flash[:notice] = "#{@type.humanize} added"
+    flash[:notice] = "A #{@type.singularize} has been added"
     redirect_to resources_path(authorization_params)
   end
 
   def destroy
-    session[:resources][type].delete(@resource.id)
-    flash[:notice] = "#{type.humanize} added"
+    session[:resources][@type].delete(@resource.id)
+    flash[:notice] = "A #{@type.singularize} has been removed"
     redirect_to resources_path(authorization_params)
   end
 

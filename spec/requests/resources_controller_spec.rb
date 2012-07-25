@@ -48,14 +48,18 @@ feature 'resources' do
             page.should have_content location.name
           end
 
+
           describe 'when adds a device' do
 
             before do
               within('.devices') { click_link 'Add' }
             end
 
+            it 'shows a message' do
+              page.should have_content 'A device has been added'
+            end
+
             it 'hides the add link' do
-              print page.html
               within('.devices') { page.should_not have_link 'Add' }
             end
 
@@ -64,28 +68,112 @@ feature 'resources' do
             end
 
             describe 'when removes the device' do
+
+              before do
+                within('.devices') { click_link 'Remove' }
+              end
+
+              it 'shows a message' do
+                page.should have_content 'A device has been removed'
+              end
+
+              it 'hides the add link' do
+                within('.devices') { page.should have_link 'Add' }
+              end
+
+              it 'shows the remove link' do
+                within('.devices') { page.should_not have_link 'Remove'}
+              end
+
+              shared_examples 'click back to the authorization page' do
+
+                before { click_link 'Back to authorization' }
+
+                it 'shows the authorization page' do
+                  page.should have_content 'Authorize Application'
+                end
+              end
+
+              it_validates 'click back to the authorization page'
             end
 
-            describe 'when add the same device' do
-            end
+            it_validates 'click back to the authorization page'
           end
+
 
           describe 'when adds a location' do
 
-            describe 'when removes the location' do
+            before do
+              within('.locations') { click_link 'Add' }
             end
 
-            describe 'when add the same location' do
+            it 'shows a message' do
+              page.should have_content 'A location has been added'
             end
+
+            it 'hides the add link' do
+              within('.locations') { page.should_not have_link 'Add' }
+            end
+
+            it 'shows the remove link' do
+              within('.locations') { page.should have_link 'Remove'}
+            end
+
+            describe 'when removes the location' do
+
+              before do
+                within('.locations') { click_link 'Remove' }
+              end
+
+              it 'shows a message' do
+                page.should have_content 'A location has been removed'
+              end
+
+              it 'hides the add link' do
+                within('.locations') { page.should have_link 'Add' }
+              end
+
+              it 'shows the remove link' do
+                within('.locations') { page.should_not have_link 'Remove'}
+              end
+
+              it_validates 'click back to the authorization page'
+            end
+
+            it_validates 'click back to the authorization page'
           end
 
+
           describe 'when adds a not owned device' do
+
+            let!(:bob)         { FactoryGirl.create :bob }
+            let!(:bob_device)  { FactoryGirl.create :device, resource_owner_id: bob.id }
+            let(:resource_uri) { "/oauth/authorize/#{bob_device.id}?type=devices" }
+
+            it 'shows a not found page' do
+              expect { page.driver.put resource_uri }.to raise_error
+            end
           end
 
           describe 'when adds a not owned location' do
+
+            let!(:bob)          { FactoryGirl.create :bob }
+            let!(:bob_location) { FactoryGirl.create :location, resource_owner_id: bob.id }
+            let(:resource_uri)  { "/oauth/authorize/#{bob_location.id}?type=locations" }
+
+            it 'shows a not found page' do
+              expect { page.driver.put resource_uri }.to raise_error
+            end
           end
 
-          describe 'when clicks back to authorization' do
+
+          describe 'when clicks back to the authorization page' do
+
+            before { click_link 'Back to authorization' }
+
+            it 'shows the authorization page' do
+              page.should have_content 'Authorize Application'
+            end
           end
         end
       end
