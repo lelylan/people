@@ -46,7 +46,6 @@ feature 'implicit grant flow' do
           let(:redirect_uri) { page.current_host + page.current_path }
 
           it 'redirects to the client callback uri' do
-            save_and_open_page
             redirect_uri.should == application.redirect_uri
           end
 

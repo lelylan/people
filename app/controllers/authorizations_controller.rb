@@ -1,5 +1,6 @@
 class AuthorizationsController < Doorkeeper::AuthorizationsController
 
+  # TODO find a better way to understand if its for grant or token
   def create
     if authorization.authorize
       save_resources(authorization, session[:resources])
