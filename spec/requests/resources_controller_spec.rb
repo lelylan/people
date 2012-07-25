@@ -166,7 +166,6 @@ feature 'resources' do
             end
           end
 
-
           describe 'when clicks back to the authorization page' do
 
             before { click_link 'Back to authorization' }

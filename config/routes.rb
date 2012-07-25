@@ -11,7 +11,7 @@ People::Application.routes.draw do
   end
 
   use_doorkeeper do
-    controllers applications: 'applications'
+    controllers applications: 'applications', authorizations: 'authorizations'
   end
 
   scope module: :api, defaults: {format: 'json'} do
