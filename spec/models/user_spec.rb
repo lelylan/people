@@ -69,7 +69,8 @@ describe User do
     describe 'with locations' do
 
       let(:house)     { FactoryGirl.create :house, :with_descendants }
-      let(:summer)    { FactoryGirl.create :house, name: 'Summer house', devices: [ '500fb2d4d033a95185000007' ] }
+      let(:device_id) { BSON::ObjectId('500fb2d4d033a95185000007') }
+      let(:summer)    { FactoryGirl.create :house, name: 'Summer house', devices: [ device_id ] }
       let(:locations) { [ house.id, summer.id ] }
       let(:resources) { { devices: [], locations: locations } }
 
@@ -77,7 +78,7 @@ describe User do
 
       describe 'when sets devices with the list of devices in the houses' do
 
-        let(:devices) { house.all_devices + summer.devices }
+        let(:devices) { house.all_devices + summer.all_devices }
 
         it 'sets the house devices' do
           user.devices.should == devices
