@@ -1,14 +1,10 @@
 require 'spec_helper'
 
-describe Device do
+describe Doorkeeper::Application do
 
-  let(:device) { FactoryGirl.create :device }
+  let(:application) { FactoryGirl.create :application }
 
-  it 'should connect to the device database' do
-    Device.db.name.should match 'devices'
-  end
-
-  it 'creates simple devices' do
-    device.name.should == 'light'
+  it 'has field resource_owner_id' do
+    application.resource_owner_id.should_not be_nil
   end
 end
