@@ -10,7 +10,8 @@ describe Location do
 
   describe '#devices' do
     it 'returns all house devices' do
-      house.all_devices.should == [1, 2, 3, 4, 5, 6]
+      base = '500fb2d4d033a9518500000'
+      house.all_devices.should == ["#{base}1", "#{base}2", "#{base}3", "#{base}4", "#{base}5", "#{base}6"]
     end
   end
 end

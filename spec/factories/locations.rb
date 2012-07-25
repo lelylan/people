@@ -2,16 +2,16 @@ FactoryGirl.define do
   factory :location, aliases: ['house'] do
     name 'House'
     sequence(:resource_owner_id) { |n| n }
-    devices [1, 2]
+    devices ['500fb2d4d033a95185000001', '500fb2d4d033a95185000002']
 
     factory :floor do
       name 'Floor'
-      devices [3, 4]
+      devices ['500fb2d4d033a95185000003', '500fb2d4d033a95185000004']
     end
 
     factory :room do
       name 'Room'
-      devices [5, 6]
+      devices ['500fb2d4d033a95185000005', '500fb2d4d033a95185000006']
     end
   end
 
