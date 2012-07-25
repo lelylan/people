@@ -1,0 +1,61 @@
+<header class="page-header">
+  <h2>Select your resource</h2>
+</header>
+
+<p><%= link_to 'Back to authorization', oauth_authorization_path(authorization_params) %></p>
+
+<div class="span16 devices">
+  <h3>Select your devices</h3>
+
+  <table class="zebra-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr id="device_<%= device.id %>">
+          <td><%= device.name %></td>
+          <% if not session[:resources][:devices].include? device.id %>
+            <td><%= link_to 'Add', resource_path(device, device_params), method: :put %></td>
+            <td></td>
+          <% else %>
+            <td>Added</td>
+            <td><%= link_to 'Remove', resource_path(device, device_params), method: :delete %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="span16 locations">
+  <h3>Select your locations</h3>
+
+  <table class="zebra-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr id="location_<%= location.id %>">
+          <td><%= location.name %></td>
+          <% if not session[:resources][:locations].include? location.id %>
+            <td><%= link_to 'Add', resource_path(location, location_params), method: :put %></td>
+            <td></td>
+          <% else %>
+            <td>Added</td>
+            <td><%= link_to 'Remove', resource_path(location, location_params), method: :delete %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

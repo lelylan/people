@@ -2,6 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 describe 'GET /me' do
 
+  before { cleanup }
+
   describe 'with not valid token' do
 
     before { visit '/me' }
@@ -11,15 +13,16 @@ describe 'GET /me' do
     end
 
     it 'returns valid json' do
-      #pending
+      # TODO
     end
 
     it 'returns 401 json representation' do
-      #pending
+      # TODO
     end
   end
 
   describe 'when token is valid' do
+
 
     let!(:application) { FactoryGirl.create :application }
     let!(:user)        { FactoryGirl.create :user, :with_all_attributes }

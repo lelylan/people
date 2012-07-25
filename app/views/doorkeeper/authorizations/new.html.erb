@@ -2,6 +2,8 @@
   <h2>Authorize <%= @authorization.client.name %> to use your account?</h2>
 </div>
 
+<p><%= link_to 'Filter resources', resources_path(authorization_params) %></p>
+
 <div class="span16">
   <% if @authorization.scopes %>
   <p>
