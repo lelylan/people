@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Doorkeeper::Application do
 
-  let(:application) { FactoryGirl.create :application }
+  before { cleanup }
 
-  it 'has field resource_owner_id' do
-    application.resource_owner_id.should_not be_nil
+  it_behaves_like 'ownable' do 
+    let(:model) { :application }
   end
 end
