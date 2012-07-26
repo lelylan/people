@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 feature 'advanced scope' do
 
-  before { cleanup }
-
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
   let!(:light)       { FactoryGirl.create :light, resource_owner_id: user.id  }

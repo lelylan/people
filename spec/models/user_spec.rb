@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe User do
 
-  before { cleanup }
-
   describe 'when validates presence of email' do
 
     it 'shows an presence error' do

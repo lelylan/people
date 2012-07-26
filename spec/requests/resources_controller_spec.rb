@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature 'resources' do
 
-  before { cleanup }
-
   let!(:user)        { FactoryGirl.create :user }
   let!(:application) { FactoryGirl.create :application }
   let!(:device)      { FactoryGirl.create :device, resource_owner_id: user.id }

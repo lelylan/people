@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature 'authorization' do
 
-  before { cleanup }
-
   describe '/users/signin' do
 
     let!(:user) { FactoryGirl.create(:user) }

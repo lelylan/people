@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 describe 'GET /me' do
 
-  before { cleanup }
-
   describe 'with not valid token' do
 
     before { visit '/me' }

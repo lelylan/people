@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature 'authorized applications' do
 
-  before { cleanup }
-
   let!(:user) { FactoryGirl.create :user }
   let!(:bob)  { FactoryGirl.create :bob }
 

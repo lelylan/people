@@ -2,8 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 feature 'implicit grant flow' do
 
-  before { cleanup }
-
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
 
