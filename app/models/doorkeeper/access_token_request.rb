@@ -1,10 +1,16 @@
+# Override Doorkeeper::OAuth::AccessTokenRequest
+#
+# Create the access token. The token is created from the data we jsut sent and from 
+# a base_toke. A base_token change depending from the flow I'm using
+# - Authorization code: base token is the previously created access grant token.
+# - Implicit grant:     base token is itself (better understand)
+# - Refresh token:      base token is the previous access token
+#
+# What we do is simply adding the device list.
+
 class Doorkeeper::OAuth::AccessTokenRequest
   private
 
-  # Override the creation of the access token. 
-  # The value of sase_token can be of two types:
-  # - AccessGrant if we use the Authorization Code Flow
-  # - AccessToken if we use the Implicit Authorization Flow
   def create_access_token
     @access_token = Doorkeeper::AccessToken.create!({
       :application_id    => client.id,

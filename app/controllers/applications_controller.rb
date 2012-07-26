@@ -1,3 +1,13 @@
+# Override Doorkeeper::ApplicationsController.
+#
+# This action is called when the resource owner wants to access its applications.
+# This change has been added as we do want let the user create its own applications
+# and he must be the only one to access them.
+#
+# Doorkeeper offers the ability to admin users to access to this area but we do 
+# not want this. We want an application section where an admin can have access to
+# all resources and where th resource owner has access to his own applications.
+
 class ApplicationsController < Doorkeeper::ApplicationController
   respond_to :html
 

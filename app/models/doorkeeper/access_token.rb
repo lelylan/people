@@ -1,3 +1,8 @@
+# Override Doorkeeper::AccessToken
+#
+# Module to add the ability to add the list of devices to a model. 
+# This functionality is needed to use the advanced scope system.
+
 class Doorkeeper::AccessToken
   field :devices, type: Array, default: []
 
