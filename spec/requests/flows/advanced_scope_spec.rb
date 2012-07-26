@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
 feature 'advanced scope' do
 
@@ -35,7 +35,7 @@ feature 'advanced scope' do
             click_button 'Sign in'
           end
 
-          describe 'when click on filter resources' do
+          describe 'when clicks on filter resources' do
 
             before { click_link 'Filter resources' }
 
@@ -59,7 +59,7 @@ feature 'advanced scope' do
                   grant.devices.should == resources
                 end
 
-                describe 'when authorize the access token request' do
+                describe 'when authorizes the access token request' do
 
                   let!(:access_params) do
                     { grant_type:  'authorization_code',
@@ -110,7 +110,7 @@ feature 'advanced scope' do
           click_button 'Sign in'
         end
 
-        describe 'when click on filter resources' do
+        describe 'when clicks on filter resources' do
 
           before { click_link 'Filter resources' }
 
