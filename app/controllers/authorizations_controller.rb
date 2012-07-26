@@ -1,6 +1,22 @@
 class AuthorizationsController < Doorkeeper::AuthorizationsController
 
-  # TODO find a better way to understand if its for grant or token
+  # Override Doorkeeper authorization definition. 
+  #
+  # This action is called when the resource owner grant the access to its resources. 
+  #
+  # This means that it can be called during two flows:
+  # - authorization code: in this case an authorization code is issued
+  # - implicit grant: in this case an access token is issued
+  #
+  # The override of the controller comes out because we need to save also the 
+  # list of devices and we must do it from the controller as they are saved in 
+  # session. Wht we do is to check into the 'authorization request' object and 
+  # add the additional information. 
+  #
+  # Depending from the flow it's being used we add the list of devices to:
+  # - AccessGrant during the authorization code flow
+  # - AccessToken during the implicit grant flow
+  #
   def create
     if authorization.authorize
       save_resources(authorization, session[:resources])
