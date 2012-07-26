@@ -35,4 +35,8 @@ guard 'rspec', cli: '--drb --format Fuubar --color', all_on_start: false, all_af
   watch('config/routes.rb')                              { "spec" }
   watch('app/controllers/application_controller.rb')     { "spec/requests" }
   watch(%r{^app/views/(.+)/(.+)\.rabl$})                 { |m| "spec/requests/#{m[1]}_controller_spec.rb" }
+
+  # run tests if concern or shared example concern is changed
+   watch(%r{^(.+)/models/concerns/ownable\.rb})          { "spec/models/doorkeeper/applications_spec.rb"}
+   watch(%r{^(.+)/models/concerns/resourceable\.rb})     { "spec/models/doorkeeper/access_token_spec.rb"}
 end

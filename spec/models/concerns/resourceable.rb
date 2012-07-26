@@ -90,13 +90,3 @@ shared_examples_for 'resourceable' do
     end
   end
 end
-
-describe 'resourceable example' do
-
-  before { cleanup }
-
-  it_behaves_like 'resourceable' do
-
-    let(:model) { :access_token }
-  end
-end

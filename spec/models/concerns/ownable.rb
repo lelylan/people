@@ -8,13 +8,3 @@ shared_examples_for 'ownable' do
     resource.resource_owner_id.should_not be_nil
   end
 end
-
-describe 'ownable example' do
-
-  before { cleanup }
-
-  it_behaves_like 'ownable' do 
-
-    let(:model) { :application }
-  end
-end
