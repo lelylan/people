@@ -1,6 +1,6 @@
 # ResourceableRequest
 #
-# Add the resource list to the AccessToken.
+# Add the resource list to the created access token.
 # 
 # The token is created from the data we jsut sent and from a base_toke. A base_token 
 # change depending from the flow I'm using:
@@ -12,17 +12,21 @@
 module ResourceableRequest
   extend ActiveSupport::Concern
 
-  private
+  included do
+    class_eval do
+      private 
 
-  def create_access_token
-    @access_token = Doorkeeper::AccessToken.create!({
-      :application_id    => client.id,
-      :resource_owner_id => base_token.resource_owner_id,
-      :scopes            => base_token.scopes_string,
-      :expires_in        => configuration.access_token_expires_in,
-      :devices           => base_token.devices,
-      :use_refresh_token => refresh_token_enabled?
-    })
+      def create_access_token
+        @access_token = Doorkeeper::AccessToken.create!({
+          :application_id    => client.id,
+          :resource_owner_id => base_token.resource_owner_id,
+          :scopes            => base_token.scopes_string,
+          :expires_in        => configuration.access_token_expires_in,
+          :devices           => base_token.devices,
+          :use_refresh_token => refresh_token_enabled?
+        })
+      end
+    end
   end
 end
 
