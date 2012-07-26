@@ -1,12 +1,21 @@
-# Override Doorkeeper::AccessToken
+# Resourceable
 #
-# Module to add the ability to add the list of devices to a model. 
-# This functionality is needed to use the advanced scope system.
+# Add resources to the model to enable advanced scope.
+#
+# Examples
+#
+#   resources = { resources: [devices: [...], locations: [...] }
+#   @model.save_resources resources.
+#
+# Returnd the updated model
 
-class Doorkeeper::AccessToken
-  field :devices, type: Array, default: []
+module Resourceable
+  extend ActiveSupport::Concern
 
-  attr_accessible :devices
+  included do
+    field :devices, type: Array, default: []
+    attr_accessible :devices
+  end
 
   def save_resources(resources)
     if filtered_resources? resources
