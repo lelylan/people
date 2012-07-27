@@ -1,6 +1,7 @@
 GIT
-  remote: https://github.com/applicake/doorkeeper
-  revision: af53f7f74e53fdd82cbebdbdef3f10afce9c35a7
+  remote: https://github.com/andreareginato/doorkeeper
+  revision: 94371aa0f32014a1bb8aae30cf9687875ee4401d
+  branch: mongoid_v3
   specs:
     doorkeeper (0.5.0.dev)
       railties (~> 3.1)
