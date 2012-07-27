@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 feature 'client credentials flow' do
 
   let!(:application) { FactoryGirl.create :application }
-  let!(:devices)     { [ BSON::ObjectId('500fb2d4d033a95185000001') ] }
+  let!(:devices)     { [ Moped::BSON::ObjectId('000aa0a0a000a00000000001') ] }
   let!(:token)       { FactoryGirl.create :access_token, application: application, devices: devices, use_refresh_token: true  }
   let!(:user)        { FactoryGirl.create :user }
 

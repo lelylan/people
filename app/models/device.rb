@@ -1,6 +1,6 @@
 class Device
   include Mongoid::Document
-  set_database :devices
+  store_in session: 'devices'
 
   field :name
   field :resource_owner_id

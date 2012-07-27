@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Doorkeeper::AccessGrant do
+describe Doorkeeper::AccessToken do
 
   it_behaves_like 'resourceable' do
-    let(:model) { :access_grant }
+    let(:model) { :access_token }
   end
 end

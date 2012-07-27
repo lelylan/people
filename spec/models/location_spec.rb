@@ -10,9 +10,9 @@ describe Location do
 
   describe '#devices' do
 
-    let(:house_device) { BSON::ObjectId('500fb2d4d033a95185000001') }
-    let(:floor_device) { BSON::ObjectId('500fb2d4d033a95185000002') }
-    let(:room_device)  { BSON::ObjectId('500fb2d4d033a95185000003') }
+    let(:house_device) { Moped::BSON::ObjectId('000aa0a0a000a00000000001') }
+    let(:floor_device) { Moped::BSON::ObjectId('000aa0a0a000a00000000002') }
+    let(:room_device)  { Moped::BSON::ObjectId('000aa0a0a000a00000000003') }
 
     it 'returns all house devices' do
       house.all_devices.should == [house_device, floor_device, room_device]

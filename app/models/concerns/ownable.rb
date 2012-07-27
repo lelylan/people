@@ -6,7 +6,7 @@ module Ownable
   extend ActiveSupport::Concern
 
   included do
-    field          :resource_owner_id, type: Integer
+    field          :resource_owner_id, type: Moped::BSON::ObjectId
     attr_protected :resource_owner_id
     validates      :resource_owner_id, presence: true
   end

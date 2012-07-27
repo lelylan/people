@@ -31,7 +31,7 @@ shared_examples_for 'resourceable' do
     describe 'with locations' do
 
       let(:house)     { FactoryGirl.create :house, :with_descendants }
-      let(:device_id) { BSON::ObjectId('500fb2d4d033a95185000007') }
+      let(:device_id) { Moped::BSON::ObjectId('000aa0a0a000a00000000007') }
       let(:summer)    { FactoryGirl.create :house, name: 'Summer house', devices: [ device_id ] }
       let(:locations) { [ house.id, summer.id ] }
       let(:resources) { { devices: [], locations: locations } }

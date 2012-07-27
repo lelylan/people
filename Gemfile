@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~>3.2.6'
-gem 'mongoid', '~> 2.4'
-gem 'bson_ext', '~> 1.5'
+gem 'mongoid', '~> 3.0.0.rc'
 gem 'devise'
 gem 'doorkeeper', :git => 'https://github.com/applicake/doorkeeper'
 gem 'awesome_nested_set'
