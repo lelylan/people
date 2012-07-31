@@ -14,7 +14,7 @@ module ResourceableRequest
 
   included do
     class_eval do
-      private 
+      private
 
       def create_access_token
         @access_token = Doorkeeper::AccessToken.create!({

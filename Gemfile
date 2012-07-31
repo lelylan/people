@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~>3.2.6'
 gem 'mongoid', '~> 3.0.0.rc'
 gem 'devise'
-gem 'doorkeeper', git: 'https://github.com/andreareginato/doorkeeper', branch: "mongoid_v3"
+gem 'doorkeeper', git: 'https://github.com/andreareginato/doorkeeper', branch: 'mongoid_v3'
 gem 'awesome_nested_set'
 gem 'rabl'
 gem 'yajl-ruby'

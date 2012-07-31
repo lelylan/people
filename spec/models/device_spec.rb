@@ -4,7 +4,7 @@ describe Device do
 
   let(:device) { FactoryGirl.create :device }
 
-  it 'should connect to the device database' do
+  it 'connect to the device database' do
     Device.database_name.should == 'devices_test'
   end
 
