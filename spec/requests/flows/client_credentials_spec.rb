@@ -7,7 +7,7 @@ feature 'client credentials flow' do
 
   let!(:authorization_params) {{
     grant_type: 'client_credentials',
-    scope:      'public write',
+    scope:      'write',
   }}
 
   describe 'when sends an authorization request' do

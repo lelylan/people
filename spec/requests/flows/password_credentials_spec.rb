@@ -9,7 +9,7 @@ feature 'resource owner password credentials flow' do
     grant_type: 'password',
     username:   'alice@example.com',
     password:   'password',
-    scope:      'public write'
+    scope:      'write'
   }}
 
   describe 'when sends an authorization request' do

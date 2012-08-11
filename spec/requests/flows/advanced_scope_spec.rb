@@ -14,7 +14,7 @@ feature 'advanced scope' do
       response_type: 'code',
       client_id:     application.uid,
       redirect_uri:  application.redirect_uri,
-      scope:         'public write',
+      scope:         'write',
       state:         'remember-me'
     }}
 
@@ -91,7 +91,7 @@ feature 'advanced scope' do
       { response_type: 'token',
         client_id:     application.uid,
         redirect_uri:  application.redirect_uri,
-        scope:         'public write',
+        scope:         'write',
         state:         'remember-me' }
     end
 
