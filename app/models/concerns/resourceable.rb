@@ -5,9 +5,9 @@
 # Examples
 #
 #   resources = { resources: [devices: [...], locations: [...] }
-#   @model.save_resources resources.
+#   @model.save_resources resources
 #
-# Returnd the updated model
+# Return the updated model
 
 module Resourceable
   extend ActiveSupport::Concern
