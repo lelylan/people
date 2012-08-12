@@ -1,3 +1,6 @@
+# Public: add and remove the devices and the locations to create advanced tokens
+# that let you access only to specific resources.
+
 class ResourcesController < Doorkeeper::ApplicationController
   respond_to :html
 
@@ -42,12 +45,10 @@ class ResourcesController < Doorkeeper::ApplicationController
   end
 
   def authorization_params
-    { 
-      response_type: params[:response_type],
+    { response_type: params[:response_type],
       client_id:     params[:client_id],
       redirect_uri:  params[:redirect_uri],
       scope:         params[:scope],
-      state:         params[:state]
-    }
+      state:         params[:state] }
   end
 end
