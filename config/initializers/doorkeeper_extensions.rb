@@ -5,4 +5,3 @@ People::Application.config.to_prepare do
   Doorkeeper::Application.class_eval { include Ownable }
   Doorkeeper::OAuth::AccessTokenRequest.class_eval { include ResourceableRequest }
 end
-

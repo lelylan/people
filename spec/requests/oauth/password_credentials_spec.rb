@@ -1,13 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-feature 'client credentials flow' do
+feature 'resource owner password credentials flow' do
 
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
 
   let!(:authorization_params) {{
-    grant_type: 'client_credentials',
-    scope:      'write',
+    grant_type: 'password',
+    username:   'alice@example.com',
+    password:   'password',
+    scope:      'resources'
   }}
 
   describe 'when sends an authorization request' do

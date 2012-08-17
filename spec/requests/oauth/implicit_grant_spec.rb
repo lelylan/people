@@ -9,7 +9,7 @@ feature 'implicit grant flow' do
     { response_type: 'token',
       client_id:     application.uid,
       redirect_uri:  application.redirect_uri,
-      scope:         'write',
+      scope:         'resources',
       state:         'remember-me' }
   end
 
