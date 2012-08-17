@@ -1,5 +1,5 @@
 class Api::UsersController < Api::BaseController
-  doorkeeper_for :all
+  doorkeeper_for :show, scopes: %w(user)
 
   respond_to :json
 

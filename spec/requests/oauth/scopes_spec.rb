@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-feature 'Authorization with scopes' do
+feature 'Scope authorization' do
 
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
@@ -11,7 +11,24 @@ feature 'Authorization with scopes' do
     password:   'password',
   }}
 
-  %w(resources resources.read devices devices.read types types.read locations locations.read).each do |scope| 
+  describe 'with no scope' do
+
+    describe 'when sends an authorization request' do
+
+      before do
+        page.driver.browser.authorize application.uid, application.secret
+        page.driver.post '/oauth/token', authorization_params
+      end
+
+      subject(:token) { Doorkeeper::AccessToken.last }
+
+      it 'sets the default scope' do
+        token.scopes.to_s.should == 'user'
+      end
+    end
+  end
+
+  %w(user resources resources.read devices devices.read types types.read locations locations.read).each do |scope| 
 
     describe "with valid scope #{scope}" do
 
