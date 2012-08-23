@@ -241,6 +241,7 @@ PLATFORMS
 DEPENDENCIES
   addressable
   bcrypt-ruby
+  bundler
   capybara
   chronic
   coffee-rails (~> 3.2.1)

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '~>3.2.6'
 gem 'mongoid', '~> 3.0.3'
 gem 'devise'
@@ -16,6 +18,7 @@ gem 'rabl'
 gem 'draper'
 gem 'addressable'
 gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'bundler'
 
 group :development, :test do
   gem 'foreman'
