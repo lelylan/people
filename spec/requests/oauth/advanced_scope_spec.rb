@@ -7,7 +7,6 @@ feature 'advanced scope' do
   let!(:light)       { FactoryGirl.create :light, resource_owner_id: user.id  }
   let!(:house)       { FactoryGirl.create :house, :with_descendants, resource_owner_id: user.id.to_s }
 
-
   describe 'with authorization code flow' do
 
     let!(:authorization_params) {{
@@ -45,7 +44,7 @@ feature 'advanced scope' do
               describe 'when authorizes the client' do
 
                 let(:devices)   { [ light.id ] }
-                let(:locations) { house.all_devices }
+                let(:locations) { house.contained_devices }
                 let(:resources) { devices + locations }
 
                 before { click_link 'Back to authorization' }
@@ -73,6 +72,8 @@ feature 'advanced scope' do
                   let(:token) { Doorkeeper::AccessToken.last }
 
                   it 'creates an access token with all desired devices' do
+                    #pp Doorkeeper::AccessToken.last
+                    #pp Doorkeeper::AccessGrant.last
                     token.devices.should == resources
                   end
                 end
@@ -83,7 +84,6 @@ feature 'advanced scope' do
       end
     end
   end
-
 
   describe 'with implicit grant flow' do
 
@@ -120,7 +120,7 @@ feature 'advanced scope' do
             describe 'when authorizes the client' do
 
               let(:devices)   { [ light.id ] }
-              let(:locations) { house.all_devices }
+              let(:locations) { house.contained_devices }
               let(:resources) { devices + locations }
 
               before { click_link 'Back to authorization' }

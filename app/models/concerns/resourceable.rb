@@ -19,8 +19,7 @@ module Resourceable
 
   def save_resources(resources)
     if filtered_resources? resources
-      self.devices = extract(resources)
-      self.save
+      self.devices = extract(resources); self.save
     end
   end
 
@@ -31,8 +30,7 @@ module Resourceable
   end
 
   def extract(resources)
-    devices = extract_devices(resources) + extract_location_devices(resources)
-    devices.uniq
+    (extract_devices(resources) + extract_location_devices(resources)).uniq
   end
 
   def extract_devices(resources)
@@ -40,6 +38,6 @@ module Resourceable
   end
 
   def extract_location_devices(resources)
-    list = Location.find(resources[:locations]).map(&:all_devices).flatten
+    list = Location.find(resources[:locations]).map(&:contained_devices).flatten
   end
 end

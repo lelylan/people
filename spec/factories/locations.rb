@@ -1,26 +1,24 @@
 FactoryGirl.define do
   factory :location, aliases: ['house'] do
     name 'House'
-    sequence(:resource_owner_id) { |n| n }
-    devices [Moped::BSON::ObjectId('000aa0a0a000a00000000001')]
+    resource_owner_id Settings.resource_id
+    device_ids { [FactoryGirl.create(:device, name: 'House light', resource_owner_id: resource_owner_id).id ] }
 
     factory :floor do
       name 'Floor'
-      devices [Moped::BSON::ObjectId('000aa0a0a000a00000000002')]
+      device_ids { [FactoryGirl.create(:device, name: 'Floor light', resource_owner_id: resource_owner_id).id ] }
     end
 
     factory :room do
       name 'Room'
-      devices [Moped::BSON::ObjectId('000aa0a0a000a00000000003')]
+      device_ids { [FactoryGirl.create(:device, name: 'Room light', resource_owner_id: resource_owner_id).id ] }
     end
   end
 
   trait :with_descendants do
     after(:create) do |house|
-      floor = FactoryGirl.create :floor
-      floor.move_to_child_of house
-      room = FactoryGirl.create :room
-      room.move_to_child_of floor
+      floor = FactoryGirl.create :floor, parent_id: house.id
+      room  = FactoryGirl.create :room, parent_id: floor.id
     end
   end
 end

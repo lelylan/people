@@ -52,7 +52,6 @@ feature 'authorization code flow' do
           end
 
           it 'returns an activation code' do
-            pp authorization_code
             authorization_code.should_not be_nil
           end
 

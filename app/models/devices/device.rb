@@ -1,5 +1,6 @@
 class Device
   include Mongoid::Document
+
   store_in session: 'devices'
 
   field :name

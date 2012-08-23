@@ -22,15 +22,13 @@ Spork.prefork do
   RSpec.configure do |config|
     config.mock_with :rspec
 
-    config.before(:suite) { DatabaseCleaner[:active_record].strategy = :transaction }
-    config.before(:suite) { DatabaseCleaner[:mongoid].strategy = :truncation }
-    config.before(:each)  { DatabaseCleaner[:active_record].clean }
-    config.before(:each)  { DatabaseCleaner[:mongoid].clean }
+    # Clean up the database
+    config.before(:suite) { DatabaseCleaner.strategy = :truncation }
+    config.before(:suite) { DatabaseCleaner.orm = :mongoid }
+    config.before(:each)  { DatabaseCleaner.clean }
 
     # Let selenium work and block all requests to the net
     WebMock.disable_net_connect! allow_localhost: true
-
-    config.alias_it_should_behave_like_to :it_validates, 'it validates'
   end
 end
 
