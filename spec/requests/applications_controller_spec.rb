@@ -2,9 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature 'applications' do
 
-  let!(:user) { FactoryGirl.create :user }
-  let!(:bob)  { FactoryGirl.create :bob }
-  let!(:admin)  { FactoryGirl.create :admin }
+  let!(:user)  { FactoryGirl.create :user }
+  let!(:bob)   { FactoryGirl.create :bob }
+  let!(:admin) { FactoryGirl.create :admin }
 
   let!(:application)     { FactoryGirl.create :application, resource_owner_id: user.id }
   let!(:bob_application) { FactoryGirl.create :application, resource_owner_id: bob.id }
