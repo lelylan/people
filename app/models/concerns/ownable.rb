@@ -1,6 +1,7 @@
 # Ownable
 # 
 # Add the field resource_owner_id to show only the owned resources.
+# Used to show owned applications in doorkeeper.
 
 module Ownable
   extend ActiveSupport::Concern

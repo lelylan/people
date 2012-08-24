@@ -9,7 +9,7 @@
 # - implicit grant:     base token is itself (better understand)
 # - refresh token:      base token is the previous access token
 
-module ResourceableRequest
+module FilterableRequest
   extend ActiveSupport::Concern
 
   included do
@@ -22,7 +22,7 @@ module ResourceableRequest
           :resource_owner_id => base_token.resource_owner_id,
           :scopes            => base_token.scopes_string,
           :expires_in        => configuration.access_token_expires_in,
-          :devices           => base_token.devices,
+          :resources         => base_token.resources,
           :use_refresh_token => refresh_token_enabled?
         })
       end
