@@ -31,7 +31,8 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
   private
 
   def save_resources(authorization, resources)
-    for_grant? ? find_grant.save_resources(resources) : find_token.save_resources(resources)
+    pp resources
+    for_grant? ? find_grant.update_attributes(resources: resources) : find_token.update_attributes(resources: resources)
   end
 
   def find_token

@@ -53,7 +53,7 @@ feature 'advanced scope' do
                 let(:grant) { Doorkeeper::AccessGrant.last }
 
                 it 'creates an access grant with all desired devices' do
-                  grant.devices.should == resources
+                  grant.device_ids.should == resources
                 end
 
                 describe 'when authorizes the access token request' do
@@ -72,9 +72,7 @@ feature 'advanced scope' do
                   let(:token) { Doorkeeper::AccessToken.last }
 
                   it 'creates an access token with all desired devices' do
-                    #pp Doorkeeper::AccessToken.last
-                    #pp Doorkeeper::AccessGrant.last
-                    token.devices.should == resources
+                    token.device_ids.should == resources
                   end
                 end
               end
@@ -129,7 +127,7 @@ feature 'advanced scope' do
               let(:token) { Doorkeeper::AccessToken.last }
 
               it 'creates an access token with all desired devices' do
-                token.devices.should == resources
+                token.device_ids.should == resources
               end
             end
           end

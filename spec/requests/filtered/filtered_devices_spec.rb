@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-feature 'devices filtering (through devices selection)' do
+feature 'when filters a device by selecting a device' do
 
   let!(:user)        { FactoryGirl.create :user }
   let!(:application) { FactoryGirl.create :application }
@@ -117,7 +117,7 @@ feature 'devices filtering (through devices selection)' do
   end
 end
 
-feature 'devices filtering through (locations selection)' do
+feature 'when filters devices contained in a location' do
 
   let!(:user)        { FactoryGirl.create :user }
   let!(:application) { FactoryGirl.create :application }
