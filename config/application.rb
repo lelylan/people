@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 #require 'rails/all'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
+require 'sprockets/railtie'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -68,7 +69,7 @@ module People
 
     # Base layout for Doorkeeper.
     config.to_prepare do
-      Doorkeeper::ApplicationController.layout "application"
+      Doorkeeper::ApplicationController.layout 'application'
     end
   end
 end
