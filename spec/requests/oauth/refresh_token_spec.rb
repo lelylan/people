@@ -41,7 +41,6 @@ feature 'refresh token' do
 
         subject(:new_token) { Doorkeeper::AccessToken.last }
 
-        before { pp new_token.resources }
         its(:token)         { should_not == access_token.token }
         its(:refresh_token) { should_not == access_token.refresh_token }
         its(:device_ids)    { should == access_token.device_ids }

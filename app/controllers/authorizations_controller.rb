@@ -18,7 +18,7 @@
 class AuthorizationsController < Doorkeeper::AuthorizationsController
   def create
     if authorization.authorize
-      #save_resources(authorization, session[:resources])
+      save_resources(authorization, session[:resources]) if session[:resources]
       redirect_to authorization.success_redirect_uri
     elsif authorization.redirect_on_error?
       redirect_to authorization.invalid_redirect_uri
@@ -30,10 +30,9 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
 
   private
 
-  def save_resources(authorization, resources)
+  def save_resources(authorization, resources = {})
     token = access_grant ? access_grant : access_token
-    pp resources.map(&:first).map(&:last)
-    token.update_attributes(resources: resources.map(&:first).map(&:last))
+    token.update_attributes!(resources: resources.values)
     session[:resources] = nil
   end
 
