@@ -6,18 +6,30 @@ FactoryGirl.define do
   end
 
   trait :with_device do
-    resources { [ FactoryGirl.build(:filtered_device) ] }
+    after(:create) do |token|
+      token.resources << FactoryGirl.build(:filtered_device)
+      token.save
+    end
   end
 
   trait :with_contained_devices do
-    resources { [ FactoryGirl.build(:filtered_contained_devices) ] }
+    after(:create) do |token|
+      token.resources << FactoryGirl.build(:filtered_contained_devices)
+      token.save
+    end
   end
 
   trait :with_location do
-    resources { [ FactoryGirl.build(:filtered_location) ] }
+    after(:create) do |token|
+      token.resources << FactoryGirl.build(:filtered_location)
+      token.save
+    end
   end
   
   trait :with_contained_locations do
-    resources { [ FactoryGirl.build(:filtered_contained_locations) ] }
+    after(:create) do |token|
+      token.resources << FactoryGirl.build(:filtered_contained_locations)
+      token.save
+    end
   end
 end

@@ -3,9 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 feature 'refresh token' do
 
   let!(:application)  { FactoryGirl.create :application }
-  let!(:devices)      { [ FactoryGirl.create(:device).id ] }
   let!(:user)         { FactoryGirl.create :user }
-  let!(:access_token) { FactoryGirl.create :access_token, application: application, scopes: 'write', devices: devices, resource_owner_id: user.id, use_refresh_token: true }
+  let!(:access_token) { FactoryGirl.create :access_token, :with_device, :with_location, application: application, scopes: 'write', resource_owner_id: user.id, use_refresh_token: true }
 
   describe 'when token expires' do
 
@@ -42,9 +41,12 @@ feature 'refresh token' do
 
         subject(:new_token) { Doorkeeper::AccessToken.last }
 
+        before { pp new_token.resources }
         its(:token)         { should_not == access_token.token }
         its(:refresh_token) { should_not == access_token.refresh_token }
-        its(:devices)       { should == access_token.devices }
+        its(:device_ids)    { should == access_token.device_ids }
+        its(:location_ids)  { should == access_token.location_ids }
+        its(:resources)     { should have(2).items }
       end
     end
   end

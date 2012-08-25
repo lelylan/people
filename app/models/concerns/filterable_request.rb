@@ -22,6 +22,8 @@ module FilterableRequest
           :resource_owner_id => base_token.resource_owner_id,
           :scopes            => base_token.scopes_string,
           :expires_in        => configuration.access_token_expires_in,
+          :device_ids        => base_token.device_ids,
+          :location_ids      => base_token.location_ids,
           :resources         => base_token.resources,
           :use_refresh_token => refresh_token_enabled?
         })
