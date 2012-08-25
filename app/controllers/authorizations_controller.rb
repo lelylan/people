@@ -31,26 +31,20 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
   private
 
   def save_resources(authorization, resources)
-    pp resources
-    for_grant? ? find_grant.update_attributes(resources: resources) : find_token.update_attributes(resources: resources)
-  end
-
-  def find_token
-    for_token?
-  end
-
-  def find_grant
-    for_grant?
+    token = access_grant ? access_grant : access_token
+    pp resources.map(&:first).map(&:last)
+    token.update_attributes(resources: resources.map(&:first).map(&:last))
+    session[:resources] = nil
   end
 
   # Authorization code flow (creates an access grant)
-  def for_token?
+  def access_token
     app = authorization.instance_variable_get '@authorization'
     app.instance_variable_get '@access_token'
   end
 
   # Implicit authorization flow (creates an access token)
-  def for_grant?
+  def access_grant
     app = authorization.instance_variable_get '@authorization'
     app.respond_to?('grant') ? app.grant : nil
   end

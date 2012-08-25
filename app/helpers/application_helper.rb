@@ -22,11 +22,19 @@ module ApplicationHelper
     }
   end
 
-  def device_params
-    authorization_params.merge(type: 'devices')
+  def device_params(device)
+    authorization_params.merge(
+      resource_id: device.id,
+      resource_type: 'device',
+      filtered_type: 'device'
+    )
   end
 
-  def location_params
-    authorization_params.merge(type: 'locations')
+  def location_params(location)
+    authorization_params.merge(
+      resource_id: location.id,
+      resource_type: 'location',
+      filtered_type: 'device'
+    )
   end
 end

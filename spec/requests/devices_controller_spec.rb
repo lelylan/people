@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
+require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature 'when filters a device by selecting a device' do
 
@@ -35,7 +35,7 @@ feature 'when filters a device by selecting a device' do
 
         describe 'when click on filter resources' do
 
-          before { click_link 'Filter resources' }
+          before { click_link 'Filter devices' }
 
           it 'shows the filterable devices' do
             page.should have_content device.name
@@ -48,7 +48,7 @@ feature 'when filters a device by selecting a device' do
             end
 
             it 'shows a message' do
-              page.should have_content 'A device has been added'
+              page.should have_content 'One or more devices has been added'
             end
 
             it 'hides the add link' do
@@ -66,7 +66,7 @@ feature 'when filters a device by selecting a device' do
               end
 
               it 'shows a message' do
-                page.should have_content 'A device has been removed'
+                page.should have_content 'One or more devices has been removed'
               end
 
               it 'hides the add link' do
@@ -153,7 +153,7 @@ feature 'when filters devices contained in a location' do
 
         describe 'when click on filter resources' do
 
-          before { click_link 'Filter resources' }
+          before { click_link 'Filter devices' }
 
           it 'shows the filterable locations' do
             page.should have_content location.name
@@ -166,7 +166,7 @@ feature 'when filters devices contained in a location' do
             end
 
             it 'shows a message' do
-              page.should have_content 'A location has been added'
+              page.should have_content 'One or more devices has been added'
             end
 
             it 'hides the add link' do
@@ -184,7 +184,7 @@ feature 'when filters devices contained in a location' do
               end
 
               it 'shows a message' do
-                page.should have_content 'A location has been removed'
+                page.should have_content 'One or more devices has been removed'
               end
 
               it 'hides the add link' do

@@ -7,7 +7,7 @@ People::Application.routes.draw do
   end
 
   scope 'oauth/authorize' do
-    resources :resources, only: %w(index update destroy)
+    resources :devices, only: %w(index create destroy)
   end
 
   use_doorkeeper do

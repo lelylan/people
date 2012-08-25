@@ -19,12 +19,12 @@
       <% @devices.each do |device| %>
         <tr id="device_<%= device.id %>">
           <td><%= device.name %></td>
-          <% if not session[:resources][:devices].include? device.id %>
-            <td><%= link_to 'Add', resource_path(device, device_params), method: :put %></td>
-            <td></td>
-          <% else %>
+          <% if session[:resources].has_key? device.id.to_s %>
             <td>Added</td>
-            <td><%= link_to 'Remove', resource_path(device, device_params), method: :delete %></td>
+            <td><%= link_to 'Remove', device_path(device, device_params(device)), method: :delete %></td>
+          <% else %>
+            <td><%= link_to 'Add', devices_path(device_params(device)), method: :post %></td>
+            <td></td>
           <% end %>
         </tr>
       <% end %>
@@ -47,12 +47,12 @@
       <% @locations.each do |location| %>
         <tr id="location_<%= location.id %>">
           <td><%= location.name %></td>
-          <% if not session[:resources][:locations].include? location.id %>
-            <td><%= link_to 'Add', resource_path(location, location_params), method: :put %></td>
-            <td></td>
-          <% else %>
+          <% if session[:resources].has_key? location.id.to_s %>
             <td>Added</td>
-            <td><%= link_to 'Remove', resource_path(location, location_params), method: :delete %></td>
+            <td><%= link_to 'Remove', device_path(location, location_params(location)), method: :delete %></td>
+          <% else %>
+            <td><%= link_to 'Add', devices_path(location_params(location)), method: :post %></td>
+            <td></td>
           <% end %>
         </tr>
       <% end %>
