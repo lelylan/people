@@ -18,7 +18,7 @@
 class AuthorizationsController < Doorkeeper::AuthorizationsController
   def create
     if authorization.authorize
-      save_resources(authorization, session[:resources])
+      #save_resources(authorization, session[:resources])
       redirect_to authorization.success_redirect_uri
     elsif authorization.redirect_on_error?
       redirect_to authorization.invalid_redirect_uri
