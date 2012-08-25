@@ -33,7 +33,6 @@ feature 'authorization code flow' do
         end
 
         it 'shows the grant page' do
-          save_and_open_page
           page.should have_content "Authorize #{application.name}"
         end
 

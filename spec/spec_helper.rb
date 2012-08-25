@@ -27,7 +27,7 @@ Spork.prefork do
     config.before(:suite) { DatabaseCleaner.orm = :mongoid }
     config.before(:each)  { DatabaseCleaner.clean }
 
-    # Let selenium work and block all requests to the net
+    # Let selenium work while blocking all requests to the net
     WebMock.disable_net_connect! allow_localhost: true
   end
 end
