@@ -67,15 +67,7 @@ People::Application.configure do
 
   # default url options
   config.action_mailer.default_url_options = { :host => 'www.lelylan.com' }
-  
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port:                 587,
-    domain:               'lelylan.com',
-    authentication:       'plain',
-    enable_starttls_auto: true,
-    user_name:            'smtp',
-    password:             'hacklely' }
+  config.action_mailer.delivery_method   = :postmark
+  config.action_mailer.postmark_settings = { api_key: '5162e9de-b611-4d03-b21e-8c2f1836f8a9' }  
 end

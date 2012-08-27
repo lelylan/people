@@ -20,6 +20,7 @@ gem 'draper'
 gem 'addressable'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'bundler'
+gem 'postmark-rails'
 
 group :development, :test do
   gem 'foreman'
