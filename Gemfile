@@ -5,6 +5,7 @@ ruby '1.9.3'
 gem 'rails', '~>3.2.6'
 gem 'mongoid', '~> 3.0.3'
 gem 'devise'
+gem 'devise_invitable'
 gem 'doorkeeper', git: 'https://github.com/andreareginato/doorkeeper', branch: 'mongoid_v3'
 gem 'mongoid-ancestry', '~> 0.3.0'
 gem 'rabl'
@@ -35,7 +36,6 @@ group :development, :test do
   gem 'spork', '~> 1.0rc'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'test-unit' # hack to not show some errors
   gem 'debugger'
 end
 

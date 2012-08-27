@@ -1,0 +1,23 @@
+<h2>Subscriptions</h2>
+
+<p><%= link_to 'New Subscription', new_subscription_path %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= subscription.email %></td>
+        <td><%= subscription.description %></td>
+        <td><%= link_to 'Send invitation', invite_subscriptions_path(email: subscription.email) %></td>
+        <td><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

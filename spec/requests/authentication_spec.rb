@@ -157,67 +157,68 @@ feature 'authorization' do
   end
 
 
-  describe '/users/sign_up' do
+  # OPEN_SIGNUP: uncomment test
+  #describe '/users/sign_up' do
 
-    before do
-      visit '/'
-      click_link 'Sign up'
-    end
+    #before do
+      #visit '/'
+      #click_link 'Sign up'
+    #end
 
-    it 'shows the sign up page' do
-      page.should have_content('Sign up')
-    end
+    #it 'shows the sign up page' do
+      #page.should have_content('Sign up')
+    #end
 
-    describe 'with all fields filled in' do
+    #describe 'with all fields filled in' do
 
-      before do
-        fill_in 'Email',    with: 'alice@example.com'
-        fill_in 'Password', with: 'password'
-        click_button 'Sign up'
-      end
+      #before do
+        #fill_in 'Email',    with: 'alice@example.com'
+        #fill_in 'Password', with: 'password'
+        #click_button 'Sign up'
+      #end
 
-      it 'signs up' do
-        page.should have_content 'Welcome! You have signed up successfully.'
-      end
+      #it 'signs up' do
+        #page.should have_content 'Welcome! You have signed up successfully.'
+      #end
 
-      it 'is logged in' do
-        page.should have_content 'Sign out'
-      end
-    end
+      #it 'is logged in' do
+        #page.should have_content 'Sign out'
+      #end
+    #end
 
-    describe 'with no password' do
+    #describe 'with no password' do
 
-      before do
-        fill_in 'Email', with: 'alice@example.com'
-        click_button 'Sign up'
-      end
+      #before do
+        #fill_in 'Email', with: 'alice@example.com'
+        #click_button 'Sign up'
+      #end
 
-      it 'shows the missing password message' do
-        page.should have_content 'password can\'t be blank'
-      end
-    end
+      #it 'shows the missing password message' do
+        #page.should have_content 'password can\'t be blank'
+      #end
+    #end
 
-    describe 'with existing email' do
+    #describe 'with existing email' do
 
-      before do
-        fill_in 'Email',    with: 'alice@example.com'
-        fill_in 'Password', with: 'password'
-        click_button 'Sign up'
-        click_link 'Sign out'
-      end
+      #before do
+        #fill_in 'Email',    with: 'alice@example.com'
+        #fill_in 'Password', with: 'password'
+        #click_button 'Sign up'
+        #click_link 'Sign out'
+      #end
 
-      before do
-        visit '/users/sign_up'
-        fill_in 'Email',    with: 'alice@example.com'
-        fill_in 'Password', with: 'password'
-        click_button 'Sign up'
-      end
+      #before do
+        #visit '/users/sign_up'
+        #fill_in 'Email',    with: 'alice@example.com'
+        #fill_in 'Password', with: 'password'
+        #click_button 'Sign up'
+      #end
 
-      it 'shows the already registerd accont message' do
-        page.should have_content 'Email is already taken'
-      end
-    end
-  end
+      #it 'shows the already registerd accont message' do
+        #page.should have_content 'Email is already taken'
+      #end
+    #end
+  #end
 
 
   describe '/users/edit' do
@@ -354,6 +355,144 @@ feature 'authorization' do
             page.should have_content 'Signed in successfully.'
           end
         end
+      end
+    end
+  end
+
+
+  # OPEN_SIGNUP: remove subscription tests
+  describe '/subscriptions/new' do
+
+    before { visit '/subscriptions/new' }
+
+    it 'shows the subscription page' do
+      page.should have_content('Subscribe to Lelylan')
+    end
+
+    describe 'with all fields filled in' do
+
+      let(:subscriptions) { Subscription.count }
+
+      before do
+        fill_in 'Email',       with: 'alice@example.com'
+        fill_in 'Description', with: 'I want to access to Lelylan'
+        click_button 'Subscribe'
+      end
+
+      it 'subscribes a new user' do
+        page.should have_content 'The subscription was successfull'
+      end
+
+      it 'shows confirmation page' do
+        page.should have_content 'The subscription was successfull'
+      end
+    end
+
+    describe 'with no email' do
+
+      let(:subscriptions) { Subscription.count }
+
+      before do
+        fill_in 'Description', with: 'I want to access to Lelylan'
+        click_button 'Subscribe'
+      end
+
+      it 'shows the missing email message' do
+        page.should have_content 'can\'t be blank'
+      end
+    end
+  end
+
+  # OPEN_SIGNUP: remove subscription tests
+  describe '/subscriptions' do
+
+    context 'when authenticates as admin' do
+
+      let!(:user)         { FactoryGirl.create(:admin) }
+      let!(:subscription) { FactoryGirl.create(:subscription) }
+
+      before do
+        visit '/users/sign_in'
+        fill_in 'Email',    with: user.email
+        fill_in 'Password', with: 'password'
+        click_button 'Sign in'
+      end
+
+      before { visit '/subscriptions' }
+
+      it 'shows the all subscriptions' do
+        page.should have_content('Subscriptions')
+      end
+
+      describe 'when clicks on invite' do
+
+        before { click_link 'Send invitation' }
+
+        it 'user has been invited' do
+          page.should_not have_content 'Send invitation'
+        end
+
+        describe 'when checking the mail' do
+
+          it 'sends the mail' do
+            last_email.should_not be_nil
+          end
+
+          it 'sends the mail to the filled mail address' do
+            last_email.to.should include 'alice@example.com'
+          end
+        end
+
+        describe 'when clicking to accept invitation' do
+
+          before do
+            visit invitation_uri(last_email)
+          end
+
+          it 'shows the change password page' do
+            page.should have_content('Set your password')
+          end
+
+          describe 'when fills in the new password' do
+
+            before do
+              fill_in 'Password',              with: 'password'
+              fill_in 'Password confirmation', with: 'password'
+              click_button 'Set my password'
+            end
+
+            it 'changes the password' do
+              page.should have_content('You are now signed in.')
+            end
+          end
+        end
+      end
+    end
+
+    context 'when does not authenticate as admin' do
+
+      let!(:user) { FactoryGirl.create(:user) }
+
+      before do
+        visit '/users/sign_in'
+        fill_in 'Email',    with: 'alice@example.com'
+        fill_in 'Password', with: 'password'
+        click_button 'Sign in'
+      end
+
+      before { visit '/subscriptions' }
+
+      it 'shows the login page' do
+        page.should have_content('You can\'t access this page')
+      end
+    end
+
+    context 'when not authenticated' do
+
+      before { visit '/subscriptions' }
+
+      it 'shows the subscription page' do
+        page.should have_content('You need to sign in')
       end
     end
   end
