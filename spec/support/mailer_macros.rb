@@ -12,6 +12,11 @@ module MailerMacros
     uris = URI.extract body
     URI.parse(uris.last).query.split('=').last
   end
+
+  def invitation_uri(mail)
+    body = mail.default_part_body.to_s
+    URI.extract(body).first
+  end
 end
 
 RSpec.configuration.include MailerMacros

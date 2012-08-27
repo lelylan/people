@@ -17,4 +17,9 @@ People::Application.routes.draw do
   scope module: :api, defaults: {format: 'json'} do
     get :me, to: 'users#show'
   end
+
+  # OPEN_SIGNUP: remove the subscription routes, controller and model
+  resources :subscriptions do
+    match :invite, via: :get, on: :collection
+  end
 end

@@ -1,17 +1,16 @@
 class User
   include Mongoid::Document
 
-  devise :database_authenticatable, 
-        #:registerable,
-         :invitable, :recoverable, :rememberable, :trackable
+  # OPEN_SIGNUP: remove invitable
+  devise :invitable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable
 
   field :email,              :type => String, :default => ''
   field :encrypted_password, :type => String, :default => ''
 
-  validates_presence_of :email
-  validates_uniqueness_of :email
-  validates_presence_of :encrypted_password
-  validates_length_of :password, minimum: 8, allow_nil: true
+  validates :email, presence: true, uniqueness: true
+  validates :encrypted_password, presence: true
+  validates :password, length: { minimum: 8, allow_nil: true }
 
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -23,6 +22,14 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+
+  # OPEN_SIGNUP: remove the invitable fields
+  ## Invitable
+  field :invitation_token
+  field :invitation_sent_at, type: Time
+  field :invitation_accepted_at, type: Time
+  field :invitation_limit, type: Integer
+  field :invited_by_id, type: Moped::BSON::ObjectId
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -47,7 +54,7 @@ class User
 
   attr_protected :admin
 
-  validates_uniqueness_of :username
+  validates :username, uniqueness: true, allow_nil: true
 
   # Tell doorkeeper how to authenticate the resource owner with username/password
   def self.authenticate!(email, password)

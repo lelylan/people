@@ -36,7 +36,6 @@ group :development, :test do
   gem 'spork', '~> 1.0rc'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'test-unit' # hack to not show some errors
   gem 'debugger'
 end
 
