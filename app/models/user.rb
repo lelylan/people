@@ -1,11 +1,12 @@
 class User
   include Mongoid::Document
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, 
+        #:registerable,
+         :invitable, :recoverable, :rememberable, :trackable
 
-  field :email,              :type => String, :default => ""
-  field :encrypted_password, :type => String, :default => ""
+  field :email,              :type => String, :default => ''
+  field :encrypted_password, :type => String, :default => ''
 
   validates_presence_of :email
   validates_uniqueness_of :email
