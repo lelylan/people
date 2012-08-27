@@ -66,7 +66,7 @@ People::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # default url options
-  config.action_mailer.default_url_options = { :host => 'www.lelylan.com' }
+  config.action_mailer.default_url_options = { :host => 'people.lelylan.com' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method   = :postmark
   config.action_mailer.postmark_settings = { api_key: '5162e9de-b611-4d03-b21e-8c2f1836f8a9' }  

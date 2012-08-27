@@ -37,6 +37,7 @@ group :development, :test do
   gem 'spork', '~> 1.0rc'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'test-unit'
   gem 'debugger'
 end
 
