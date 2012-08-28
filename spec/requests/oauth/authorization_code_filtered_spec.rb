@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-feature 'authorization code flow with filtered devices' do
+feature 'authorization code flow with accessible devices' do
 
   let!(:application) { FactoryGirl.create :application }
   let!(:user)        { FactoryGirl.create :user }
@@ -95,7 +95,7 @@ feature 'authorization code flow with filtered devices' do
                   its(:refresh_token) { should == token.refresh_token }
                 end
 
-                describe 'when returns the filtered access token' do
+                describe 'when returns the accessible access token' do
 
                   subject          { Doorkeeper::AccessToken.last }
                   let(:device_ids) { ([light.id] << house.contained_devices).flatten }

@@ -1,5 +1,3 @@
-# ResourceableRequest
-#
 # Add the resource list to the created access token.
 # 
 # The token is created from the data we jsut sent and from a base_toke. A base_token 
@@ -9,7 +7,7 @@
 # - implicit grant:     base token is itself (better understand)
 # - refresh token:      base token is the previous access token
 
-module FilterableRequest
+module AccessibleRequest
   extend ActiveSupport::Concern
 
   included do

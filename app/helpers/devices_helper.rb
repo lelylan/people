@@ -13,7 +13,7 @@ module DevicesHelper
     authorization_params.merge(
       resource_id: device.id,
       resource_type: 'device',
-      filtered_type: 'device'
+      accessible_type: 'device'
     )
   end
 
@@ -21,7 +21,7 @@ module DevicesHelper
     authorization_params.merge(
       resource_id: location.id,
       resource_type: 'location',
-      filtered_type: 'device'
+      accessible_type: 'device'
     )
   end
 end
