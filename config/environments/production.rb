@@ -72,5 +72,5 @@ People::Application.configure do
   config.action_mailer.postmark_settings     = { api_key: '5162e9de-b611-4d03-b21e-8c2f1836f8a9' }  
 
   # enable the same cookies for authenticating diffferent domains
-  config.session_store :cookie_store, key: '_people_session', domain: ENV[SESSION_STORE_DOMAIN]
+  config.session_store :cookie_store, key: '_people_session', domain: ENV['SESSION_STORE_DOMAIN']
 end
