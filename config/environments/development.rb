@@ -48,4 +48,7 @@ People::Application.configure do
     enable_starttls_auto: true,
     user_name:            'smtp',
     password:             'hacklely' }
+
+  # Session store
+  config.session_store :cookie_store, key: '_people_session'
 end

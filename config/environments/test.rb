@@ -37,4 +37,7 @@ People::Application.configure do
 
   # default url options
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Session store
+  config.session_store :cookie_store, key: '_people_session'
 end
