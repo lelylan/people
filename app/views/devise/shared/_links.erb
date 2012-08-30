@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <li>
-  <%= link_to 'Dev center', "" %>
+  <%= link_to 'Dev center', "#{dev_host}/start/introduction" %>
   </li>
   <li>
   <%= link_to 'Authorized applications', oauth_authorized_applications_path %>
