@@ -1,32 +1,38 @@
-<h2>User profile</h2>
+<header class="intro">
+<h3>Change your user profile</h3>
+</header>
+
+</br>
+
+<div class="content">
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <div><%= f.label :email %>
+  <%= f.email_field :email, class: 'text-input' %></div>
 
-  <div><%= f.label :full_name %><br />
-  <%= f.text_field :full_name %></div>
+  <div><%= f.label :full_name %>
+  <%= f.text_field :full_name, class: 'text-input' %></div>
 
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
+  <div><%= f.label :username %>
+  <%= f.text_field :username, class: 'text-input' %></div>
 
-  <div><%= f.label :location %><br />
-  <%= f.text_field :location %></div>
+  <div><%= f.label :location %>
+  <%= f.text_field :location, class: 'text-input' %></div>
 
-  <div><%= f.label :homepage %><br />
-  <%= f.text_field :homepage %></div>
+  <div><%= f.label :homepage %>
+  <%= f.text_field :homepage, class: 'text-input' %></div>
 
-  <div><%= f.submit 'Update' %></div>
+  </br>
+
+  <div class="bcta"><%= f.submit 'Update your profile', class: 'cta' %></div>
+
+  </br>
 <% end %>
 
-<h3>Change your password</h3>
-
-<p><%= link_to 'Edit my password', edit_password_path(resource_name)  %>.</p>
-
-<h3>Cancel my account</h3>
-
-<p><%= link_to 'Cancel my account', registration_path(resource_name), :data => { :confirm => 'Are you sure?' }, :method => :delete %>.</p>
-
-<%= link_to 'Back', :back %>
+<hr>
+<div class="bcta">
+  <%= link_to 'Change my password', edit_password_path(resource_name), class: 'cta' %>
+  <%= link_to 'Cancel my account', registration_path(resource_name), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'cta danger' %>
+</div>

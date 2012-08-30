@@ -1,18 +1,21 @@
-<div class="span16">
-  <header class="page-header">
-    <h2>Your applications</h2>
-  </header>
+<header class="intro">
+<h3>Your applications</h3>
+</header>
 
-  <p><%= link_to 'New Application', new_oauth_application_path %></p>
+
+<div class="content">
+
+  <div class="bcta"><%= link_to 'New Application', new_oauth_application_path, class: 'cta' %></>
+  </br>
+  </br>
 
   <table class="zebra-striped">
     <thead>
       <tr>
         <th>Name</th>
         <th>Callback url</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th style="width:50px;"></th>
+        <th style="width:50px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -20,10 +23,12 @@
         <tr id="application_<%= application.id %>">
           <td><%= link_to application.name, [:oauth, application] %></td>
           <td><%= application.redirect_uri %></td>
-          <td><%= link_to 'Edit', edit_oauth_application_path(application) %></td>
-          <td><%= link_to 'Delete', [:oauth, application], :data => { :confirm => 'Are you sure?' }, :method => :delete %></td>
+          <td class="btn-container"><%= link_to 'Edit', edit_oauth_application_path(application), :class => 'btn' %></td>
+          <td class="btn-container"><%= link_to 'Delete', [:oauth, application], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
+
 </div>

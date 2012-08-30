@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>People</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Lelylan peole | <%# title %></title>
 
-<ul>
-  <%= render 'devise/shared/links' %>
-</ul>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+    <%# render 'shared/services/analytics' %>
+  </head>
 
-<p class='notice'><%= notice %></p>
-<p class='alert'><%= alert %></p>
+  <body class="pages pages-index">
 
-<%= yield %>
+    <section id="section">
 
-</body>
+    <header id="header">
+    <div class="left">
+      <h1><a href="http://lelylan.com">Lelylan</a></h1>
+    </div>
+
+    <nav class="right">
+    <ul>
+      <%= render "devise/shared/links" %>
+    </ul>
+    </nav>
+    </header>
+
+    <article>
+
+    <header class="intro">
+    <% if flash[:alert] -%>
+      <h3 class="errors"><%= flash[:alert] %></h3>
+    <% end -%>
+    </header>
+    <%= yield %>
+    </article>
+
+    </br>
+    </section>
+
+    <footer id="footer">
+    <ul>
+      <li><a href="http://lelylan.com/blog/">Latest from the Blog</a></li>
+      <li><a href="http://lelylan.com/about/">About Lelylan</a></li>
+    </ul>
+    </footer>
+  </body>
 </html>
+
+<%#<p class='notice'>[> notice <]</p>%>
+<%#<p class='alert'>[> alert <]</p>%>
