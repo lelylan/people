@@ -1,15 +1,18 @@
-<div class="span16">
-  <header class="page-header">
-    <h2>Your authorized applications</h2>
-  </header>
+<header class="intro">
+<h3>Authorized applications</h3>
+<h4>{ control your resources access }</h4>
+</header>
+
+</br>
+
+<div class="content">
 
   <table class="zebra-striped">
     <thead>
       <tr>
         <th>Application</th>
         <th>Authorized at</th>
-        <th></th>
-        <th></th>
+        <th style="width:50px;"></th>
       </tr>
     </thead>
     <tbody>
@@ -17,9 +20,11 @@
         <tr>
           <td><%= application.name %></td>
           <td><%= application.created_at %></td>
-          <td><%= link_to 'Revoke', oauth_authorized_application_path(application), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
+          <td class="btn-container"><%= link_to 'Revoke', oauth_authorized_application_path(application), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
+
 </div>

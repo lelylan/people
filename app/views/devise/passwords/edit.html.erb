@@ -1,16 +1,22 @@
-<h2>Change your password</h2>
+<header class="intro">
+<h3>Change your password</h3>
+</header>
+
+</br>
+
+<div class="content">
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password %></div>
+  <div><%= f.label :password, 'New password' %>
+  <%= f.password_field :password, class: 'text-input' %></div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <div><%= f.label :password_confirmation, 'Confirm new password' %>
+  <%= f.password_field :password_confirmation, class: 'text-input' %></div>
 
-  <div><%= f.submit "Change my password" %></div>
+  <div class="bcta"><%= f.submit 'Change my password', class: 'cta' %></div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+</div>

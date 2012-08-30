@@ -6,3 +6,5 @@ services:
   types: 'https://types.lelylan.com'
   people: 'https://people.lelylan.com'
   locations: 'https://locations.lelylan.com'
+titles:
+  '/users/new': Sign in

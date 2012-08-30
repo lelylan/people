@@ -1,12 +1,19 @@
-<h2><%= t 'devise.invitations.new.header' %></h2>
+<header class="intro">
+<h3><%= t 'devise.invitations.new.header' %></h3>
+</header>
 
-<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-  <%= devise_error_messages! %>
+</br>
 
-<% resource.class.invite_key_fields.each do |field| -%>
-  <p><%= f.label field %><br />
-  <%= f.text_field field %></p>
-<% end -%>
+<div class="content">
 
-  <p><%= f.submit t('devise.invitations.new.submit_button') %></p>
-<% end %>
+  <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+    <%= devise_error_messages! %>
+
+    <% resource.class.invite_key_fields.each do |field| -%>
+      <div><%= f.label field %>
+        <%= f.text_field field, class: 'text-input' %></div>
+    <% end -%>
+
+    <div class="bcta"><%= f.submit t('devise.invitations.new.submit_button'), class: 'cta' %></div>
+  <% end %>
+</div>
