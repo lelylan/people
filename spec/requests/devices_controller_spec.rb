@@ -35,7 +35,7 @@ feature 'when filters a device by selecting a device' do
 
         describe 'when click on filter resources' do
 
-          before { click_link 'Filter devices' }
+          before { click_link 'Filter Accessible Devices' }
 
           it 'shows the filterable devices' do
             page.should have_content device.name
@@ -82,7 +82,7 @@ feature 'when filters a device by selecting a device' do
                 before { click_link 'Back to authorization' }
 
                 it 'shows the authorization page' do
-                  page.should have_content 'Authorize Application'
+                  page.should have_content 'Authorization for'
                 end
               end
 
@@ -108,7 +108,7 @@ feature 'when filters a device by selecting a device' do
             before { click_link 'Back to authorization' }
 
             it 'shows the authorization page' do
-              page.should have_content 'Authorize Application'
+              page.should have_content 'Authorization for'
             end
           end
         end
@@ -153,7 +153,7 @@ feature 'when filters devices contained in a location' do
 
         describe 'when click on filter resources' do
 
-          before { click_link 'Filter devices' }
+          before { click_link 'Filter Accessible Devices' }
 
           it 'shows the filterable locations' do
             page.should have_content location.name
@@ -217,7 +217,7 @@ feature 'when filters devices contained in a location' do
             before { click_link 'Back to authorization' }
 
             it 'shows the authorization page' do
-              page.should have_content 'Authorize Application'
+              page.should have_content 'Authorization for'
             end
           end
         end

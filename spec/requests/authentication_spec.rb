@@ -233,11 +233,11 @@ feature 'authorization' do
     end
 
     before do
-      click_link 'Edit profile'
+      click_link 'Profile'
     end
 
     it 'shows the priofile page' do
-      page.should have_content 'Edit profile'
+      page.should have_content 'Profile'
     end
 
     describe 'when updating the profile' do
@@ -275,11 +275,11 @@ feature 'authorization' do
       fill_in 'Email',    with: 'alice@example.com'
       fill_in 'Password', with: 'password'
       click_button 'Sign in'
-      click_link 'Edit profile'
+      click_link 'Profile'
     end
 
     it 'shows the profile page' do
-      page.should have_content 'Edit profile'
+      page.should have_content 'Profile'
     end
 
     describe 'when clicks on the cancel link' do
@@ -308,7 +308,7 @@ feature 'authorization' do
       fill_in 'Email',    with: 'alice@example.com'
       fill_in 'Password', with: 'password'
       click_button 'Sign in'
-      click_link 'Edit profile'
+      click_link 'Profile'
     end
 
     before do
@@ -374,17 +374,17 @@ feature 'authorization' do
       let(:subscriptions) { Subscription.count }
 
       before do
-        fill_in 'Email',       with: 'alice@example.com'
-        fill_in 'Description', with: 'I want to access to Lelylan'
+        fill_in 'Email', with: 'alice@example.com'
+        fill_in 'subscription_description', with: 'I want to access to Lelylan'
         click_button 'Subscribe'
       end
 
       it 'subscribes a new user' do
-        page.should have_content 'The subscription was successfull'
+        page.should have_content 'Thank you for your interest in Lelylan'
       end
 
       it 'shows confirmation page' do
-        page.should have_content 'The subscription was successfull'
+        page.should have_content 'Thank you for your interest in Lelylan'
       end
     end
 
@@ -393,7 +393,7 @@ feature 'authorization' do
       let(:subscriptions) { Subscription.count }
 
       before do
-        fill_in 'Description', with: 'I want to access to Lelylan'
+        fill_in 'subscription_description', with: 'I want to access to Lelylan'
         click_button 'Subscribe'
       end
 
@@ -426,10 +426,10 @@ feature 'authorization' do
 
       describe 'when clicks on invite' do
 
-        before { click_link 'Send invitation' }
+        before { click_link 'Invite' }
 
         it 'user has been invited' do
-          page.should_not have_content 'Send invitation'
+          page.should_not have_content 'Invite'
         end
 
         describe 'when checking the mail' do
@@ -456,7 +456,7 @@ feature 'authorization' do
           describe 'when fills in the new password' do
 
             before do
-              fill_in 'Password',              with: 'password'
+              fill_in 'Password', with: 'password'
               fill_in 'Password confirmation', with: 'password'
               click_button 'Set my password'
             end

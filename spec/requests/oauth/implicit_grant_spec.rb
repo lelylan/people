@@ -33,7 +33,7 @@ feature 'implicit grant flow' do
         end
 
         it 'shows the grant page' do
-          page.should have_content "Authorize #{application.name}"
+          page.should have_content "Authorization for #{application.name}"
         end
 
         # We have to use js as the result is given as fragment

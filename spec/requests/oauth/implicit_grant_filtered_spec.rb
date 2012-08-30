@@ -35,12 +35,12 @@ feature 'implicit grant flow' do
         end
 
         it 'shows the grant page' do
-          page.should have_content "Authorize #{application.name}"
+          page.should have_content "Authorization for #{application.name}"
         end
 
         describe 'when clicks on filter resources' do
 
-          before { click_link 'Filter devices' }
+          before { click_link 'Filter Accessible Devices' }
 
           describe 'when adds a device and a location containing devices' do
 

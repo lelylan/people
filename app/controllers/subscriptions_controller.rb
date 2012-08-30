@@ -18,7 +18,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(params[:subscription])
     if @subscription.save
-      flash[:notice] = 'Subscription created'
+      flash[:notice] = 'Thank you for your interest in Lelylan'
       redirect_to subscription_path @subscription
     else
       render :new
@@ -27,13 +27,13 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     @subscription = Subscription.find(params[:id])
-    flash[:notice] = "Subscription deleted" if @subscription.destroy
+    flash[:notice] = 'Subscription deleted' if @subscription.destroy
     redirect_to subscriptions_url
   end
 
   def invite
     User.invite! email: params[:email]
-    flash[:notice] = "The user #{params[:email]} has been invited"
+    flash[:notice] = "The user #{params[:email]} has been successfully invited"
     redirect_to subscriptions_path
   end
 

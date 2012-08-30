@@ -1,4 +1,5 @@
-<% if user_signed_in? %>
+<% if params[:controller] != 'authorizations' and params[:controller] != 'devices'  -%>
+<% if user_signed_in? -%>
   <li>
   <%= link_to 'Developers', "#{dev_host}" %>
   </li>
@@ -29,4 +30,5 @@
   <li>
   <%= link_to 'Forgot your password?', new_password_path(resource_name) %>
   </li>
-<% end %>
+<% end -%>
+<% end -%>
