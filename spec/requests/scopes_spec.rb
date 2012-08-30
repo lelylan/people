@@ -28,7 +28,7 @@ feature 'Scope authorization' do
     end
   end
 
-  %w(user resources resources.read devices devices.read types types.read locations locations.read).each do |scope| 
+  %w(user resources resources-read devices devices-read types types-read locations locations-read).each do |scope| 
 
     describe "with valid scope #{scope}" do
 

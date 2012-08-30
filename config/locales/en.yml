@@ -1,5 +1,12 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  doorkeeper:
+    scopes:
+      resources: Read and write all your resources (devices, locations and types)
+      resources-read: Read all your resources (devices, locations and types)
+      devices: Read and write all your devices
+      devices-read: Read all your devices
+      types: Read all your types
+      types-read: Read all your types
+      locations: Read and write all your locations
+      locations-read: Read locations all your location
+      user: Read access your user profile (GET /me).

@@ -1,7 +1,8 @@
+<% title 'Your Applications' %>
+
 <header class="intro">
 <h3>Your applications</h3>
 </header>
-
 
 <div class="content">
 
@@ -14,8 +15,9 @@
       <tr>
         <th>Name</th>
         <th>Callback url</th>
-        <th style="width:50px;"></th>
-        <th style="width:50px;"></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +26,7 @@
           <td><%= link_to application.name, [:oauth, application] %></td>
           <td><%= application.redirect_uri %></td>
           <td class="btn-container"><%= link_to 'Edit', edit_oauth_application_path(application), :class => 'btn' %></td>
+          <td class="btn-container"><%= link_to 'Test', test_authorization_url(application), :class => 'btn' %></td>
           <td class="btn-container"><%= link_to 'Delete', [:oauth, application], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
         </tr>
       <% end %>

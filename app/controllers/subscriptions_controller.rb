@@ -25,6 +25,12 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def destroy
+    @subscription = Subscription.find(params[:id])
+    flash[:notice] = "Subscription deleted" if @subscription.destroy
+    redirect_to subscriptions_url
+  end
+
   def invite
     User.invite! email: params[:email]
     flash[:notice] = "The user #{params[:email]} has been invited"

@@ -24,7 +24,7 @@ header.heading{padding:10px;background:#f4f4f4;background:-webkit-gradient(linea
 header.heading h2{line-height:35px;font-size:30px}
 .flash{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:15px 0 10px 0;padding:5px 10px;color:#151616;font-size:15px;text-shadow:0 1px 0 rgba(255,255,255,0.50);-moz-box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30);box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30),0 1px 0 rgba(0,0,0,0.20);background:#eef6fd;}
 .flash.error{background:#ffc}
-.errors{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:0 0 15px 0;padding:10px 0;color:#151616;font-size:15px;text-shadow:0 1px 0 rgba(255,255,255,0.50);-moz-box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30);box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30),0 1px 1px rgba(0,0,0,0.20);background:#ffc;}
+.errors, .notices{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:0 0 15px 0;padding:10px 0;color:#151616;font-size:15px;text-shadow:0 1px 0 rgba(255,255,255,0.50);-moz-box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30);box-shadow:0 0 2px rgba(0,0,0,0.30);-webkit-box-shadow:0 0 2px rgba(0,0,0,0.30),0 1px 1px rgba(0,0,0,0.20);background:#ffc;}
 .errors ul{margin:0}
 #section{width:700px;margin:30px auto 0;-moz-box-shadow:0 1px 4px rgba(0,0,0,0.40);-webkit-box-shadow:0 1px 4px rgba(0,0,0,0.40);box-shadow:0 1px 4px rgba(0,0,0,0.40);background:#fff;overflow:hidden;min-height:200px;position:relative;}
 #section:after,#section:before{content:"";z-index:-1;position:absolute;bottom:25px;width:500px;height:200px;-moz-box-shadow:0 4px 8px rgba(0,0,0,0.20);-webkit-box-shadow:0 4px 8px rgba(0,0,0,0.20);box-shadow:0 4px 8px rgba(0,0,0,0.20)}
@@ -63,7 +63,7 @@ body.pages-index #section{overflow:visible}
 body.pages-index header.intro{padding:10px;text-align:center;overflow:hidden;}
 body.pages-index header.intro h2{margin:10px 0 20px 0}
 body.pages-index header.intro h3{margin:8px 20px 0 20px;font-size:36px;font-weight:normal}
-body.pages-index header.intro h4{margin:8px 20px 0 20px;font-size:24px;font-weight:normal}
+body.pages-index h4{margin:8px 20px 0 20px;font-size:24px;font-weight:normal}
 body.pages-index article footer{padding:5px 0 0 0;overflow:hidden;text-align:center}
 body.pages-index article div.content{padding:5px 0 0 0;overflow:hidden;text-align:center}
 body.pages-index aside{display:block;overflow:hidden;padding:10px 0 0 25px}
@@ -83,18 +83,31 @@ body.pages-start article ol{line-height:1.5em}
 body.pages-community article{padding:20px}
 body.pages-about article{padding:20px}
 
-body.pages-index header.intro h3.errors{margin-top:30px;color:red; font-size: 24px;}
-label {color:#aaaaaa; display: block;margin: 0 0 4px 0;font-size: 1.1em;line-height: 1;}
-input.text-input {width: 300px;border: 1px solid #dddddd;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;font-size: 1.6em;padding: 8px 10px;margin-right: 0px;color: #00979D;outline: none;margin-bottom: 20px;}
-div.invisible {display: none;}
-body.pages-index a.danger {color: red;}
+body.pages-index .cta {font-family:helvetica neue,helvetica,arial,sans-serif;}
+body.pages-index header.intro h3.errors, body.pages-index header.intro h3.notices{margin-top:30px;color:red;font-size:24px;}
+body.pages-index header.intro h3.notices{color:green;}
+body.pages-index #error_explanation h2{font-size:24px;}
+body.pages-index ul{list-style:none;margin:0;padding:0}
+body.pages-index #error_explanation ul li{color:red;font-size:24px;}
+body.pages-index label {color:#aaaaaa; display: block;margin: 0 0 4px 0;font-size: 1.1em;line-height: 1;}
+body.pages-index span .help-inline{display:none}
+body.pages-index .text-input {width: 300px;border: 1px solid #dddddd;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;font-size: 1.6em;padding: 8px 10px;margin-right: 0px;color: #00979D;outline: none;margin-bottom: 20px;}
+body.pages-index .error .text-input {border: 1px solid red;}
+body.pages-index textarea.text-input {font-size: 1.2em;width: 550px;}
+body.pages-index div.invisible {display: none;}
+body.pages-index .danger {color: red;}
 body.pages-index label i{font-size:14px;}
-div.content table.zebra-striped a.btn {padding:2px 10px;}
-div.content table.zebra-striped .btn-container {padding:6px 10px 4px; width:50px;}
-div.show-details div {margin: 10px 0 20px;}
-div.show-details p {margin-top:5px;}
-div.show-details p.big {font-size: 22px;}
-div.show-details p.small {font-size: 18px;}
+body.pages-index div.content table.zebra-striped a.btn {padding:2px 10px;}
+body.pages-index div.content table.zebra-striped .btn-container {padding:6px 5px 4px 0; width:70px;}
+body.pages-index div.show-details div {margin: 10px 0 20px;}
+body.pages-index div.show-details p {margin-top:5px;}
+body.pages-index div.show-details p.big {font-size: 22px;}
+body.pages-index div.show-details p.small {font-size: 18px;}
 body.pages-index .colored{color:#00979D;}
+body.pages-index .bcta form{display:inline;}
+body.pages-index .bcta form .grant{color:#00979D;}
+body.pages-index div.authorizations{margin:10px;}
+body.pages-index div.authorizations h4 {margin:10px 0 10px; font-size:28px;}
+body.pages-index div.authorizations ul li{color:#00979D;font-size: 17px;margin: 4px 0 4px; font-style:italic;}
 /*label.email-label {width:424px;}*/
 /*label.password-label {width:465px;}*/

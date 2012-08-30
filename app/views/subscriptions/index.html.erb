@@ -1,22 +1,31 @@
-<h2>Subscriptions</h2>
+<% title 'Lelylan Subscriptions' %>
 
-<p><%= link_to 'New Subscription', new_subscription_path %></p>
+<header class="intro">
+<h3>Lelylan Subscriptions</h3>
+</header>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="content">
+
+  <div class="bcta"><%= link_to 'New Subscription', new_subscription_path, class: 'cta' %></>
+  </br>
+  </br>
+
+  <table class="zebra-striped">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Description</th>
+        <th style="width:50px;"></th>
+        <th style="width:50px;"></th>
+      </tr>
+    </thead>
+    <tbody>
     <% @subscriptions.each do |subscription| %>
       <tr>
         <td><%= subscription.email %></td>
         <td><%= subscription.description %></td>
-        <td><%= link_to 'Send invitation', invite_subscriptions_path(email: subscription.email) %></td>
-        <td><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete %></td>
+        <td><%= link_to 'Invite', invite_subscriptions_path(email: subscription.email), :class => 'btn' %></td>
+        <td><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lelylan peole | <%# title %></title>
+    <title><%= yield(:title) %></title>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -28,9 +28,8 @@
     <article>
 
     <header class="intro">
-    <% if flash[:alert] -%>
-      <h3 class="errors"><%= flash[:alert] %></h3>
-    <% end -%>
+    <% if alert -%><h3 class="errors"><%= alert %></h3><% end -%>
+    <% if notice -%><h3 class="notices"><%= notice %></h3><% end -%>
     </header>
     <%= yield %>
     </article>
@@ -47,5 +46,3 @@
   </body>
 </html>
 
-<%#<p class='notice'>[> notice <]</p>%>
-<%#<p class='alert'>[> alert <]</p>%>

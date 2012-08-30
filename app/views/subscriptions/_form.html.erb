@@ -1,11 +1,12 @@
 <%= form_for @subscription do |f| %>
 
-  <div><%= f.label :email %><br />
-  <%= f.text_field :email %></div>
+  <div><%= f.label :email %>
+  <%= f.text_field :email, class: 'text-input' %></div>
 
-  <div><%= f.label :description %><br />
-  <%= f.text_field :description %></div>
+  <div>
+  <label>Tell us why you want a Lelylan access</label>
+  <%= f.text_area :description, class: 'text-input' %></div>
 
-  <div><%= f.submit 'Subscribe' %></div>
+  <div class="bcta"><%= f.submit 'Subscribe', class: 'cta' %></div>
 
 <% end %>

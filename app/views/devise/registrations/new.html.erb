@@ -1,3 +1,5 @@
+<% title 'Sign up to Lelylan' %>
+
 <header class="intro">
 <h2>Sign up to Lelylan</h2>
 <h3>{ connected house for developers }</h3>
@@ -8,7 +10,10 @@
 <div class="content">
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+
+  <% if resource.errors.any? %>
+    <div class="errors"><%= devise_error_messages! %></div>
+  <% end -%>
 
   <div><%= f.label :email %>
   <%= f.email_field :email, class: 'text-input' %></div>

@@ -1,15 +1,20 @@
 <% if user_signed_in? %>
   <li>
-  <%= link_to 'Dev center', "#{dev_host}/start/introduction" %>
+  <%= link_to 'Developers', "#{dev_host}" %>
+  </li>
+  <% if current_user.admin %>
+  <li>
+  <%= link_to 'Subs', subscriptions_path  %>
+  </li>
+  <% end %>
+  <li>
+  <%= link_to 'Profile', edit_user_registration_path %>
   </li>
   <li>
-  <%= link_to 'Authorized applications', oauth_authorized_applications_path %>
+  <%= link_to 'Authorized Applications', oauth_authorized_applications_path %>
   </li>
   <li>
-  <%= link_to 'Applications', oauth_applications_path %>
-  </li>
-  <li>
-  <%= link_to 'Edit profile', edit_user_registration_path %>
+  <%= link_to 'Your Applications', oauth_applications_path %>
   </li>
   <li>
   <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

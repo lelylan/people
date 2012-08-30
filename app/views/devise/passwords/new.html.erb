@@ -1,3 +1,5 @@
+<% title 'Forgot your password?' %>
+
 <header class="intro">
 <h3>Forgot your password?</h3>
 </header>
@@ -7,7 +9,10 @@
 <div class="content">
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+
+  <% if resource.errors.any? %>
+    <div class="errors"><%= devise_error_messages! %></div>
+  <% end -%>
 
   <div><%= f.label :email %>
   <%= f.email_field :email, class: 'text-input' %></div>

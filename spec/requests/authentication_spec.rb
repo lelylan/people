@@ -250,7 +250,7 @@ feature 'authorization' do
       end
 
       it 'shows the profile page' do
-        page.should have_content 'User profile'
+        page.should have_content 'user profile'
       end
 
       it 'updates the profile' do
@@ -312,7 +312,7 @@ feature 'authorization' do
     end
 
     before do
-      click_link 'Edit my password'
+      click_link 'Change my password'
     end
 
     it 'shows the priofile page' do
@@ -329,7 +329,7 @@ feature 'authorization' do
       end
 
       it 'shows the profile page' do
-        page.should have_content 'User profile'
+        page.should have_content 'user profile'
       end
 
       it 'changes the password' do

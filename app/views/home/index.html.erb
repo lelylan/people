@@ -1,3 +1,5 @@
+<% title 'Connected house for developers' %>
+
 <header class="intro">
 <h2>Welcome to Lelylan</h2>
 <h3>{ connected house for developers }</h3>
@@ -32,6 +34,15 @@
 
 </br>
 
-<div class="content">
-  <div class="bcta"><a href="/" class="cta">Get started with Lelylan</a></div>
-</div>
+<% if user_signed_in? %>
+  <div class="content">
+    <div class="bcta"><a href="<%= "#{dev_host}/start/introduction"%>" class="cta">Get started with Lelylan</a></div>
+  </div>
+<% else %>
+  <div class="content">
+    <div class="bcta">
+      <%= link_to 'Sign in', new_user_session_path, class:'cta' %> or
+      <%= link_to 'Ask for an invitation', new_subscription_path, class:'cta' %>
+    </div>
+  </div>
+<% end %>
