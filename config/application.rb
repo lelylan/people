@@ -71,5 +71,8 @@ module People
     config.to_prepare do
       Doorkeeper::ApplicationController.layout 'application'
     end
+
+    # Set the default Logger in application.rb to STDOUT, otherwise logging with unicorn doesn't work
+    config.logger = Logger.new(STDOUT)
   end
 end
