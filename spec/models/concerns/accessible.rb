@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for 'filterable' do
+shared_examples_for 'accessible' do
 
   describe 'when filters a device by selecting a device' do
 

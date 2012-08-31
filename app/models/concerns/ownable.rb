@@ -10,5 +10,7 @@ module Ownable
     field          :resource_owner_id, type: Moped::BSON::ObjectId
     attr_protected :resource_owner_id
     validates      :resource_owner_id, presence: true
+
+    index({ resource_owner_id: 1 })
   end
 end

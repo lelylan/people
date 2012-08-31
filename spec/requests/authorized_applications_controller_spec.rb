@@ -33,7 +33,7 @@ feature 'authorized applications' do
     end
 
     it 'contains the authorized applications link' do
-      page.should have_link 'Authorized applications'
+      page.should have_link 'Authorized Applications'
     end
   end
 

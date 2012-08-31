@@ -33,7 +33,7 @@ feature 'authorization code flow' do
         end
 
         it 'shows the grant page' do
-          page.should have_content "Authorize #{application.name}"
+          page.should have_content "Authorization for #{application.name}"
         end
 
         describe 'when authorizes the client' do

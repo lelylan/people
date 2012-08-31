@@ -1,61 +1,59 @@
-<header class="page-header">
-  <h2>Select your resource</h2>
+<% title 'Filter accessible resources' %>
+
+<header class="intro">
+<h3 class="colored">Filter accessible resources</h3>
 </header>
 
-<p><%= link_to 'Back to authorization', oauth_authorization_path(authorization_params) %></p>
+<div class="content">
 
-<div class="span16 devices">
-  <h3>Select your devices</h3>
+  <p><%= link_to 'Back to authorization', oauth_authorization_path(authorization_params), class: 'cta' %></p>
 
-  <table class="zebra-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @devices.each do |device| %>
-        <tr id="device_<%= device.id %>">
-          <td><%= device.name %></td>
-          <% if session[:resources].has_key? device.id.to_s %>
-            <td>Added</td>
-            <td><%= link_to 'Remove', device_path(device, device_params(device)), method: :delete %></td>
-          <% else %>
-            <td><%= link_to 'Add', devices_path(device_params(device)), method: :post %></td>
-            <td></td>
+  <div class="content">
+
+    <div class="authorizations devices">
+
+      <table class="zebra-striped">
+        <thead>
+          <tr>
+            <th colspan="3">Directly add the accessible devices</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @devices.each do |device| %>
+            <tr id="device_<%= device.id %>">
+              <td><%= device.name %></td>
+              <% if session[:resources].has_key? device.id.to_s %>
+                <td class="btn-container"><%= link_to 'Remove', device_path(device, device_params(device)), method: :delete, class: 'cta' %></td>
+              <% else %>
+                <td class="btn-container"><%= link_to 'Add', devices_path(device_params(device)), method: :post, class: 'cta' %></td>
+              <% end %>
+            </tr>
           <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+        </tbody>
+      </table>
+    </div>
 
-<div class="span16 locations">
-  <h3>Select your locations</h3>
+    <div class="authorizations locations">
 
-  <table class="zebra-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @locations.each do |location| %>
-        <tr id="location_<%= location.id %>">
-          <td><%= location.name %></td>
-          <% if session[:resources].has_key? location.id.to_s %>
-            <td>Added</td>
-            <td><%= link_to 'Remove', device_path(location, location_params(location)), method: :delete %></td>
-          <% else %>
-            <td><%= link_to 'Add', devices_path(location_params(location)), method: :post %></td>
-            <td></td>
+      <table class="zebra-striped">
+        <thead>
+          <tr>
+            <th colspan="3">Add all devices contained in specific locations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @locations.each do |location| %>
+            <tr id="location_<%= location.id %>">
+              <td><%= location.name %></td>
+              <% if session[:resources].has_key? location.id.to_s %>
+                <td class="btn-container"><%= link_to 'Remove', device_path(location, location_params(location)), method: :delete, class: 'cta' %></td>
+              <% else %>
+                <td class="btn-container"><%= link_to 'Add', devices_path(location_params(location)), method: :post, class: 'cta' %></td>
+              <% end %>
+            </tr>
           <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

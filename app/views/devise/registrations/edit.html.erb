@@ -1,3 +1,5 @@
+<% title 'Change your user profile' %>
+
 <header class="intro">
 <h3>Change your user profile</h3>
 </header>
@@ -7,7 +9,8 @@
 <div class="content">
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+
+  <%= lelylan_error_messages_for(resource) %>
 
   <div><%= f.label :email %>
   <%= f.email_field :email, class: 'text-input' %></div>

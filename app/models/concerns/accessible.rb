@@ -4,8 +4,8 @@ module Accessible
   extend ActiveSupport::Concern
 
   included do
-    field :device_ids,   type: Array, default: []
-    field :location_ids, type: Array, default: []
+    field :device_ids,   type: Array,   default: []
+    field :location_ids, type: Array,   default: []
     attr_accessible :device_ids, :location_ids, :resources
 
     embeds_many :resources, class_name: 'AccessibleResource', cascade_callbacks: true, inverse_of: :token

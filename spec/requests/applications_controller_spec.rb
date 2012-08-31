@@ -139,7 +139,7 @@ feature 'applications' do
       end
 
       it 'contains validation errors' do
-        page.should have_content 'errors'
+        page.should have_content '1 error prohibited'
       end
     end
 
