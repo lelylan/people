@@ -115,6 +115,9 @@ GEM
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.4)
+    jquery-rails (2.0.2)
+      railties (>= 3.2.0, < 5.0)
+      thor (~> 0.14)
     json (1.7.4)
     kgio (2.7.4)
     launchy (2.1.0)
@@ -275,6 +278,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   hashie
+  jquery-rails
   launchy
   mongoid (~> 3.0.3)
   mongoid-ancestry (~> 0.3.0)
