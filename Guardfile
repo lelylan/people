@@ -23,5 +23,5 @@ guard 'rspec', cli: '--drb --format Fuubar --color', all_on_start: false, all_af
 
   # run tests if concern or shared example concern is changed
   watch(%r{^(.+)/models/concerns/ownable\.rb})    { "spec/models/doorkeeper/applications_spec.rb"}
-  watch(%r{^(.+)/models/concerns/filterable\.rb}) { "spec/models/doorkeeper/access_token_spec.rb"}  
+  watch(%r{^(.+)/models/concerns/accessible\.rb}) { "spec/models/doorkeeper/access_token_spec.rb"}  
 end

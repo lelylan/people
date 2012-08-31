@@ -18,6 +18,7 @@
 class AuthorizationsController < Doorkeeper::AuthorizationsController
   def create
     if authorization.authorize
+      save_expirable(authorization)
       save_resources(authorization, session[:resources]) if session[:resources]
       redirect_to authorization.success_redirect_uri
     elsif authorization.redirect_on_error?
@@ -29,6 +30,11 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
   end
 
   private
+
+  def save_expirable(authorization)
+    token = access_grant ? access_grant : access_token
+    token.update_attributes!(expirable: params[:authorization][:expirable])
+  end
 
   def save_resources(authorization, resources = {})
     token = access_grant ? access_grant : access_token

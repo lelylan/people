@@ -15,11 +15,12 @@ module AccessibleRequest
       private
 
       def create_access_token
+        expires_in = base_token.expirable ? configuration.access_token_expires_in : nil
         @access_token = Doorkeeper::AccessToken.create!({
           :application_id    => client.id,
           :resource_owner_id => base_token.resource_owner_id,
           :scopes            => base_token.scopes_string,
-          :expires_in        => configuration.access_token_expires_in,
+          :expires_in        => expires_in,
           :device_ids        => base_token.device_ids,
           :location_ids      => base_token.location_ids,
           :resources         => base_token.resources,

@@ -9,4 +9,4 @@ en:
       types-read: Read all your types
       locations: Read and write all your locations
       locations-read: Read locations all your location
-      user: Read access your user profile (GET /me).
+      user: Read your user profile (GET /me).

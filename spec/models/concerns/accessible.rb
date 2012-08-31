@@ -1,6 +1,18 @@
 require 'spec_helper'
 
-shared_examples_for 'filterable' do
+shared_examples_for 'accessible' do
+
+  # TODO move to a spec specific for accessible
+  describe 'when does not expires' do
+
+    let(:token) { FactoryGirl.create factory }
+
+    it 'filters the selected device' do
+      token.expirable.should be_true
+      token.update_attributes(expirable: '0')
+      token.expirable.should be_false
+    end
+  end
 
   describe 'when filters a device by selecting a device' do
 

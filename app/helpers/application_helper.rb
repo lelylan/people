@@ -27,7 +27,7 @@ module ApplicationHelper
       redirect_uri:  application.redirect_uri,
       scope:         'resources',
       state:         'remember-me' }
-    oauth_authorization_path(authorization_params)
+      oauth_authorization_path(authorization_params)
   end
 
   def lelylan_error_messages_for(resource)

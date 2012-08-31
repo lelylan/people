@@ -35,6 +35,7 @@
       <%= f.hidden_field :state %>
       <%= f.hidden_field :response_type %>
       <%= f.hidden_field :scope %>
+      <%= f.check_box :expirable, checked: true %> <%= f.label :expirable %>
       <%= f.submit 'Authorize Access', class: 'cta grant' %>
     <% end %> or
     <%= form_for @authorization, as: :authorization, url: oauth_authorization_path, method: :delete do |f| %>
