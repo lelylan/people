@@ -21,12 +21,9 @@
 
   <div class="authorizations">
     <p>
-      <%= link_to 'Filter Accessible Devices', devices_path(authorization_params), class: 'cta' %>
+      <%= link_to 'Filter Accessible Devices', devices_path(authorization_params), class: 'btn' %>
     </p>
   </div>
-
-  </br>
-  <hr>
 
   <div class="bcta">
     <%= form_for @authorization, as: :authorization, url: oauth_authorization_path, method: :post do |f| %>
@@ -35,7 +32,9 @@
       <%= f.hidden_field :state %>
       <%= f.hidden_field :response_type %>
       <%= f.hidden_field :scope %>
-      <%= f.check_box :expirable, checked: true %> <%= f.label :expirable %>
+      <%= f.check_box :expirable, checked: true %> 
+      <%= f.label 'Create expirable token', for: 'authorization_expirable',  class: 'expirable-label colored' %>
+      </br></br><hr></br>
       <%= f.submit 'Authorize Access', class: 'cta grant' %>
     <% end %> or
     <%= form_for @authorization, as: :authorization, url: oauth_authorization_path, method: :delete do |f| %>

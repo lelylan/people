@@ -92,8 +92,9 @@ body.pages-index #error_explanation ul li{color:red;font-size:24px;}
 body.pages-index label {color:#aaaaaa; display: block;margin: 0 0 4px 0;font-size: 1.1em;line-height: 1;}
 body.pages-index span .help-inline{display:none}
 body.pages-index .text-input {width: 300px;border: 1px solid #dddddd;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;font-size: 1.6em;padding: 8px 10px;margin-right: 0px;color: #00979D;outline: none;margin-bottom: 20px;}
+body.pages-index .expirable-label {display: inline;font-size: 15px;}
 body.pages-index .error .text-input {border: 1px solid red;}
-body.pages-index textarea.text-input {font-size: 1.2em;width: 550px;}
+body.pages-index textarea.text-input {font-size: 1.2em;}
 body.pages-index div.invisible {display: none;}
 body.pages-index .danger {color: red;}
 body.pages-index label i{font-size:14px;}

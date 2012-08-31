@@ -139,7 +139,6 @@ feature 'applications' do
       end
 
       it 'contains validation errors' do
-        save_and_open_page
         page.should have_content '1 error prohibited'
       end
     end

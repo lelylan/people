@@ -4,10 +4,9 @@ module Accessible
   extend ActiveSupport::Concern
 
   included do
-    field :expirable,    type: Boolean, default: true
     field :device_ids,   type: Array,   default: []
     field :location_ids, type: Array,   default: []
-    attr_accessible :device_ids, :location_ids, :resources, :expirable
+    attr_accessible :device_ids, :location_ids, :resources
 
     embeds_many :resources, class_name: 'AccessibleResource', cascade_callbacks: true, inverse_of: :token
     before_save :set_device_ids, :set_location_ids
