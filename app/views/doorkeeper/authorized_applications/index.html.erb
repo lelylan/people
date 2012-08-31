@@ -9,24 +9,28 @@
 
 <div class="content">
 
-  <table class="zebra-striped">
-    <thead>
-      <tr>
-        <th>Application</th>
-        <th>Authorized at</th>
-        <th style="width:50px;"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @applications.each do |application| %>
+  <% if @applications.entries.empty? -%>
+    <h4 class="light">There are no authorized applications</h4>
+  <% else %>
+    <table class="zebra-striped">
+      <thead>
         <tr>
-          <td><%= application.name %></td>
-          <td><%= application.created_at %></td>
-          <td class="btn-container"><%= link_to 'Revoke', oauth_authorized_application_path(application), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
+          <th>Application</th>
+          <th>Authorized at</th>
+          <th style="width:50px;"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @applications.each do |application| %>
+          <tr>
+            <td><%= application.name %></td>
+            <td><%= application.created_at %></td>
+            <td class="btn-container"><%= link_to 'Revoke', oauth_authorized_application_path(application), :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
 
 </div>

@@ -7,26 +7,31 @@
 <div class="content">
 
   <div class="bcta"><%= link_to 'New Subscription', new_subscription_path, class: 'cta' %></>
-  </br>
-  </br>
+    </br>
+    </br>
 
-  <table class="zebra-striped">
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Description</th>
-        <th style="width:50px;"></th>
-        <th style="width:50px;"></th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @subscriptions.each do |subscription| %>
-      <tr>
-        <td><%= subscription.email %></td>
-        <td><%= subscription.description %></td>
-        <td><%= link_to 'Invite', invite_subscriptions_path(email: subscription.email), :class => 'btn' %></td>
-        <td><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <% if @subscriptions.entries.empty? -%>
+        <h4 class="light">There are no subscriptions</h4>
+      <% else %>
+      <table class="zebra-striped">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Description</th>
+            <th style="width:50px;"></th>
+            <th style="width:50px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @subscriptions.each do |subscription| %>
+            <tr>
+              <td><%= subscription.email %></td>
+              <td><%= subscription.description %></td>
+              <td><%= link_to 'Invite', invite_subscriptions_path(email: subscription.email), :class => 'btn' %></td>
+              <td><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      <% end %>
+
+    </table>

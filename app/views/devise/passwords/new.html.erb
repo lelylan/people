@@ -10,9 +10,7 @@
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
 
-  <% if resource.errors.any? %>
-    <div class="errors"><%= devise_error_messages! %></div>
-  <% end -%>
+  <%= lelylan_error_messages_for(resource) %>
 
   <div><%= f.label :email %>
   <%= f.email_field :email, class: 'text-input' %></div>

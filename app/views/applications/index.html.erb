@@ -6,32 +6,35 @@
 
 <div class="content">
 
-  <div class="bcta"><%= link_to 'New Application', new_oauth_application_path, class: 'cta' %></>
+  <div class="bcta"><%= link_to 'New Application', new_oauth_application_path, class: 'cta' %></div>
   </br>
   </br>
 
-  <table class="zebra-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Callback url</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @applications.each do |application| %>
-        <tr id="application_<%= application.id %>">
-          <td><%= link_to application.name, [:oauth, application] %></td>
-          <td><%= application.redirect_uri %></td>
-          <td class="btn-container"><%= link_to 'Edit', edit_oauth_application_path(application), :class => 'btn' %></td>
-          <td class="btn-container"><%= link_to 'Test', test_authorization_url(application), :class => 'btn' %></td>
-          <td class="btn-container"><%= link_to 'Delete', [:oauth, application], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
+  <% if @applications.entries.empty? -%>
+    <h4 class="light">There are no applications</h4>
+  <% else %>
+    <table class="zebra-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Callback url</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% @applications.each do |application| %>
+          <tr id="application_<%= application.id %>">
+            <td><%= link_to application.name, [:oauth, application] %></td>
+            <td><%= application.redirect_uri %></td>
+            <td class="btn-container"><%= link_to 'Edit', edit_oauth_application_path(application), :class => 'btn' %></td>
+            <td class="btn-container"><%= link_to 'Test', test_authorization_url(application), :class => 'btn' %></td>
+            <td class="btn-container"><%= link_to 'Delete', [:oauth, application], :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 
 </div>

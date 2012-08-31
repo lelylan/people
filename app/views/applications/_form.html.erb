@@ -1,7 +1,6 @@
 <%= form_for([:oauth, application]) do |f| %>
-    <% if application.errors.any? %>
-      <div class="alert-message error" data-alert><a class="close" href="#">×</a><p>Whoops! Check your form for possible errors</p></div>
-    <% end %>
+
+  <%= lelylan_error_messages_for(application) %>
 
     <div><%= f.label :name %>
     <%= f.text_field :name, class: 'text-input' %></div>
