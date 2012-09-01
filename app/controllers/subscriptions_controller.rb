@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
   before_filter :admin?, only: :index
 
   def index
-    @subscriptions = Subscription.nin(email: User.all.map(&:email))
+    @subscriptions = Subscription.all
   end
 
   def show
