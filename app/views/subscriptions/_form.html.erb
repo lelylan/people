@@ -1,5 +1,7 @@
 <%= form_for @subscription do |f| %>
 
+  <%= lelylan_error_messages_for(@subscription) %>
+
   <div><%= f.label :email %>
   <%= f.text_field :email, class: 'text-input' %></div>
 
