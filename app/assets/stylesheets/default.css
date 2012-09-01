@@ -56,7 +56,7 @@ body.pages-index #section{overflow:visible}
 body.pages-index header.intro{padding:10px;text-align:center;overflow:hidden;}
 body.pages-index header.intro h2{margin:10px 0 20px 0}
 body.pages-index header.intro h3{margin:8px 20px 0 20px;font-size:36px;font-weight:normal}
-body.pages-index h4{margin:8px 20px 0 20px;font-size:24px;font-weight:normal}
+body.pages-index h4{margin:8px 20px 0 20px;font-size:23px;font-weight:normal}
 body.pages-index article footer{padding:5px 0 0 0;overflow:hidden;text-align:center}
 body.pages-index article div.content{padding:5px 0 0 0;overflow:hidden;text-align:center}
 body.pages-index aside{display:block;overflow:hidden;padding:10px 0 0 25px}
@@ -77,11 +77,11 @@ body.pages-community article{padding:20px}
 body.pages-about article{padding:20px}
 
 body.pages-index .cta {font-family:helvetica neue,helvetica,arial,sans-serif;}
-body.pages-index header.intro h3.errors, body.pages-index header.intro h3.notices{margin-top:30px;color:red;font-size:24px;}
+body.pages-index header.intro h3.errors, body.pages-index header.intro h3.notices{margin-top:30px;color:red;font-size:23px;}
 body.pages-index header.intro h3.notices{color:green;}
-body.pages-index #error_explanation h2{font-size:24px; margin-top:0;padding-bottom:10px;line-height:40px;}
+body.pages-index #error_explanation h2{font-size:23px; margin-top:0;padding-bottom:10px;line-height:40px;}
 body.pages-index ul{list-style:none;margin:0;padding:0}
-body.pages-index #error_explanation ul li{color:red;font-size:24px;}
+body.pages-index #error_explanation ul li{color:red;font-size:23px;}
 body.pages-index label {color:#aaaaaa; display: block;margin: 0 0 4px 0;font-size: 1.1em;line-height: 1;}
 body.pages-index span .help-inline{display:none}
 body.pages-index .text-input {width: 300px;border: 1px solid #dddddd;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;font-size: 1.6em;padding: 8px 10px;margin-right: 0px;color: #00979D;outline: none;margin-bottom: 20px;}
