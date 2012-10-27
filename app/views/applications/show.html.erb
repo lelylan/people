@@ -8,13 +8,13 @@
 
 <div class="content show-details">
 
-  <div><label>Callback url</label>
+  <div><label>Redirect URL</label>
   <p class="big colored"><%= @application.redirect_uri %></p></div>
 
-  <div><label>Application ID</label>
+  <div><label>Client ID</label>
   <p class="small colored"><%= @application.uid %></p></div>
 
-  <div><label>Secret</label>
+  <div><label>Client Secret</label>
   <p class="small colored"><%= @application.secret %></p></div>
 
   <div class="bcta"><%= link_to 'Edit your application', edit_oauth_application_path(@application), :class => 'cta' %><div>

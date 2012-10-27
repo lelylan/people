@@ -3,7 +3,7 @@ class AccessibleResource
 
   field :resource_id, type: Moped::BSON::ObjectId  # id for the saved resource
   field :resource_type
-  field :accessible_ids, type: Array, default: []    # ids
+  field :accessible_ids, type: Array, default: []  # ids
   field :accessible_type
 
   embedded_in :token

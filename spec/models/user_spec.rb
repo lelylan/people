@@ -4,7 +4,7 @@ describe User do
 
   describe 'when validates presence of email' do
 
-    it 'shows an presence error' do
+    it 'shows a presence error' do
       expect { FactoryGirl.create :user, email: ''}.to raise_error Mongoid::Errors::Validations
     end
   end
