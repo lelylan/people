@@ -1,4 +1,11 @@
+<% title 'Authorization Error' %>
+
 <header class="intro">
-<h3>Authorized applications</h3>
-<h4><%= @error.description %></h4>
+<h3>An error has occurred</h3>
 </header>
+
+<div class="content">
+  <h4 class="light">
+    <%= @pre_auth.error_response.body[:error_description] %>
+  </h4>
+</div>

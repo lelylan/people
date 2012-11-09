@@ -30,7 +30,7 @@ feature 'authorization code flow' do
 
         describe 'when makes the token not expirable' do
 
-          before { uncheck 'authorization_expirable' }
+          before { uncheck 'expirable' }
 
           describe 'when authorizes the client' do
 
@@ -101,7 +101,7 @@ feature 'implicit grant flow' do
 
         describe 'when makes the token not expirable' do
 
-          before { uncheck 'authorization_expirable' }
+          before { uncheck 'expirable' }
 
           describe 'when authorizes the client', js: true do
 
@@ -116,7 +116,7 @@ feature 'implicit grant flow' do
                 Hashie::Mash.new Rack::Utils.parse_nested_query(params)
               end
 
-              its(:expires_in) { should == '7200' }
+              its(:expires_in) { should == nil }
             end
           end
         end

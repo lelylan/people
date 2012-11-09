@@ -41,7 +41,7 @@ feature 'authorization code flow with accessible devices' do
 
             describe 'when authorizes the client' do
 
-              before { click_link 'Back to authorization' }
+              before { click_link 'Back to authorization'; }
               before { begin page.click_button 'Authorize' rescue ActionController::RoutingError end }
 
               let(:redirect_uri) { page.current_host + page.current_path }
