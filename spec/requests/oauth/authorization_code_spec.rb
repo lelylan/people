@@ -78,7 +78,7 @@ feature 'authorization code flow' do
               subject(:json)  { Hashie::Mash.new JSON.parse(page.source) }
 
               its(:access_token)  { should == token.token }
-              its(:expires_in)    { should == 7200 }
+              its(:expires_in)    { should == 600 }
               its(:token_type)    { should == 'bearer' }
               its(:refresh_token) { should == token.refresh_token }
             end

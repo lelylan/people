@@ -32,8 +32,8 @@
       <%= hidden_field_tag :state, @pre_auth.state %>
       <%= hidden_field_tag :response_type, @pre_auth.response_type %>
       <%= hidden_field_tag :scope, @pre_auth.scope %>
-      <%# check_box_tag :expirable, 'true', false, class: 'expirable-label colored' %>
-      <%# label_tag     :expirable, 'Create expirable token', class: 'expirable-label colored' %>
+      <%= check_box_tag :expirable, 'true', true, class: 'expirable-label colored' %>
+      <%= label_tag     :expirable, 'Expirable token', class: 'expirable-label colored' %>
       </br></br><hr></br>
       <%= submit_tag 'Authorize', class: 'cta grant' %>
     <% end %> or
