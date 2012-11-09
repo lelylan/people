@@ -20,9 +20,9 @@ module ApplicationHelper
     content_for :title, "Lelylan | #{page_title.to_s}"
   end
 
-  def test_authorization_url(application)
+  def test_authorization_path(application)
     authorization_params = {
-      response_type: 'code',
+      response_type: 'token',
       client_id:     application.uid,
       redirect_uri:  application.redirect_uri,
       scope:         'resources',
