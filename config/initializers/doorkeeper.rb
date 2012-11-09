@@ -1,6 +1,6 @@
 Doorkeeper.configure do
   # ORM setting. Currently supported options are :active_record and :mongoid
-  orm :mongoid
+  orm :mongoid3
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do |routes|

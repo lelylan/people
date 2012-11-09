@@ -223,5 +223,5 @@ feature 'when filters devices contained in a location' do
         end
       end
     end
-  end  
+  end
 end

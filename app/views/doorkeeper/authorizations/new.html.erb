@@ -1,16 +1,16 @@
 <% title 'Authorize application' %>
 
 <header class="intro">
-<h3 class="colored">Authorization for <%= @authorization.client.name %></h3>
+<h3 class="colored">Authorization for <%= @pre_auth.client.name %></h3>
 </header>
 
 <div class="content">
 
   <div class="authorizations">
-    <% if @authorization.scopes %>
+    <% if @pre_auth.scopes %>
       <h4>This application will be able to</h4>
       <ul>
-        <% @authorization.scopes.each do |scope| %>
+        <% @pre_auth.scopes.each do |scope| %>
           <li><%= t scope, :scope => [:doorkeeper, :scopes]  %></li>
         <% end %>
       </ul>
@@ -21,29 +21,29 @@
 
   <div class="authorizations">
     <p>
-      <%= link_to 'Filter Accessible Devices', devices_path(authorization_params), class: 'btn' %>
+    <%= link_to 'Filter Accessible Devices', devices_path(authorization_params), class: 'btn' %>
     </p>
   </div>
 
   <div class="bcta">
-    <%= form_for @authorization, as: :authorization, url: oauth_authorization_path, method: :post do |f| %>
-      <%= f.hidden_field :client_id %>
-      <%= f.hidden_field :redirect_uri %>
-      <%= f.hidden_field :state %>
-      <%= f.hidden_field :response_type %>
-      <%= f.hidden_field :scope %>
-      <%= f.check_box :expirable, checked: true %> 
-      <%= f.label 'Create expirable token', for: 'authorization_expirable',  class: 'expirable-label colored' %>
+    <%= form_tag oauth_authorization_path, method: :post do %>
+      <%= hidden_field_tag :client_id, @pre_auth.client.uid %>
+      <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri %>
+      <%= hidden_field_tag :state, @pre_auth.state %>
+      <%= hidden_field_tag :response_type, @pre_auth.response_type %>
+      <%= hidden_field_tag :scope, @pre_auth.scope %>
+      <%# check_box_tag :expirable, 'true', false, class: 'expirable-label colored' %>
+      <%# label_tag     :expirable, 'Create expirable token', class: 'expirable-label colored' %>
       </br></br><hr></br>
-      <%= f.submit 'Authorize Access', class: 'cta grant' %>
+      <%= submit_tag 'Authorize', class: 'cta grant' %>
     <% end %> or
-    <%= form_for @authorization, as: :authorization, url: oauth_authorization_path, method: :delete do |f| %>
-      <%= f.hidden_field :client_id %>
-      <%= f.hidden_field :redirect_uri %>
-      <%= f.hidden_field :state %>
-      <%= f.hidden_field :response_type %>
-      <%= f.hidden_field :scope %>
-      <%= f.submit 'Deny', class: 'cta' %>
+    <%= form_tag oauth_authorization_path, method: :delete do %>
+      <%= hidden_field_tag :client_id, @pre_auth.client.uid %>
+      <%= hidden_field_tag :redirect_uri, @pre_auth.redirect_uri %>
+      <%= hidden_field_tag :state, @pre_auth.state %>
+      <%= hidden_field_tag :response_type, @pre_auth.response_type %>
+      <%= hidden_field_tag :scope, @pre_auth.scope %>
+      <%= submit_tag 'Deny', class: 'cta' %>
     <% end %>
   </div>
 </div>
