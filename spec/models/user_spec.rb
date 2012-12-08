@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe User do
 
+  its(:admin) { should == false }
+  its(:rate_limit) { should == 5000 }
+
   describe 'when validates presence of email' do
 
     it 'shows a presence error' do

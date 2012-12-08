@@ -37,6 +37,11 @@ feature 'refresh token' do
         expect { JSON.parse(page.source) }.to_not raise_error
       end
 
+      it 'revokes expired token' do
+        Doorkeeper::AccessToken.where(id: access_token.id).first.revoked_at.should_not == nil
+      end
+
+
       describe 'when returns the acces token representation' do
 
         subject(:new_token) { Doorkeeper::AccessToken.last }

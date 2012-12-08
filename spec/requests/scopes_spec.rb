@@ -28,7 +28,7 @@ feature 'Scope authorization' do
     end
   end
 
-  %w(user resources resources-read devices devices-read types types-read locations locations-read).each do |scope| 
+  %w(user resources resources-read devices devices-read types types-read locations locations-read secrets).each do |scope|
 
     describe "with valid scope #{scope}" do
 
@@ -49,7 +49,7 @@ feature 'Scope authorization' do
     end
   end
 
-  %w(not-valid).each do |scope| 
+  %w(not-valid).each do |scope|
 
     describe "with not valid scope #{scope}" do
 

@@ -46,11 +46,12 @@ class User
   # field :authentication_token, :type => String
 
   # Personalized fields
-  field :username,  type: String
-  field :full_name, type: String
-  field :location,  type: String
-  field :homepage,  type: String
-  field :admin,     type: Boolean, default: false
+  field :username,   type: String
+  field :full_name,  type: String
+  field :location,   type: String
+  field :homepage,   type: String
+  field :admin,      type: Boolean, default: false
+  field :rate_limit, type: Integer, default: 5000
 
   attr_protected :admin
 
@@ -75,7 +76,7 @@ class User
       params.delete(:password_confirmation) if params[:password_confirmation].blank?
     end
 
-    result = if params[:password].blank? || valid_password?(current_password) 
+    result = if params[:password].blank? || valid_password?(current_password)
       update_attributes(params, *options)
     else
       self.assign_attributes(params, *options)

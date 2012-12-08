@@ -6,7 +6,11 @@ module Accessible
   included do
     field :device_ids,   type: Array,   default: []
     field :location_ids, type: Array,   default: []
+
     attr_accessible :device_ids, :location_ids, :resources
+
+    index({ device_ids: 1 })
+    index({ location_ids: 1 })
 
     embeds_many :resources, class_name: 'AccessibleResource', cascade_callbacks: true, inverse_of: :token
     before_save :set_device_ids, :set_location_ids
