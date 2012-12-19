@@ -74,6 +74,6 @@ People::Application.configure do
   # enable the same cookies for authenticating diffferent domains
   config.session_store :cookie_store, key: '_people_session', domain: ENV['SESSION_STORE_DOMAIN']
 
-  # CDN configuration
-  config.action_controller.asset_host = "//#{ENV['FOG_DIRECTORY']}.cloudfront.net"
+  # CDN settings
+  config.action_controller.asset_host = "//#{ENV['FOG_CLOUDFRONT']}.cloudfront.net"
 end
