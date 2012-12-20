@@ -10,3 +10,6 @@ en:
       locations: Read and write all your locations
       locations-read: Read locations all your location
       user: Read your user profile (GET /me).
+  notifications:
+    access:
+      not_authorized: "Token not valid"

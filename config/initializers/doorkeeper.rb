@@ -45,3 +45,21 @@ Doorkeeper.configure do
   # Check out the wiki for mor information on customization
   # access_token_methods :from_bearer_authorization, :from_access_token_param, :from_bearer_param
 end
+
+# 401 rendering
+# TODO move /me service in the invitation service module as here it creates confusion.
+module Doorkeeper
+  module Helpers
+    module Filter
+      module ClassMethods
+        def doorkeeper_for(*args)
+          doorkeeper_for = DoorkeeperForBuilder.create_doorkeeper_for(*args)
+          before_filter doorkeeper_for.filter_options do
+            return if doorkeeper_for.validate_token(doorkeeper_token)
+            render json: { status: 401, error: { code: 'notifications.access.not_authorized', description: I18n.t('notifications.access.not_authorized') } }, status: 401
+          end
+        end
+      end
+    end
+  end
+end

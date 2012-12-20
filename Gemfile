@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '~> 3.2.6'
+gem 'rails', '~> 3.2.0'
 gem 'unicorn'
 gem 'mongoid', '~> 3.0.3'
 gem 'devise'
@@ -29,7 +29,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'email_spec'
   gem 'shoulda'
-  gem 'capybara'
+  gem 'capybara', '~> 1.1.4'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'fuubar'

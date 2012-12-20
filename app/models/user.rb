@@ -5,23 +5,23 @@ class User
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
-  field :email,              :type => String, :default => ''
-  field :encrypted_password, :type => String, :default => ''
+  field :email,              type: String, default: ''
+  field :encrypted_password, type: String, default: ''
 
   validates :email, presence: true, uniqueness: true
   validates :encrypted_password, presence: true
   validates :password, length: { minimum: 8, allow_nil: true }
 
-  field :reset_password_token,   :type => String
-  field :reset_password_sent_at, :type => Time
+  field :reset_password_token,   type: String
+  field :reset_password_sent_at, type: Time
 
-  field :remember_created_at, :type => Time
+  field :remember_created_at, type: Time
 
-  field :sign_in_count,      :type => Integer, :default => 0
-  field :current_sign_in_at, :type => Time
-  field :last_sign_in_at,    :type => Time
-  field :current_sign_in_ip, :type => String
-  field :last_sign_in_ip,    :type => String
+  field :sign_in_count,      type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at,    type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip,    type: String
 
   # OPEN_SIGNUP: remove the invitable fields
   ## Invitable
@@ -46,10 +46,10 @@ class User
   # field :authentication_token, :type => String
 
   # Personalized fields
-  field :username,   type: String
-  field :full_name,  type: String
-  field :location,   type: String
-  field :homepage,   type: String
+  field :username,   type: String,  default: ''
+  field :full_name,  type: String,  default: ''
+  field :location,   type: String,  default: ''
+  field :homepage,   type: String,  default: ''
   field :admin,      type: Boolean, default: false
   field :rate_limit, type: Integer, default: 5000
 
