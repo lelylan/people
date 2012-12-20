@@ -1,5 +1,5 @@
 body,html{height:100%;width:100%;margin:0;padding:0;overflow:auto}
-body{color:#52585d;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font:15px "helvetica neue",helvetica,arial,sans-serif;background:#f4f4f4}
+body{color:#52585d;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;font:14px "helvetica neue",helvetica,arial,sans-serif;background:#f4f4f4}
 p{margin:0 0 10px 0;line-height:1.5em}
 a{color:#00979D;text-shadow:0 1px 0 #fff;text-decoration:none}
 ::selection,::-moz-selection,::-webkit-selection{background:#e0edf8;text-shadow:none}
@@ -103,6 +103,6 @@ body.pages-index .bcta form{display:inline;}
 body.pages-index .bcta form .grant{color:#00979D;}
 body.pages-index div.authorizations{margin:10px;}
 body.pages-index div.authorizations h4 {margin:10px 0 10px; font-size:28px;}
-body.pages-index div.authorizations ul li{color:#00979D;font-size: 17px;margin: 4px 0 4px; font-style:italic;}
+body.pages-index div.authorizations ul li{color:#00979D;font-size: 17px;margin: 4px 0 4px;}
 /*label.email-label {width:424px;}*/
 /*label.password-label {width:465px;}*/

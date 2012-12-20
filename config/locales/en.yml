@@ -1,15 +1,24 @@
 en:
   doorkeeper:
     scopes:
-      resources: Read and write all your resources (devices, locations and types)
-      resources-read: Read all your resources (devices, locations and types)
-      devices: Read and write all your devices
-      devices-read: Read all your devices
-      types: Read all your types
-      types-read: Read all your types
-      locations: Read and write all your locations
-      locations-read: Read locations all your location
-      user: Read your user profile (GET /me).
+      user: Read access to user profile.
+      resources: Full access to all services (device secrets not included).
+      resources-read: Full access to all read services (device secrets not included).
+      devices: Read, control and write access to owned devices.
+      devices-control: Read and control access to owned devices.
+      devices-read: Read access to owned devices.
+      consumptions: Read and write access to owned consumptions
+      consumptions-read: Read access to owned consumptions
+      histories-read: Read access to owned histories
+      types: Read and write access to owned types.
+      types-read: Read access to owned types.
+      locations: Read and write access to owned locations
+      locations-read: Read access to owned locations
+      privates: <span class="label warning">attention</span> Access to the owned devices private info
   notifications:
     access:
-      not_authorized: "Token not valid"
+      not_authorized: Token not valid
+  devise:
+    mailer:
+      invitation_instructions:
+        subject: Lelylan Beta Invitation | Connected house for developers

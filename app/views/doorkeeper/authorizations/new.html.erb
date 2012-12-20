@@ -11,7 +11,7 @@
       <h4>This application will be able to</h4>
       <ul>
         <% @pre_auth.scopes.each do |scope| %>
-          <li><%= t scope, :scope => [:doorkeeper, :scopes]  %></li>
+          <li><%=raw t(scope, :scope => [:doorkeeper, :scopes]) %></li>
         <% end %>
       </ul>
     <% end %>

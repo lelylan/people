@@ -426,11 +426,7 @@ feature 'authorization' do
 
       describe 'when clicks on invite' do
 
-        before { click_link 'New Subscription' }
-
-        it 'user has been invited' do
-          page.should_not have_content 'Invite'
-        end
+        before { click_link 'Invite' }
 
         describe 'when checking the mail' do
 
@@ -441,6 +437,10 @@ feature 'authorization' do
           it 'sends the mail to the filled mail address' do
             last_email.to.should include 'alice@example.com'
           end
+
+          it 'sets a personalized title' do
+            last_email.subject.should == 'Lelylan Beta Invitation | Connected house for developers'
+          end
         end
 
         describe 'when clicking to accept invitation' do
@@ -450,7 +450,7 @@ feature 'authorization' do
           end
 
           it 'shows the change password page' do
-            page.should have_content('Edit password')
+            page.should have_content('Set your password')
           end
 
           describe 'when fills in the new password' do
@@ -458,24 +458,15 @@ feature 'authorization' do
             before do
               fill_in 'Password', with: 'password'
               fill_in 'Password confirmation', with: 'password'
-              click_button 'Update'
+              click_button 'Set my password'
             end
 
             it 'creates the new password without automatically logging in' do
-              page.should have_content('You need to sign in')
+              page.should have_content('Your password was set successfully')
             end
 
-            describe 'when logs in with the new password' do
-
-              before do
-                fill_in 'Email',    with: user.email
-                fill_in 'Password', with: 'password'
-                click_button 'Sign in'
-              end
-
-              it 'logs in' do
-                page.should have_content('Signed in successfully.')
-              end
+            it 'is already logged in' do
+              page.should have_content('Profile')
             end
           end
         end

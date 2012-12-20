@@ -1,167 +1,169 @@
-require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
+# TODO Active them when you re-add the filtering via locations
 
-feature 'authorization code flow with accessible devices' do
+#require File.expand_path(File.dirname(__FILE__) + '/../acceptance_helper')
 
-  let!(:application) { FactoryGirl.create :application }
-  let!(:user)        { FactoryGirl.create :user }
-  let!(:light)       { FactoryGirl.create :light, resource_owner_id: user.id  }
-  let!(:house)       { FactoryGirl.create :house, :with_descendants, resource_owner_id: user.id }
+#feature 'authorization code flow with accessible devices' do
 
-  let!(:authorization_params) {{
-    response_type: 'code',
-    client_id:     application.uid,
-    redirect_uri:  application.redirect_uri,
-    scope:         'resources',
-    state:         'remember-me'
-  }}
+  #let!(:application) { FactoryGirl.create :application }
+  #let!(:user)        { FactoryGirl.create :user }
+  #let!(:light)       { FactoryGirl.create :light, resource_owner_id: user.id  }
+  #let!(:house)       { FactoryGirl.create :house, :with_descendants, resource_owner_id: user.id }
 
-  describe 'when sends an authorization request' do
+  #let!(:authorization_params) {{
+    #response_type: 'code',
+    #client_id:     application.uid,
+    #redirect_uri:  application.redirect_uri,
+    #scope:         'resources',
+    #state:         'remember-me'
+  #}}
 
-    let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
-    before    { visit uri }
+  #describe 'when sends an authorization request' do
 
-    describe 'when not logged in' do
+    #let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
+    #before    { visit uri }
 
-      describe 'when signs in' do
+    #describe 'when not logged in' do
 
-        before do
-          fill_in 'Email',    with: 'alice@example.com'
-          fill_in 'Password', with: 'password'
-          click_button 'Sign in'
-        end
+      #describe 'when signs in' do
 
-        describe 'when clicks on filter resources' do
+        #before do
+          #fill_in 'Email',    with: 'alice@example.com'
+          #fill_in 'Password', with: 'password'
+          #click_button 'Sign in'
+        #end
 
-          before { click_link 'Filter Accessible Devices' }
+        #describe 'when clicks on filter resources' do
 
-          describe 'when adds a device and a location containing devices' do
+          #before { click_link 'Filter Accessible Devices' }
 
-            before { within('.devices')   { click_link 'Add' } }
-            before { within('.locations') { click_link 'Add' } }
+          #describe 'when adds a device and a location containing devices' do
 
-            describe 'when authorizes the client' do
+            #before { within('.devices')   { click_link 'Add' } }
+            #before { within('.locations') { click_link 'Add' } }
 
-              before { click_link 'Back to authorization'; }
-              before { begin page.click_button 'Authorize' rescue ActionController::RoutingError end }
+            #describe 'when authorizes the client' do
 
-              let(:redirect_uri) { page.current_host + page.current_path }
+              #before { click_link 'Back to authorization'; }
+              #before { begin page.click_button 'Authorize' rescue ActionController::RoutingError end }
 
-              let!(:authorization_code) do
-                query = URI.parse(page.current_url).query
-                Rack::Utils.parse_nested_query(query)['code']
-              end
+              #let(:redirect_uri) { page.current_host + page.current_path }
 
-              it 'redirects to the client callback uri' do
-                redirect_uri.should == application.redirect_uri
-              end
+              #let!(:authorization_code) do
+                #query = URI.parse(page.current_url).query
+                #Rack::Utils.parse_nested_query(query)['code']
+              #end
 
-              it 'returns an activation code' do
-                authorization_code.should_not be_nil
-              end
+              #it 'redirects to the client callback uri' do
+                #redirect_uri.should == application.redirect_uri
+              #end
 
-              describe 'when sends an access token request' do
+              #it 'returns an activation code' do
+                #authorization_code.should_not be_nil
+              #end
 
-                let!(:access_params) do
-                  { grant_type:  'authorization_code',
-                    code:         authorization_code,
-                    redirect_uri: application.redirect_uri }
-                end
+              #describe 'when sends an access token request' do
 
-                before do
-                  page.driver.browser.authorize application.uid, application.secret
-                  page.driver.post '/oauth/token', access_params
-                end
+                #let!(:access_params) do
+                  #{ grant_type:  'authorization_code',
+                    #code:         authorization_code,
+                    #redirect_uri: application.redirect_uri }
+                #end
 
-                describe 'when returns the acces token representation' do
+                #before do
+                  #page.driver.browser.authorize application.uid, application.secret
+                  #page.driver.post '/oauth/token', access_params
+                #end
 
-                  subject(:json)     { Hashie::Mash.new JSON.parse(page.source) }
-                  its(:access_token) { should == Doorkeeper::AccessToken.last.token }
-                end
+                #describe 'when returns the acces token representation' do
 
-                describe 'when returns the accessible access token' do
+                  #subject(:json)     { Hashie::Mash.new JSON.parse(page.source) }
+                  #its(:access_token) { should == Doorkeeper::AccessToken.last.token }
+                #end
 
-                  subject          { Doorkeeper::AccessToken.last }
-                  let(:device_ids) { ([light.id] << house.contained_devices).flatten }
+                #describe 'when returns the accessible access token' do
 
-                  its(:device_ids) { should have(4).items }
-                  its(:device_ids) { subject.should == device_ids }
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-  end
-end
+                  #subject          { Doorkeeper::AccessToken.last }
+                  #let(:device_ids) { ([light.id] << house.contained_devices).flatten }
 
-# NOTE: this is an incomplete test as we do not check the token in the hash.
-# Actually the problem is due to the fact that when we click to the buttons
-# to add the devices, the button is found, but nothing is made. Maybe new
-# versions of capybara will solve the problem. In that case take the implicit
-# grant flow and remake this part js based with the check of the token.
+                  #its(:device_ids) { should have(4).items }
+                  #its(:device_ids) { subject.should == device_ids }
+                #end
+              #end
+            #end
+          #end
+        #end
+      #end
+    #end
+  #end
+#end
 
-feature 'implicit grant flow with accessible devices' do
+## NOTE: this is an incomplete test as we do not check the token in the hash.
+## Actually the problem is due to the fact that when we click to the buttons
+## to add the devices, the button is found, but nothing is made. Maybe new
+## versions of capybara will solve the problem. In that case take the implicit
+## grant flow and remake this part js based with the check of the token.
 
-  let!(:application) { FactoryGirl.create :application }
-  let!(:user)        { FactoryGirl.create :user }
-  let!(:light)       { FactoryGirl.create :light, resource_owner_id: user.id  }
-  let!(:house)       { FactoryGirl.create :house, :with_descendants, resource_owner_id: user.id }
+#feature 'implicit grant flow with accessible devices' do
 
-  let!(:authorization_params) {{
-    response_type: 'token',
-    client_id:     application.uid,
-    redirect_uri:  application.redirect_uri,
-    scope:         'resources',
-    state:         'remember-me'
-  }}
+  #let!(:application) { FactoryGirl.create :application }
+  #let!(:user)        { FactoryGirl.create :user }
+  #let!(:light)       { FactoryGirl.create :light, resource_owner_id: user.id  }
+  #let!(:house)       { FactoryGirl.create :house, :with_descendants, resource_owner_id: user.id }
 
-  describe 'when sends an authorization request' do
+  #let!(:authorization_params) {{
+    #response_type: 'token',
+    #client_id:     application.uid,
+    #redirect_uri:  application.redirect_uri,
+    #scope:         'resources',
+    #state:         'remember-me'
+  #}}
 
-    let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
-    before    { visit uri }
+  #describe 'when sends an authorization request' do
 
-    describe 'when not logged in' do
+    #let(:uri) { "/oauth/authorize?#{authorization_params.to_param}" }
+    #before    { visit uri }
 
-      describe 'when signs in' do
+    #describe 'when not logged in' do
 
-        before do
-          fill_in 'Email',    with: 'alice@example.com'
-          fill_in 'Password', with: 'password'
-          click_button 'Sign in'
-        end
+      #describe 'when signs in' do
 
-        describe 'when clicks on filter resources' do
+        #before do
+          #fill_in 'Email',    with: 'alice@example.com'
+          #fill_in 'Password', with: 'password'
+          #click_button 'Sign in'
+        #end
 
-          before { click_link 'Filter Accessible Devices' }
+        #describe 'when clicks on filter resources' do
 
-          describe 'when adds a device and a location containing devices' do
+          #before { click_link 'Filter Accessible Devices' }
 
-            before { within('.devices')   { click_link 'Add' } }
-            before { within('.locations') { click_link 'Add' } }
+          #describe 'when adds a device and a location containing devices' do
 
-            describe 'when authorizes the client' do
+            #before { within('.devices')   { click_link 'Add' } }
+            #before { within('.locations') { click_link 'Add' } }
 
-              describe 'when authorizes the client' do
+            #describe 'when authorizes the client' do
 
-                before { click_link 'Back to authorization' }
-                before { begin page.click_button 'Authorize' rescue ActionController::RoutingError end }
+              #describe 'when authorizes the client' do
 
-                describe 'when returns the filtered access token' do
+                #before { click_link 'Back to authorization' }
+                #before { begin page.click_button 'Authorize' rescue ActionController::RoutingError end }
 
-                  subject          { Doorkeeper::AccessToken.last }
-                  let(:device_ids) { ([light.id] << house.contained_devices).flatten }
+                #describe 'when returns the filtered access token' do
 
-                  its(:device_ids) { should have(4).items }
-                  its(:device_ids) { subject.should == device_ids }
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-  end
-end
+                  #subject          { Doorkeeper::AccessToken.last }
+                  #let(:device_ids) { ([light.id] << house.contained_devices).flatten }
+
+                  #its(:device_ids) { should have(4).items }
+                  #its(:device_ids) { subject.should == device_ids }
+                #end
+              #end
+            #end
+          #end
+        #end
+      #end
+    #end
+  #end
+#end
 
 
