@@ -22,6 +22,7 @@ gem 'addressable'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'bundler'
 gem 'postmark-rails'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   gem 'foreman'
@@ -55,4 +56,3 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '~> 1.0.3'
 end
-
