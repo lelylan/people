@@ -1,6 +1,6 @@
 pagination:
   per: 25
-  max_per: 100
+  max_per: 250
 services:
   devices: 'https://devices.lelylan.com'
   types: 'https://types.lelylan.com'
@@ -8,3 +8,17 @@ services:
   locations: 'https://locations.lelylan.com'
 titles:
   '/users/new': Sign in
+scopes:
+  read:
+    - resources
+    - resources:read
+    - devices
+    - devices:read
+    - devices:control
+    - histories:read
+    - types
+    - types:read
+    - locations
+    - locations:read
+    - privates
+    - user

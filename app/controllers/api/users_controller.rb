@@ -1,5 +1,5 @@
 class Api::UsersController < Api::BaseController
-  doorkeeper_for :show, scopes: %w(user resources:read resources).map(&:to_sym)
+  doorkeeper_for :show, scopes: Settings.scopes.read.map(&:to_sym)
 
   respond_to :json
 
