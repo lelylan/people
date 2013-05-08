@@ -46,10 +46,10 @@ class User
   # field :authentication_token, :type => String
 
   # Personalized fields
-  field :username,   type: String,  default: ''
-  field :full_name,  type: String,  default: ''
-  field :location,   type: String,  default: ''
-  field :homepage,   type: String,  default: ''
+  field :username,   type: String
+  field :full_name,  type: String
+  field :location,   type: String
+  field :homepage,   type: String
   field :admin,      type: Boolean, default: false
   field :rate_limit, type: Integer, default: 5000
 
