@@ -3,7 +3,7 @@ People::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: :registrations }
   devise_scope :user do
-    get '/users/edit/password' => 'registrations#edit_password', as: 'edit_user_password'
+    get '/users/password/change' => 'registrations#edit_password'
   end
 
   scope 'oauth/authorize' do

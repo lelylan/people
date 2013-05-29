@@ -58,7 +58,7 @@ class User
   index({ email: 1 })
   index({ username: 1 })
 
-  validates :username, uniqueness: true, allow_nil: true
+  validates :username, uniqueness: true, allow_nil: true, allow_blank: true
 
   # Tell doorkeeper how to authenticate the resource owner with username/password
   def self.authenticate!(email, password)

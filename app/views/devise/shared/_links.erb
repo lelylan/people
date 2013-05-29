@@ -1,11 +1,11 @@
 <% if params[:controller] != 'authorizations' and params[:controller] != 'devices'  -%>
 <% if user_signed_in? -%>
   <li>
-  <strong style="font-size:14px; text-style:underline"><%= link_to 'Developers', "#{dev_host}" %></strong>
+  <%= link_to 'Developers', "#{dev_host}" %>
   </li>
   <% if current_user.admin %>
   <li>
-  <%= link_to 'Subs', subscriptions_path  %>
+  <%= link_to 'Subscriptions', subscriptions_path  %>
   </li>
   <% end %>
   <li>

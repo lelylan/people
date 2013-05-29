@@ -1,42 +1,50 @@
-<% title 'Connected house for developers' %>
+<% title 'Building the Connected Home' %>
 
 <header class="intro">
-<h2>Welcome to Lelylan</h2>
-<h3>{ connected house for developers }</h3>
+<h2>Building the Connected Home</h2>
+<h3>with Lelylan</h3>
 </header>
 
 </br>
 
+<% if not user_signed_in? %>
 <aside>
 
-<section>
-  <header>Easy</header>
-  <p>
-  Makes it easy to start building the connected house on the web, today.
-  </p>
-</section>
+  <section>
+    <header>For Makers</header>
+    <p>
+    New physical devices for your home connected to the web in no time
+    </p>
+  </section>
 
-<section>
-  <header>Developers</header>
-  <p>
-  Strives to have the best, and most friendly documentation for developers and hackers.
-  </p>
-</section>
+  <section>
+    <header>Developers</header>
+    <p>
+    A simple and open set of REST API to easily create new apps
+    </p>
+  </section>
 
-<section>
-  <header>Change</header>
-  <p>
-  Made up from people who want to build the best solution for your house.
-  </p>
-</section>
+  <section>
+    <header>Collaborations</header>
+    <p>
+    Made up from people who want to improve the connected home
+    </p>
+  </section>
 
 </aside>
+</br><hr/>
 
-</br>
+<% end %>
+
+
 
 <% if user_signed_in? %>
+  <a href="<%= "#{dev_host}/start/introduction"%>">
+    <%= image_tag('dev-center.png', class: 'dev-center img-polaroid', alt: 'Dev Center') %>
+  </a>
+  <br/><br/>
   <div class="content">
-    <div class="bcta"><a href="<%= "#{dev_host}/start/introduction"%>" class="cta">Get started with Lelylan</a></div>
+    <div class="bcta"><a href="<%= "#{dev_host}/start/introduction"%>" class="cta">Start Building the Connected Home</a></div>
   </div>
 <% else %>
   <div class="content">

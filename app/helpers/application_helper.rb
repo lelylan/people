@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def title(page_title)
-    content_for :title, "Lelylan | #{page_title.to_s}"
+    content_for :title, "Lelylan. #{page_title.to_s}"
   end
 
   def test_authorization_path(application)

@@ -2,7 +2,6 @@
 
 <header class="intro">
 <h2>Sign in to Lelylan</h2>
-<h3>{ connected house for developers }</h3>
 </header>
 
 </br>
@@ -19,13 +18,17 @@
       <%= f.email_field :email, class: 'text-input' %></div>
 
     <div><%= f.label :password, class: 'password-label' %>
-      <%= f.password_field :password, class: 'text-input' %></div>
+      <%= f.password_field :password, class: 'text-input', style: 'margin-bottom: 5px' %><br/>
+      <span style="font-size: 12px;">Forgot your password? <%= link_to 'Ask for a new one.', new_password_path(resource_name) %></span>
+    </div>
+
+    <br/>
 
     <% if devise_mapping.rememberable? -%>
       <div class='invisible'><%= f.check_box :remember_me, checked: true %> <%= f.label :remember_me %></div>
     <% end -%>
 
-    <div class="bcta"><%= f.submit 'Sign in', class: 'cta' %></div>
+    <div class="bcta"><%= f.submit 'Sign in to Lelylan', class: 'cta' %></div>
   <% end %>
 
 </div>
