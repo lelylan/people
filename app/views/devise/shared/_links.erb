@@ -1,7 +1,7 @@
 <% if params[:controller] != 'authorizations' and params[:controller] != 'devices'  -%>
 <% if user_signed_in? -%>
   <li>
-  <%= link_to 'Developers', "#{dev_host}" %>
+  <%= link_to 'Dev Center', "#{dev_host}" %>
   </li>
   <% if current_user.admin %>
   <li>
