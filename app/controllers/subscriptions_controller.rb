@@ -16,6 +16,12 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new
   end
 
+  def see_later
+    @registered_emails = User.all.map(&:email)
+    @subscriptions = Subscription.where(later: true)
+    render :index
+  end
+
   def create
     @subscription = Subscription.new(params[:subscription])
     if @subscription.save
@@ -37,11 +43,6 @@ class SubscriptionsController < ApplicationController
     User.invite! email: params[:email]
     flash[:notice] = "The user #{params[:email]} has been successfully invited"
     redirect_to subscriptions_path
-  end
-
-  def see_later
-    @subscriptions = Subscription.where(later: true)
-    render :index
   end
 
   def later
