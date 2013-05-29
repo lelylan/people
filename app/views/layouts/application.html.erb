@@ -25,6 +25,21 @@
     </nav>
     </header>
 
+    <% if current_user.admin %>
+      <header id="header">
+      <div class="left">
+        <h1><a href=":javascript">Admin section</a></h1>
+      </div>
+      <nav class="right">
+      <ul>
+        <li><%= link_to 'New Subscription', new_subscription_path %></li>
+        <li><%= link_to 'Subscriptions', subscriptions_path  %></li>
+        <li><%= link_to  'Later subscriptions', see_later_subscriptions_path %></li>
+      </ul>
+      </nav>
+      </header>
+    <% end %>
+
     <article>
 
     <header class="intro">

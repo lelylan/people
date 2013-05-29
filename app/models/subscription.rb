@@ -3,6 +3,7 @@ class Subscription
 
   field :email
   field :description
+  field :later, type: Boolean, default: false
 
   index({ email: 1 })
 

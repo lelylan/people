@@ -15,3 +15,15 @@
 //= require jquery_ujs
 //= require_tree .
 
+$(document).ready(function() {
+  $('.short').shorten({
+      moreText: '&rarr;',
+      lessText: '&larr;',
+      showChars: 52
+  });
+  $('.email').shorten({
+      moreText: '&rarr;',
+      lessText: '&larr;',
+      showChars: 25
+  });
+});

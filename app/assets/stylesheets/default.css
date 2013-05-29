@@ -104,6 +104,11 @@ body.pages-index .bcta form .grant{color:#00979D;}
 body.pages-index div.authorizations{margin:10px;}
 body.pages-index div.authorizations h4 {margin:10px 0 10px; font-size:28px;}
 body.pages-index div.authorizations ul li{color:#00979D;font-size: 17px;margin: 4px 0 4px;}
+body.pages-index div.subscriptions table td.link {padding-right:0;margin-left:0;padding:10px 0 10px !important;}
+body.pages-index div.subscriptions {margin: 0 10px;}
 body.pages-index .dev-center { margin-left: 75px; }
 /*label.email-label {width:424px;}*/
 /*label.password-label {width:465px;}*/
+a.morelink {text-decoration:none;outline: none;}
+.morecontent span {display: none;}
+

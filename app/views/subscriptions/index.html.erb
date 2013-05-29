@@ -1,37 +1,49 @@
 <% title 'Lelylan Subscriptions' %>
 
 <header class="intro">
-<h3>Lelylan Subscriptions</h3>
+
+<% if params[:action] == 'index' -%>
+  <h3>Subscriptions</h3>
+<% else -%>
+  <h3>Later Subscriptions</h3>
+<% end -%>
 </header>
 
-<div class="content">
+</br></br>
 
-  <div class="bcta"><%= link_to 'New Subscription', new_subscription_path, class: 'cta' %></>
-    </br>
-    </br>
+<div class="content subscriptions">
 
-    <% if @subscriptions.entries.empty? -%>
-        <h4 class="light">There are no subscriptions</h4>
-      <% else %>
-      <table class="zebra-striped">
-        <thead>
+  <% if @subscriptions.entries.empty? -%>
+    <h4 class="light">There are no subscriptions</h4>
+  <% else %>
+    <table class="zebra-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Description</th>
+          <th style="width:50px;"></th>
+          <th style="width:50px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscriptions.each do |subscription| %>
           <tr>
-            <th>Email</th>
-            <th>Description</th>
-            <th style="width:50px;"></th>
-            <th style="width:50px;"></th>
+            <td><span class="email"><%= subscription.email %></span></td>
+            <td><span class="short"><%= subscription.description %></span></td>
+            <% if @registered_emails.include?(subscription.email) %>
+              <td class="link">Invited</td>
+            <% else %>
+              <td class="link"><%= link_to 'Invite', invite_subscriptions_path(email: subscription.email)%></td>
+            <% end %>
+            <% if params[:action] == 'index' -%>
+              <td class="link"><%= link_to 'Later', later_subscriptions_path(email: subscription.email), method: :put %></td>
+            <% else -%>
+              <td class="link"><%= link_to 'Prioritize', prioritize_subscriptions_path(email: subscription.email), method: :put %></td>
+            <% end -%>
+            <td class="link"><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @subscriptions.each do |subscription| %>
-            <tr>
-              <td><%= subscription.email %></td>
-              <td><%= subscription.description %></td>
-              <td><%= link_to 'Invite', invite_subscriptions_path(email: subscription.email), :class => 'btn' %></td>
-              <td><%= link_to 'Delete', subscription, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn' %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      <% end %>
-
-    </table>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+</div>

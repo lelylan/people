@@ -3,11 +3,6 @@
   <li>
   <%= link_to 'Dev Center', "#{dev_host}" %>
   </li>
-  <% if current_user.admin %>
-  <li>
-  <%= link_to 'Subscriptions', subscriptions_path  %>
-  </li>
-  <% end %>
   <li>
   <%= link_to 'Profile', edit_user_registration_path %>
   </li>

@@ -20,6 +20,9 @@ People::Application.routes.draw do
 
   # OPEN_SIGNUP: remove the subscription routes, controller and model
   resources :subscriptions do
-    match :invite, via: :get, on: :collection
+    match :invite,     via: :get, on: :collection
+    match :later,      via: :put, on: :collection
+    match :prioritize, via: :put, on: :collection
+    match :see_later,  via: :get, on: :collection
   end
 end
