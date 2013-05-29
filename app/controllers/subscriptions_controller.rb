@@ -6,7 +6,6 @@ class SubscriptionsController < ApplicationController
 
   def index
     @registered_emails = User.all.map(&:email)
-    pp @registered_emails
     @subscriptions = Subscription.where(later: false)
   end
 

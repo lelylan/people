@@ -41,6 +41,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'test-unit'
   gem 'debugger'
+  gem 'brakeman', :require => false
 end
 
 group :test do
