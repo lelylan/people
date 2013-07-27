@@ -21,7 +21,7 @@ gem 'draper'
 gem 'addressable'
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'bundler'
-gem 'postmark-rails'
+gem 'postmark-rails', '~> 0.5.1'
 gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
