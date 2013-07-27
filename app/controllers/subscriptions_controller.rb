@@ -26,8 +26,9 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new(params[:subscription])
     if @subscription.save
       flash[:notice] = 'Thank you for your interest in Lelylan'
-      redirect_to subscription_path @subscription if !current_user or !current_user.admin
-      redirect_to subscriptions_path @subscription if current_user.admin
+      redirect_to subscription_path  @subscription if !current_user
+      redirect_to subscription_path  @subscription if current_user and !current_user.admin
+      redirect_to subscriptions_path @subscription if current_user and !current_user.admin
     else
       render :new
     end
