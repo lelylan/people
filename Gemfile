@@ -23,6 +23,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'bundler'
 gem 'postmark-rails', '~> 0.5.1'
 gem 'rack-cors', require: 'rack/cors'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'foreman'
