@@ -176,6 +176,7 @@ GEM
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
+    newrelic_rpm (3.6.7.152)
     nokogiri (1.5.9)
     origin (1.1.0)
     orm_adapter (0.4.0)
@@ -340,6 +341,7 @@ DEPENDENCIES
   launchy
   mongoid (~> 3.1.4)
   mongoid-ancestry (~> 0.3.1)
+  newrelic_rpm
   postmark-rails (~> 0.5.1)
   rabl
   rack-cors
