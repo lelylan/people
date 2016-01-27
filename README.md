@@ -72,7 +72,7 @@ for submitting patches.
 
 ## Changelog
 
-See [CHANGELOG](https://github.com/lelylan/profiles/blob/master/CHANGELOG.md)
+See [CHANGELOG](https://github.com/lelylan/people/blob/master/CHANGELOG.md)
 
 
 ## License
