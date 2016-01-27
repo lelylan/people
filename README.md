@@ -1,6 +1,6 @@
 # People API
 
-People API for Lelylan authentication and authorization. [Learn more](http://dev.lelylan.com/rest/authentication/)
+People API for authentication and authorization of third party apps.
 
 
 ## Requirements
@@ -10,21 +10,22 @@ People API is tested against MRI 1.9.3.
 
 ## Installation
 
-Clone the repository.
-
-    git clone git@github.com:lelylan/people.git
+    $ git clone git@github.com:lelylan/people.git
+    $ cd profiles
+    $ gem install bundler
+    $ bundle install
+    $ foreman start
 
 
 ## Resources
 
-* [Lelylan API](http://dev.lelylan.com)
-* [Lelylan People API](http://dev.lelylan.com/rest/authentication/)
+* [Lelylan OAuth 2.0](http://dev.lelylan.com/developers#oauth)
 
 
 ## Contributing
 
-Fork the repo on github and send a pull requests with topic branches. Do not forget to 
-provide specs to your contribution.
+Fork the repo on github and send a pull requests with topic branches. 
+Do not forget to provide specs to your contribution.
 
 
 ### Running specs
@@ -47,11 +48,11 @@ Follow [github](https://github.com/styleguide/) guidelines.
 
 ## Feedback
 
-Use the [issue tracker](http://github.com/lelylan/people/issues) for bugs.
-[Mail](mailto:touch@lelylan.com) or [Tweet](http://twitter.com/lelylan) us for any idea that can improve the project.
+Use the [issue tracker](http://github.com/lelylan/people/issues) for bugs or [stack overflow](http://stackoverflow.com/questions/tagged/lelylan) for questions.
+[Mail](mailto:dev@lelylan.com) or [Tweet](http://twitter.com/lelylan) us for any idea that can improve the project.
 
 
-## Links 
+## Links
 
 * [GIT Repository](http://github.com/lelylan/people)
 * [Lelylan Dev Center](http://dev.lelylan.com)
@@ -60,19 +61,20 @@ Use the [issue tracker](http://github.com/lelylan/people/issues) for bugs.
 
 ## Authors
 
-[Andrea Reginato](http://twitter.com/andreareginato)
+[Andrea Reginato](https://www.linkedin.com/in/andreareginato)
 
 
 ## Contributors
 
-Special thanks to the following people for submitting patches.
+Special thanks to all [contributors](https://github.com/lelylan/people/contributors)
+for submitting patches.
 
 
 ## Changelog
 
-See [CHANGELOG](people/blob/master/CHANGELOG.md)
+See [CHANGELOG](https://github.com/lelylan/profiles/blob/master/CHANGELOG.md)
 
 
-## Copyright
+## License
 
-Copyright (c) 2013 [Lelylan](http://lelylan.com). See [LICENSE](people/blob/master/LICENSE.md) for details.
+Lelylan is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
