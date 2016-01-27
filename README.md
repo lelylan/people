@@ -1,6 +1,6 @@
 # People API
 
-People API for authentication and authorization of third party apps.
+OAuth 2.0 authentication and authorization API.
 
 
 ## Requirements
