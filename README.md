@@ -1,6 +1,6 @@
 # People API
 
-OAuth 2.0 authentication and authorization API.
+OAuth 2.0 user authentication and authorization.
 
 
 ## Requirements
@@ -10,16 +10,15 @@ People API is tested against MRI 1.9.3.
 
 ## Installation
 
-    $ git clone git@github.com:lelylan/people.git
-    $ cd profiles
-    $ gem install bundler
-    $ bundle install
-    $ foreman start
+        $ git clone git@github.com:lelylan/people.git && cd people
+        $ gem install bundler
+        $ bundle install 
+        $ foreman start
 
 
 ## Resources
 
-* [Lelylan OAuth 2.0](http://dev.lelylan.com/developers#oauth)
+* [Lelylan OAuth 2.0 API](http://dev.lelylan.com/api#api-oauth)
 
 
 ## Contributing
@@ -30,10 +29,11 @@ Do not forget to provide specs to your contribution.
 
 ### Running specs
 
-* Fork and clone the repository.
-* Run `gem install bundler` to get the latest for the gemset.
-* Run `bundle install` for dependencies.
-* Run `bundle exec guard` and press enter to execute all specs.
+        $ gem install bundler
+        $ bundle install 
+        $ bundle exec guard
+
+Press enter to execute all specs.
 
 
 ## Spec guidelines
