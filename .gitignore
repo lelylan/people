@@ -19,9 +19,6 @@
 /log/*.log
 /tmp
 
-# Ignore .rvmrc file.
-/.rvmrc
-
 # Config files
 /config/settings.local.yml
 /config/settings/*.local.yml
@@ -31,5 +28,4 @@
 public/assets
 
 # Procfile env
-.env
 .production.env
