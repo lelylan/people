@@ -10,11 +10,15 @@ People API is tested against MRI 1.9.3.
 
 ## Installation
 
-        $ git clone git@github.com:lelylan/people.git && cd people
-        $ gem install bundler
-        $ bundle install 
-        $ foreman start
+    $ git clone git@github.com:lelylan/people.git && cd people
+    $ gem install bundler
+    $ bundle install 
+    $ foreman start
 
+## Install with docker
+
+    $ docker build --tag=people .
+    $ docker run -d -it --name people people
 
 ## Resources
 
