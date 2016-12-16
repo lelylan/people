@@ -10,11 +10,30 @@ People API is tested against MRI 1.9.3.
 
 ## Installation
 
-        $ git clone git@github.com:lelylan/people.git && cd people
-        $ gem install bundler
-        $ bundle install 
-        $ foreman start
+```bash
+$ git clone git@github.com:lelylan/people.git && cd people
+$ gem install bundler
+$ bundle install
+$ foreman start
+```
 
+## Install with docker
+
+#### Badges
+Docker image: [lelylanlab/people](https://hub.docker.com/r/lelylanlab/people/)
+
+[![](https://images.microbadger.com/badges/version/lelylanlab/people:latest.svg)](http://microbadger.com/images/lelylanlab/people:latest "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/lelylanlab/people:latest.svg)](http://microbadger.com/images/lelylanlab/people:latest "Get your own image badge on microbadger.com")
+
+### Use docker hub image
+```bash
+$ docker run -d -it --name people lelylanlab/people
+```
+
+### Generate local image
+```bash
+$ docker build --tag=people .
+$ docker run -d -it --name people people
+```
 
 ## Resources
 
@@ -23,15 +42,17 @@ People API is tested against MRI 1.9.3.
 
 ## Contributing
 
-Fork the repo on github and send a pull requests with topic branches. 
+Fork the repo on github and send a pull requests with topic branches.
 Do not forget to provide specs to your contribution.
 
 
 ### Running specs
 
-        $ gem install bundler
-        $ bundle install 
-        $ bundle exec guard
+```bash
+$ gem install bundler
+$ bundle install
+$ bundle exec guard
+```
 
 Press enter to execute all specs.
 
