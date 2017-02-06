@@ -17,11 +17,4 @@ module DevicesHelper
     )
   end
 
-  def location_params(location)
-    authorization_params.merge(
-      resource_id: location.id,
-      resource_type: 'location',
-      accessible_type: 'device'
-    )
-  end
 end

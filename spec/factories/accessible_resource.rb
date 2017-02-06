@@ -4,22 +4,5 @@ FactoryGirl.define do
     resource_type 'device'
     accessible_type 'device'
 
-    factory :accessible_contained_devices do
-      resource_id   { FactoryGirl.create(:location, :with_descendants).id }
-      resource_type 'location'
-      accessible_type 'device'
-    end
-
-    factory :accessible_location do
-      resource_id   { FactoryGirl.create(:location).id }
-      resource_type 'location'
-      accessible_type 'location'
-    end
-
-    factory :accessible_contained_locations do
-      resource_id   { FactoryGirl.create(:location, :with_descendants).id }
-      resource_type 'location'
-      accessible_type 'location'
-    end
   end
 end

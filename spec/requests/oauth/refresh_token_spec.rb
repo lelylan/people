@@ -4,7 +4,7 @@ feature 'refresh token' do
 
   let!(:application)  { FactoryGirl.create :application }
   let!(:user)         { FactoryGirl.create :user }
-  let!(:access_token) { FactoryGirl.create :access_token, :with_device, :with_location, application: application, scopes: 'write', resource_owner_id: user.id, use_refresh_token: true }
+  let!(:access_token) { FactoryGirl.create :access_token, :with_device, application: application, scopes: 'write', resource_owner_id: user.id, use_refresh_token: true }
 
   describe 'when token expires' do
 
@@ -49,10 +49,8 @@ feature 'refresh token' do
         its(:token)         { should_not == access_token.token }
         its(:refresh_token) { should_not == access_token.refresh_token }
         its(:device_ids)    { should == access_token.device_ids }
-        its(:location_ids)  { should == access_token.location_ids }
-        its(:resources)     { should have(2).items }
+        its(:resources)     { should have(1).items }
       end
     end
   end
 end
-

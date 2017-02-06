@@ -4,8 +4,6 @@ development:
       uri: <%= ENV['MONGOLAB_PEOPLE_URL'] || 'mongodb://localhost:27017/people_development' %>
     devices:
       uri: <%= ENV['MONGOLAB_DEVICES_URL'] || 'mongodb://localhost:27017/devices_development' %>
-    locations:
-      uri: <%= ENV['MONGOLAB_LOCATIONS_URL'] || 'mongodb://localhost:27017/locations_development' %>
   options:
 test:
   sessions:
@@ -21,12 +19,6 @@ test:
         - localhost:27017
       options:
         consistency: :strong
-    locations:
-      database: locations_test
-      hosts:
-        - localhost:27017
-      options:
-        consistency: :strong
   options:
 production:
   sessions:
@@ -34,6 +26,4 @@ production:
       uri: <%= ENV['MONGOLAB_PEOPLE_URL'] %>
     devices:
       uri: <%= ENV['MONGOLAB_DEVICES_URL'] %>
-    locations:
-      uri: <%= ENV['MONGOLAB_LOCATIONS_URL'] %>
   options:
