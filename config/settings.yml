@@ -5,7 +5,6 @@ services:
   devices: 'https://devices.lelylan.com'
   types: 'https://types.lelylan.com'
   people: 'https://people.lelylan.com'
-  locations: 'https://locations.lelylan.com'
 titles:
   '/users/new': Sign in
 scopes:
@@ -18,7 +17,5 @@ scopes:
     - histories:read
     - types
     - types:read
-    - locations
-    - locations:read
     - privates
     - user

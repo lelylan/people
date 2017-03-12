@@ -14,7 +14,6 @@ module ExtendableRefresh
           :resource_owner_id => refresh_token.resource_owner_id,
           :scopes            => refresh_token.scopes_string,
           :device_ids        => refresh_token.device_ids,
-          :location_ids      => refresh_token.location_ids,
           :resources         => refresh_token.resources,
           :expires_in        => server.access_token_expires_in,
           :use_refresh_token => server.refresh_token_enabled?
@@ -23,4 +22,3 @@ module ExtendableRefresh
     end
   end
 end
-

@@ -10,7 +10,6 @@ class Api::UsersController < Api::BaseController
      email: current_user.email,
      full_name: current_user.full_name,
      homepage: current_user.full_name,
-     location: current_user.full_name,
      rate_limit: current_user.rate_limit }
 
     respond_with result

@@ -31,7 +31,6 @@ class DevicesController < Doorkeeper::ApplicationController
 
   def find_resources
     @devices   = Device.where(resource_owner_id: current_resource_owner.id)
-    @locations = Location.where(resource_owner_id: current_resource_owner.id.to_s)
   end
 
   def find_resource

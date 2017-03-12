@@ -18,18 +18,5 @@ FactoryGirl.define do
       token.save
     end
   end
-
-  trait :with_location do
-    after(:create) do |token|
-      token.resources << FactoryGirl.build(:accessible_location)
-      token.save
-    end
-  end
   
-  trait :with_contained_locations do
-    after(:create) do |token|
-      token.resources << FactoryGirl.build(:accessible_contained_locations)
-      token.save
-    end
-  end
 end

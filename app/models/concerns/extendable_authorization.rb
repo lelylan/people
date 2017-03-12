@@ -14,7 +14,6 @@ module ExtendableAuthorization
           :resource_owner_id => grant.resource_owner_id,
           :scopes            => grant.scopes_string,
           :device_ids        => grant.device_ids,
-          :location_ids      => grant.location_ids,
           :resources         => grant.resources,
           :expires_in        => grant.expires_in,
           :use_refresh_token => server.refresh_token_enabled?
@@ -23,4 +22,3 @@ module ExtendableAuthorization
     end
   end
 end
-

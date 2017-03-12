@@ -12,8 +12,6 @@ en:
       histories-read: Read access to owned histories
       types: Read and write access to owned types.
       types-read: Read access to owned types.
-      locations: Read and write access to owned locations
-      locations-read: Read access to owned locations
       privates: <span class="label warning">attention</span> Access to the owned devices private info
   notifications:
     access:
